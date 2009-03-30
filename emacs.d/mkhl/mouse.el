@@ -1,5 +1,5 @@
 
-(when window-system
+(when (featurep 'mouse)
   ;; Mouse
   (setq mouse-yank-at-point t
         mouse-wheel-follow-mouse t
