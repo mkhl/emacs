@@ -1,7 +1,7 @@
 
 ;; Find file at point
-(require 'ffap)
-(ffap-bindings)
+;; (require 'ffap)
+;; (ffap-bindings)
 
 ;; Buffer switching
 (require 'ibuffer)
