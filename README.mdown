@@ -1,0 +1,3 @@
+# mkhl’s dot-emacs
+
+Yet another emacs configuration package.
