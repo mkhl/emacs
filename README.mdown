@@ -1,3 +1,18 @@
-# mkhl’s dot-emacs
+# mkhl’s emacs config
 
 Yet another emacs configuration package.
+
+## Requirements
+
+[Emacs][], the extensible, customizable, self-documenting real-time display editor.
+
+The one I currently use is the [Carbon Emacs][carbon-emacs] package, other
+“distributions” may work as well.
+
+    (emacs-version)
+
+    "GNU Emacs 22.3.1 (i386-apple-darwin9.6.0, Carbon Version 1.6.0)
+     of 2009-01-03 on seijiz.local"
+
+[emacs]: <http://www.gnu.org/software/emacs/> "GNU Emacs - GNU Project - Free Software Foundation (FSF)"
+[carbon-emacs]: <http://homepage.mac.com/zenitani/emacs-e.html> "Carbon Emacs Package"
