@@ -9,3 +9,9 @@
                       (or (buffer-file-name) load-file-name))))
 (add-to-list 'load-path dot-emacs-dir)
 (add-to-list 'load-path (concat dot-emacs-dir "lisp"))
+
+;; Initialization
+(load "mkhl/global")
+(load "mkhl/keys")
+(load "mkhl/mouse")
+(load "mkhl/modes")
