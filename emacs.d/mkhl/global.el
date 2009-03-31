@@ -3,6 +3,7 @@
 (set-language-environment "UTF-8")
 
 (ido-mode t)
+(savehist-mode t)
 (show-paren-mode t)
 
 (global-font-lock-mode t)
