@@ -19,6 +19,8 @@
 (add-hook 'lisp-interaction-mode-hook '(lambda () (paredit-mode +1)))
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 
+(defalias 'perl-mode 'cperl-mode)
+
 ;;  '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "linux"))))
 ;;  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
 ;;  '(gud-tooltip-mode t)
