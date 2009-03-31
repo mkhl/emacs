@@ -27,6 +27,7 @@
       kept-old-versions 2
       delete-old-versions t
       vc-follow-symlinks t
+      bs-default-sort-name "by name"
       diff-switches "-u")
 
 (require 'uniquify)

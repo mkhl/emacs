@@ -1,7 +1,6 @@
 
 ;; Buffer switching
 (require 'ibuffer)
-(setq bs-default-sort-name "by name")
 (global-set-key [(control x) (control b)] #'ibuffer)
 ;; (require 'bs)
 ;; (global-set-key [(control x) (control b)] #'bs-show)
