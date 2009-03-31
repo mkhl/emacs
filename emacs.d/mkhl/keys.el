@@ -1,8 +1,4 @@
 
-;; Find file at point
-;; (require 'ffap)
-;; (ffap-bindings)
-
 ;; Buffer switching
 (require 'ibuffer)
 (setq bs-default-sort-name "by name")
