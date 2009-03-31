@@ -5,6 +5,9 @@
 ;; (require 'bs)
 ;; (global-set-key [(control x) (control b)] #'bs-show)
 
+;; Directory editing
+(global-set-key [(control x) (control d)] #'dired)
+
 ;; Kill ring
 (when (require 'browse-kill-ring nil 'noerror)
   (setq browse-kill-ring-highlight-current-entry t
