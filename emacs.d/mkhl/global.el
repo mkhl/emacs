@@ -10,7 +10,7 @@
 (global-hl-line-mode t)
 
 (setq-default indent-tabs-mode nil
-              fill-column 78
+              fill-column 72
               comment-column 40)
 
 (setq inhibit-startup-screen t
