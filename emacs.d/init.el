@@ -15,5 +15,6 @@
 (load "mkhl/keys")
 (load "mkhl/mouse")
 (load "mkhl/modes")
+(load "mkhl/local")
 (load "mkhl/pkg")
 (load "mkhl/path")

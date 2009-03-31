@@ -8,14 +8,6 @@
 ;; Directory editing
 (global-set-key [(control x) (control d)] #'dired)
 
-;; Kill ring
-(when (require 'browse-kill-ring nil 'noerror)
-  (setq browse-kill-ring-highlight-current-entry t
-        browse-kill-ring-highlight-inserted-item t
-        browse-kill-ring-display-duplicates nil
-        browse-kill-ring-no-duplicates t)
-  (browse-kill-ring-default-keybindings))
-
 ;; Undo/Redo
 (require 'redo)
 (global-set-key [(control _)] #'undo)
