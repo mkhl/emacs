@@ -17,5 +17,5 @@
 (load "mkhl/mouse")
 (load "mkhl/modes")
 (load "mkhl/local")
-(load "mkhl/pkg")
+(load "mkhl/elpa")
 (load "mkhl/path")
