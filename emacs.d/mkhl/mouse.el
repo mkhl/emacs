@@ -5,4 +5,5 @@
         mouse-wheel-follow-mouse t
         mouse-wheel-progressive-speed nil
         mouse-avoidance-mode 'exile
-        mac-emulate-three-button-mouse nil))
+        mac-emulate-three-button-mouse nil)
+  (require 'scroll-in-place nil 'noerror))
