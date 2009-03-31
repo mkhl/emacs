@@ -9,6 +9,14 @@
      (require 'dired-x)
      (setq-default dired-omit-mode t)))
 
+(autoload 'paredit-mode "paredit"
+  "Minor mode for pseudo-structurally editing Lisp code."
+  t)
+(add-hook 'emacs-lisp-mode-hook '(lambda () (paredit-mode +1)))
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'lisp-interaction-mode-hook '(lambda () (paredit-mode +1)))
+(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+
 ;; "Generic" major modes
 ;; (require 'generic-x)
 
