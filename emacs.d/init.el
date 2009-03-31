@@ -9,6 +9,7 @@
                       (or (buffer-file-name) load-file-name))))
 (add-to-list 'load-path dot-emacs-dir)
 (add-to-list 'load-path (concat dot-emacs-dir "lisp"))
+(load "lisp/loaddefs" 'noerror)
 
 ;; Initialization
 (load "mkhl/global")
