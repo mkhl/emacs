@@ -15,10 +15,8 @@
 
 ;; Window switching
 (require 'windmove)
-(windmove-default-keybindings)
-;; (global-set-key [(control tab)] #'other-window)
-;; (global-set-key [(control shift tab)]
-;;                 #'(lambda () (interactive) (other-window -1)))
+(windmove-default-keybindings 'meta)
+(setq windmove-wrap-around t)
 
 ;; Shifted motion
 ;; (require 's-region)
