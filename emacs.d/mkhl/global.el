@@ -31,7 +31,14 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward)
 
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+;; (when (fboundp 'scroll-bar-mode)
+;;   (scroll-bar-mode -1))
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+
+(server-start)
