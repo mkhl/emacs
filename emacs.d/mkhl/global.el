@@ -15,14 +15,18 @@
 (setq inhibit-startup-screen t
       require-final-newline t
       visible-bell t
+      ido-enable-flex-matching t
+      show-paren-style 'mixed
       frame-title-format '("%b" " - " invocation-name "@" system-name)
       column-number-mode t
       line-number-mode t
-      transient-mark-mode t
+      history-length 100
+      history-delete-duplicates t
       version-control t
       kept-new-versions 10
       kept-old-versions 2
       delete-old-versions t
+      vc-follow-symlinks t
       diff-switches "-u")
 
 (require 'dired-x)
