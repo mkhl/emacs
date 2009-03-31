@@ -1,4 +1,9 @@
 
+(eval-after-load 'dired
+  '(progn
+     (require 'dired-x)
+     (setq-default dired-omit-mode t)))
+
 ;; "Generic" major modes
 ;; (require 'generic-x)
 

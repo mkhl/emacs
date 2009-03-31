@@ -29,9 +29,6 @@
       vc-follow-symlinks t
       diff-switches "-u")
 
-(require 'dired-x)
-(setq-default dired-omit-mode t)
-
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward)
 
