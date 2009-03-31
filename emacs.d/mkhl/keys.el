@@ -6,10 +6,6 @@
 ;; (require 'bs)
 ;; (global-set-key [(control x) (control b)] #'bs-show)
 
-;; Hippie completion
-;; (global-set-key [(meta space)] #'hippie-expand)
-;; (global-set-key [(control space)] #'hippie-expand)
-
 ;; Undo/Redo
 (require 'redo)
 (global-set-key [(control _)] #'undo)
