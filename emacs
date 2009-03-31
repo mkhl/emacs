@@ -1,3 +1,5 @@
+;;;;; .emacs                            -*- mode: emacs-lisp -*-
+
 (require 'cl)
 
 ;; Load implementation specific init-file
