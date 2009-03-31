@@ -6,10 +6,8 @@
   t)
 (add-hook 'find-file-hook 'indent-tabs-maybe 'append)
 
-(eval-after-load 'dired
-  '(progn
-     (require 'dired-x)
-     (setq-default dired-omit-mode t)))
+(require 'dired-x)
+(setq-default dired-omit-mode t)
 
 (add-hook 'text-mode-hook 'longlines-mode)
 
