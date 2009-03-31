@@ -19,4 +19,5 @@
 (setq windmove-wrap-around t)
 
 ;; Shifted motion
-;; (require 's-region)
+(setq cua-highlight-region-shift-only t)
+(cua-selection-mode t)
