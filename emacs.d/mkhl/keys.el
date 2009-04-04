@@ -16,9 +16,9 @@
 (global-set-key [(meta z)]    #'redo)
 
 ;; Window switching
-(require 'windmove)
-(windmove-default-keybindings 'meta)
-(setq windmove-wrap-around t)
+;; (require 'windmove)
+;; (windmove-default-keybindings 'meta)
+;; (setq windmove-wrap-around t)
 
 ;; Shifted motion
 (setq cua-highlight-region-shift-only t)
