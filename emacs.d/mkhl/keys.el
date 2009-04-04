@@ -9,11 +9,11 @@
 (global-set-key [(control x) (control d)] #'dired)
 
 ;; Undo/Redo
-(require 'redo)
-(global-set-key [(control _)] #'undo)
-(global-set-key [(meta _)]    #'redo)
-(global-set-key [(control z)] #'undo)
-(global-set-key [(meta z)]    #'redo)
+;; (require 'redo)
+;; (global-set-key [(control _)] #'undo)
+;; (global-set-key [(meta _)]    #'redo)
+;; (global-set-key [(control z)] #'undo)
+;; (global-set-key [(meta z)]    #'redo)
 
 ;; Window switching
 ;; (require 'windmove)
