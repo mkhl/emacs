@@ -22,6 +22,7 @@
       frame-title-format '("%b" " - " invocation-name "@" system-name)
       column-number-mode t
       line-number-mode t
+      size-indication-mode t
       history-length 100
       history-delete-duplicates t
       version-control t
