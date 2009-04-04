@@ -10,6 +10,7 @@
 (global-hl-line-mode t)
 
 (setq-default indent-tabs-mode nil
+              show-trailing-whitespace t
               fill-column 72
               comment-column 40)
 
