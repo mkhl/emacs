@@ -29,6 +29,7 @@
       delete-old-versions t
       vc-follow-symlinks t
       bs-default-sort-name "by name"
+      mark-holidays-in-calendar t
       generated-autoload-file (locate-library "lisp/loaddefs.el")
       diff-switches "-u")
 
