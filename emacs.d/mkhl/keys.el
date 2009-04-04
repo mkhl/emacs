@@ -1,4 +1,7 @@
 
+;; Don't use Alt-x, use Ctrl-x-m
+(global-set-key [(control x) (control m)] #'execute-extended-command)
+
 ;; Buffer switching
 (require 'ibuffer)
 (global-set-key [(control x) (control b)] #'ibuffer)
