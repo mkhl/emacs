@@ -43,8 +43,6 @@
 ;; (when (fboundp 'scroll-bar-mode)
 ;;   (scroll-bar-mode -1))
 
-(defalias 'yes-or-no-p 'y-or-n-p)
-
 (put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 

@@ -15,6 +15,7 @@
 (load "mkhl/global")
 (load "mkhl/keys")
 (load "mkhl/mouse")
+(load "mkhl/aliases")
 (load "mkhl/modes")
 (load "mkhl/local")
 (load "mkhl/elpa")
