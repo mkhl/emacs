@@ -1,1 +1,1 @@
-submodule :emacs, homedir, '.%f'
+submodule :emacs, homedir, '.%f', :ignore => 'README.mdown'
