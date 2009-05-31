@@ -26,5 +26,11 @@
 (global-set-key (kbd "C-<tab>") 'next-tab-or-buffer)
 (global-set-key (kbd "C-S-<tab>") 'previous-tab-or-buffer)
 
-;; Comment/Uncomment
-;; (global-set-key (kbd "A-;") 'comment-or-uncomment-region)
+(labels ((next-line-and-indent ()
+           (interactive)
+           (end-of-line)
+           (newline-and-indent)))
+  ;; TextMate-like Convenience
+  (define-key osx-key-mode-map (kbd "A-<return>") #'next-line-and-indent)
+  ;; Comment/Uncomment
+  (define-key osx-key-mode-map (kbd "A-;") 'comment-or-uncomment-region))
