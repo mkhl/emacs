@@ -20,3 +20,7 @@
 (load "mkhl/local")
 (load "mkhl/elpa")
 (load "mkhl/path")
+
+;; Bugfixes
+(if (eq system-type 'darwin)
+    (setq system-name (car (split-string system-name "\\."))))
