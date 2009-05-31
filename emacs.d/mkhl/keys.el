@@ -26,3 +26,7 @@
 ;; Shifted motion
 (setq cua-highlight-region-shift-only t)
 (cua-selection-mode t)
+
+;; Tab switching
+(global-set-key (kbd "C-<tab>") 'next-tab-or-buffer)
+(global-set-key (kbd "C-S-<tab>") 'previous-tab-or-buffer)
