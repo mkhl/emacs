@@ -18,11 +18,6 @@
 ;; (global-set-key (kbd "C-z") 'undo)
 ;; (global-set-key (kbd "M-z") 'redo)
 
-;; Window switching
-;; (require 'windmove)
-;; (windmove-default-keybindings 'meta)
-;; (setq windmove-wrap-around t)
-
 ;; Shifted motion
 (setq cua-highlight-region-shift-only t)
 (cua-selection-mode t)
@@ -30,3 +25,6 @@
 ;; Tab switching
 (global-set-key (kbd "C-<tab>") 'next-tab-or-buffer)
 (global-set-key (kbd "C-S-<tab>") 'previous-tab-or-buffer)
+
+;; Comment/Uncomment
+;; (global-set-key (kbd "A-;") 'comment-or-uncomment-region)
