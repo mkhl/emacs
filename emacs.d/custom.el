@@ -6,6 +6,7 @@
  '(aquamacs-autoface-mode nil)
  '(aquamacs-save-options-on-quit nil)
  '(aquamacs-set-creator-codes-after-writing-files nil)
+ '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(ps-paper-type (quote a4))
  '(user-full-name "Martin Kühl")
  '(user-mail-address "martin.kuehl@gmail.com"))
