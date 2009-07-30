@@ -22,15 +22,19 @@
 (setq cua-highlight-region-shift-only t)
 (cua-selection-mode t)
 
-;; Tab switching
-(global-set-key (kbd "C-<tab>") 'next-tab-or-buffer)
-(global-set-key (kbd "C-S-<tab>") 'previous-tab-or-buffer)
+(when (featurep 'aquamacs)
+  ;; Tab switching
+  (global-set-key (kbd "C-<tab>") 'next-tab-or-buffer)
+  (global-set-key (kbd "C-S-<tab>") 'previous-tab-or-buffer)
+  (define-key osx-key-mode-map (kbd "A-C-<right>") 'next-tab-or-buffer)
+  (define-key osx-key-mode-map (kbd "A-C-<left>") 'previous-tab-or-buffer)
 
-(labels ((next-line-and-indent ()
-           (interactive)
-           (end-of-line)
-           (newline-and-indent)))
-  ;; TextMate-like Convenience
-  (define-key osx-key-mode-map (kbd "A-<return>") #'next-line-and-indent)
   ;; Comment/Uncomment
-  (define-key osx-key-mode-map (kbd "A-;") 'comment-or-uncomment-region))
+  (define-key osx-key-mode-map (kbd "A-;") 'comment-or-uncomment-region)
+
+  ;; Next line (TextMate)
+  (labels ((next-line-and-indent ()
+             (interactive)
+             (end-of-line)
+             (newline-and-indent)))
+    (define-key osx-key-mode-map (kbd "A-<return>") #'next-line-and-indent)))
