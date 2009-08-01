@@ -10,6 +10,8 @@
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(global-hl-line-mode t)
  '(initial-major-mode (quote lisp-interaction-mode))
+ '(ns-alternate-modifier (quote none))
+ '(ns-command-modifier (quote meta))
  '(ps-paper-type (quote a4))
  '(user-full-name "Martin Kühl")
  '(user-mail-address "martin.kuehl@gmail.com"))
