@@ -30,11 +30,13 @@
   (define-key osx-key-mode-map (kbd "A-C-<left>") 'previous-tab-or-buffer)
 
   ;; Comment/Uncomment
-  (define-key osx-key-mode-map (kbd "A-;") 'comment-or-uncomment-region)
+  (define-key osx-key-mode-map (kbd "A-;") 'comment-or-uncomment-region))
 
-  ;; Next line (TextMate)
-  (labels ((next-line-and-indent ()
-             (interactive)
-             (end-of-line)
-             (newline-and-indent)))
-    (define-key osx-key-mode-map (kbd "A-<return>") #'next-line-and-indent)))
+;; Next line (TextMate)
+(labels ((next-line-and-indent ()
+           (interactive)
+           (end-of-line)
+           (newline-and-indent)))
+  (if (featurep 'aquamacs)
+      (define-key osx-key-mode-map (kbd "A-<return>") #'next-line-and-indent)
+    (global-set-key (kbd "M-<return>") #'next-line-and-indent)))
