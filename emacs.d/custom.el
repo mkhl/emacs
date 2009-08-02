@@ -8,7 +8,6 @@
  '(aquamacs-set-creator-codes-after-writing-files nil)
  '(default-major-mode (quote text-mode))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
- '(global-hl-line-mode t)
  '(initial-major-mode (quote lisp-interaction-mode))
  '(ns-alternate-modifier (quote none))
  '(ns-command-modifier (quote meta))
