@@ -10,6 +10,7 @@
 (add-to-list 'load-path dot-emacs-dir)
 (add-to-list 'load-path (concat dot-emacs-dir "lisp"))
 (load "lisp/loaddefs" 'noerror)
+(add-to-list 'load-path (concat dot-emacs-dir "slime"))
 
 ;; Initialization
 (load "mkhl/global")
