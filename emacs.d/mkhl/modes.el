@@ -8,8 +8,6 @@
 (require 'dired-x)
 (setq-default dired-omit-mode t)
 
-(add-hook 'text-mode-hook 'longlines-mode)
-
 (autoload 'paredit-mode "paredit"
   "Minor mode for pseudo-structurally editing Lisp code." t)
 ;; (add-hook 'emacs-lisp-mode-hook '(lambda () (paredit-mode +1)))
