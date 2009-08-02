@@ -15,7 +15,17 @@
 ;; (add-hook 'lisp-interaction-mode-hook '(lambda () (paredit-mode +1)))
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 
+(setq inferior-lisp-program "/opt/ccl/scripts/ccl64 -K utf-8")
+
 (defalias 'perl-mode 'cperl-mode)
+
+(require 'slime-autoloads nil 'noerror)
+(eval-after-load "slime"
+  '(progn
+     (setq slime-net-coding-system 'utf-8-unix)
+;;      (setq slime-complete-symbol*-fancy t)
+;;      (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)))
+     (slime-setup '(slime-fancy))))
 
 (labels ((dumb-indent ()
            (make-local-variable indent-line-function)
