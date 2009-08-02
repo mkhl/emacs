@@ -19,10 +19,10 @@
 
 (defalias 'perl-mode 'cperl-mode)
 
-(add-hook 'applescript-mode-hook
-          '(lambda ()
-             (make-local-variable indent-line-function)
-             (setq indent-line-function 'tab-to-tab-stop)))
+(labels ((dumb-indent ()
+           (make-local-variable indent-line-function)
+           (setq indent-line-function 'tab-to-tab-stop)))
+  (add-hook 'applescript-mode-hook #'dumb-indent 'append))
 
 ;;  '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "linux"))))
 ;;  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
