@@ -22,6 +22,16 @@
 (setq cua-highlight-region-shift-only t)
 (cua-selection-mode t)
 
+;; Tab switching
+(labels ((goto-next-window ()
+           (interactive)
+           (other-window 1))
+         (goto-previous-window ()
+           (interactive)
+           (other-window -1)))
+  (global-set-key (kbd "C-<tab>") #'goto-next-window)
+  (global-set-key (kbd "C-S-<tab>") #'goto-previous-window))
+
 (when (featurep 'aquamacs)
   ;; Tab switching
   (global-set-key (kbd "C-<tab>") 'next-tab-or-buffer)
