@@ -23,14 +23,10 @@
 (cua-selection-mode t)
 
 ;; Tab switching
-(labels ((goto-next-window ()
-           (interactive)
-           (other-window 1))
-         (goto-previous-window ()
-           (interactive)
-           (other-window -1)))
-  (global-set-key (kbd "C-<tab>") #'goto-next-window)
-  (global-set-key (kbd "C-S-<tab>") #'goto-previous-window))
+(global-set-key (kbd "C-<tab>")
+  (lambda () (interactive) (other-window 1)))
+(global-set-key (kbd "C-S-<tab>")
+  (lambda () (interactive) (other-window -1)))
 
 (when (featurep 'aquamacs)
   ;; Tab switching
