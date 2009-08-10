@@ -35,6 +35,7 @@
       kept-old-versions 2
       delete-old-versions t
       vc-follow-symlinks t
+      backup-directory-alist `(("." . ,(concat dot-emacs-dir "backup")))
       bs-default-sort-name "by name"
       mark-holidays-in-calendar t
       generated-autoload-file (locate-library "lisp/loaddefs.el")
