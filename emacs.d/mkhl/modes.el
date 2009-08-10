@@ -54,10 +54,5 @@
 (autoload 'paredit-mode "paredit"
   "Minor mode for pseudo-structurally editing Lisp code." t)
 
-(labels ((dumb-indent ()
-           (make-local-variable indent-line-function)
-           (setq indent-line-function 'tab-to-tab-stop)))
-  (add-hook 'applescript-mode-hook #'dumb-indent 'append))
-
 ;;  '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "linux"))))
 ;;  '(gud-tooltip-mode t)
