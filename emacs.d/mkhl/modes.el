@@ -60,5 +60,13 @@
 (autoload 'paredit-mode "paredit"
   "Minor mode for pseudo-structurally editing Lisp code." t)
 
+;;; Haskell
+(remove-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+(add-hook 'haskell-mode-hook
+  (lambda ()
+    (turn-on-haskell-simple-indent)
+    (mkhl/set-indent-to-tab-stops)
+    (mkhl/set-tab-stops 4)))
+
 ;;  '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "linux"))))
 ;;  '(gud-tooltip-mode t)
