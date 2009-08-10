@@ -8,5 +8,3 @@
                    (buffer-string))))
     (map 'nil 'add-to-exec-path (split-string buffer))))
 (setenv "PATH" (mapconcat 'identity exec-path path-separator))
-
-
