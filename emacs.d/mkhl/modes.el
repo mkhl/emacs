@@ -65,6 +65,7 @@
 (add-hook 'haskell-mode-hook
   (lambda ()
     (turn-on-haskell-simple-indent)
+    (require 'hs-lint nil 'noerror)
     (mkhl/set-indent-to-tab-stops)
     (mkhl/set-tab-stops 4)))
 
