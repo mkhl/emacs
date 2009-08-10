@@ -34,7 +34,6 @@
   (global-set-key (kbd "C-S-<tab>") 'previous-tab-or-buffer)
   (define-key osx-key-mode-map (kbd "A-C-<right>") 'next-tab-or-buffer)
   (define-key osx-key-mode-map (kbd "A-C-<left>") 'previous-tab-or-buffer)
-
   ;; Comment/Uncomment
   (define-key osx-key-mode-map (kbd "A-;") 'comment-or-uncomment-region))
 
