@@ -18,8 +18,8 @@
 (when (require 'redo nil 'noerror)
   (global-set-key (kbd "C-_") 'undo)
   (global-set-key (kbd "M-_") 'redo)
-  (global-set-key (kbd "C-z") 'undo)
-  (global-set-key (kbd "M-z") 'redo))
+  (global-set-key (kbd "M-z") 'undo)
+  (global-set-key (kbd "M-Z") 'redo))
 
 ;; Shifted motion
 (setq cua-highlight-region-shift-only t)
