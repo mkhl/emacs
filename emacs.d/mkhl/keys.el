@@ -25,6 +25,10 @@
 (setq cua-highlight-region-shift-only t)
 (cua-selection-mode t)
 
+;; Meta motion
+(global-set-key (kbd "M-<up>") 'backward-paragraph)
+(global-set-key (kbd "M-<down>") 'forward-paragraph)
+
 ;; Tab switching
 (windmove-default-keybindings 'control)
 
