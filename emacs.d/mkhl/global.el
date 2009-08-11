@@ -53,6 +53,6 @@
 ;;   (scroll-bar-mode -1))
 
 (add-to-list 'default-frame-alist '(width . 80))
-(add-to-list 'default-frame-alist '(height . 48))
+(add-to-list 'default-frame-alist '(height . 40))
 
 (server-start)
