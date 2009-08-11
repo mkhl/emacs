@@ -11,6 +11,9 @@
 ;; Directory editing
 (global-set-key (kbd "C-x C-d") 'dired)
 
+;; Symbol completion
+(global-set-key (kbd "S-<tab>") 'hippie-expand)
+
 ;; Undo/Redo
 (when (require 'redo nil 'noerror)
   (global-set-key (kbd "C-_") 'undo)
