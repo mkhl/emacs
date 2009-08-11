@@ -9,6 +9,7 @@
   "Set `indent-tabs-mode' according to buffer contents." t)
 (add-hook 'find-file-hook 'indent-tabs-maybe 'append)
 (defun mkhl/set-tab-stops (width)
+  (setq tab-width width)
   (make-local-variable 'tab-stop-list)
   (setq tab-stop-list (loop for i from width to 120 by width collect i)))
 (defun mkhl/set-indent-to-tab-stops ()
