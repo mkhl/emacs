@@ -44,12 +44,15 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward)
 
+(put 'upcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
 ;; (when (fboundp 'scroll-bar-mode)
 ;;   (scroll-bar-mode -1))
 
-(put 'upcase-region 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
+(add-to-list 'default-frame-alist '(width . 80))
+(add-to-list 'default-frame-alist '(height . 48))
 
 (server-start)
