@@ -10,4 +10,4 @@
 ;; Color theme
 (when (require 'color-theme nil 'noerror)
   (color-theme-initialize)
-  (color-theme-scintilla))
+  (color-theme-xemacs))
