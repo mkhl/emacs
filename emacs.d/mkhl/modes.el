@@ -14,7 +14,10 @@
   (setq tab-stop-list (loop for i from width to 120 by width collect i)))
 (defun mkhl/set-indent-to-tab-stops ()
   (make-local-variable 'indent-line-function)
-  (setq indent-line-function 'tab-to-tab-stop))
+  (setq indent-line-function 'tab-to-tab-stop)
+  (when (boundp 'yas/indent-line)
+    (make-local-variable 'yas/indent-line)
+    (setq yas/indent-line 'nil)))
 
 ;;; Perl
 (defalias 'perl-mode 'cperl-mode)
