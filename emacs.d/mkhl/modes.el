@@ -17,7 +17,7 @@
   (setq indent-line-function 'tab-to-tab-stop)
   (when (boundp 'yas/indent-line)
     (make-local-variable 'yas/indent-line)
-    (setq yas/indent-line 'nil)))
+    (setq yas/indent-line 'fixed)))
 
 ;;; Perl
 (defalias 'perl-mode 'cperl-mode)
