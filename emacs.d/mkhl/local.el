@@ -17,3 +17,8 @@
   (textmate-mode t)
   (define-key *textmate-mode-map* (kbd "C-c C-t") nil)
   (define-key *textmate-mode-map* (kbd "M-<return>") nil))
+
+;; YASnippet
+(eval-after-load "yasnippet-bundle"
+  '(unwind-protect
+       (yas/load-directory (concat dot-emacs-dir "snippets"))))
