@@ -11,3 +11,9 @@
 (when (require 'color-theme nil 'noerror)
   (color-theme-initialize)
   (color-theme-xemacs))
+
+;; TextMate mode
+(when (fboundp 'textmate-mode)
+  (textmate-mode t)
+  (define-key *textmate-mode-map* (kbd "C-c C-t") nil)
+  (define-key *textmate-mode-map* (kbd "M-<return>") nil))
