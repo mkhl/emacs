@@ -63,8 +63,10 @@
 
 ;;; Haskell
 (remove-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+(remove-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook
   (lambda ()
+    (turn-on-eldoc-mode)
     (turn-on-haskell-simple-indent)
     (require 'hs-lint nil 'noerror)
     (mkhl/set-indent-to-tab-stops)
