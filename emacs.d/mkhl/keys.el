@@ -49,6 +49,12 @@
       (define-key osx-key-mode-map (kbd "A-<return>") #'next-line-and-indent)
     (global-set-key (kbd "M-<return>") #'next-line-and-indent)))
 
+;; Auto-Pairs (TextMate)
+(global-set-key (kbd "M-[") 'insert-pair)
+(global-set-key (kbd "M-]") 'up-list)
+(global-set-key (kbd "M-{") 'insert-pair)
+(global-set-key (kbd "M-}") 'up-list)
+
 ;; Indent yanked text
 ;; - This doesn't work because the defadvice bodies are only executed
 ;;   when the advised function was called, i.e. outside of the lexical
