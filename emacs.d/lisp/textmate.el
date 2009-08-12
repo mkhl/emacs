@@ -238,7 +238,9 @@ A place is considered `tab-width' character columns."
 
 ;;;###autoload
 (define-minor-mode textmate-mode "TextMate Emulation Minor Mode"
-  :lighter " mate" :global t :keymap *textmate-mode-map*
+;;   :lighter " mate"
+  :lighter nil
+  :global t :keymap *textmate-mode-map*
   (textmate-bind-keys)
   ; activate preferred completion library
   (dolist (mode *textmate-completing-minor-mode-alist*)

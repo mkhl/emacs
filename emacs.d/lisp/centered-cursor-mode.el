@@ -384,8 +384,8 @@ centered-cursor-mode is called interactively."
   "Makes the cursor stay vertically in a defined
 position (usually centered)."
   :init-value nil
-;;  :lighter nil
-  :lighter " ¢"
+  :lighter nil
+;;   :lighter " ¢"
   :keymap ccm-map
   (cond
    (centered-cursor-mode
