@@ -20,6 +20,8 @@
      ;; requiring it after an eshell session is started works fine.
      ;; (require 'eshell-vc)
      (setenv "PAGER" "cat")
+     (setenv "EDITOR" "emacsclient")
+     (setenv "VISUAL" "emacsclient")
      (add-hook 'eshell-mode-hook
                '(lambda () (define-key eshell-mode-map (kbd "C-a") 'eshell-bol)))
      (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color)))
