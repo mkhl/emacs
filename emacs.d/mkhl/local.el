@@ -7,6 +7,10 @@
         browse-kill-ring-no-duplicates t)
   (browse-kill-ring-default-keybindings))
 
+;; Centered cursor
+(when (require 'centered-cursor-mode nil 'noerror)
+  (global-centered-cursor-mode t))
+
 ;; Color theme
 (when (require 'color-theme nil 'noerror)
   (color-theme-initialize)
