@@ -1,30 +1,29 @@
 
 ;; Don't use Alt-x, use Ctrl-x-m
-(global-set-key (kbd "C-x C-m") 'execute-extended-command)
+(global-set-key [(control x) (control m)] 'execute-extended-command)
 
 ;; Buffer switching
-(require 'ibuffer)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-;; (global-set-key (kbd "C-x C-b") 'bs-show)
+(global-set-key [(control x) (control b)] 'ibuffer)
+;; (global-set-key [(control x) (control b)] 'bs-show)
 
 ;; Directory editing
-(global-set-key (kbd "C-x C-d") 'dired)
+(global-set-key [(control x) (control d)] 'dired)
 
 ;; Symbol completion
-(global-set-key (kbd "S-<tab>") 'hippie-expand)
+(global-set-key [(shift tab)] 'hippie-expand)
 
 ;; Undo/Redo
 (when (require 'redo nil 'noerror)
-  (global-set-key (kbd "M-z") 'undo)
-  (global-set-key (kbd "M-Z") 'redo))
+  (global-set-key [(meta z)] 'undo)
+  (global-set-key [(meta Z)] 'redo))
 
 ;; Shifted motion
 (setq cua-highlight-region-shift-only t)
 (cua-selection-mode t)
 
 ;; Meta motion
-(global-set-key (kbd "M-<up>") 'backward-paragraph)
-(global-set-key (kbd "M-<down>") 'forward-paragraph)
+(global-set-key [(meta up)] 'backward-paragraph)
+(global-set-key [(meta down)] 'forward-paragraph)
 
 ;; Tab switching
 (windmove-default-keybindings 'control)
@@ -41,14 +40,14 @@
                               (back-to-indentation)
                               (current-column))))))
   (if (featurep 'aquamacs)
-      (define-key osx-key-mode-map (kbd "A-<return>") #'next-line-and-indent)
-    (global-set-key (kbd "M-<return>") #'next-line-and-indent)))
+      (define-key osx-key-mode-map [(alt return)] #'next-line-and-indent)
+    (global-set-key [(meta return)] #'next-line-and-indent)))
 
 ;; Auto-Pairs (TextMate)
-(global-set-key (kbd "M-[") 'insert-pair)
-(global-set-key (kbd "M-]") 'up-list)
-(global-set-key (kbd "M-{") 'insert-pair)
-(global-set-key (kbd "M-}") 'up-list)
+(global-set-key [(meta \[)] 'insert-pair)
+(global-set-key [(meta \])] 'up-list)
+(global-set-key [(meta \{)] 'insert-pair)
+(global-set-key [(meta \})] 'up-list)
 
 ;; Indent yanked text
 ;; - This doesn't work because the defadvice bodies are only executed
