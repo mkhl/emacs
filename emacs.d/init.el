@@ -27,5 +27,5 @@
 (load "mkhl/path")
 
 ;; Bugfixes
-(if (eq system-type 'darwin)
-    (setq system-name (car (split-string system-name "\\."))))
+(when (eq system-type 'darwin)
+  (setq system-name (car (split-string system-name "\\."))))
