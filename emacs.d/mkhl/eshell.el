@@ -1,5 +1,6 @@
 
-(setq eshell-save-history-on-exit t
+(setq comint-prompt-read-only t
+      eshell-save-history-on-exit t
       eshell-cmpl-cycle-completions nil
       eshell-cmpl-dir-ignore (rx bot (or (and ?. (opt ?.))
                                          "CVS"
@@ -7,6 +8,9 @@
                                          ".git"
                                          ".hg")
                                  eot))
+
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
 (eval-after-load 'esh-opt
   '(progn
      (require 'em-prompt)
