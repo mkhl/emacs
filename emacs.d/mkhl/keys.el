@@ -5,7 +5,6 @@
 ;; Buffer switching
 (require 'ibuffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-;; (require 'bs)
 ;; (global-set-key (kbd "C-x C-b") 'bs-show)
 
 ;; Directory editing
@@ -16,8 +15,6 @@
 
 ;; Undo/Redo
 (when (require 'redo nil 'noerror)
-  (global-set-key (kbd "C-_") 'undo)
-  (global-set-key (kbd "M-_") 'redo)
   (global-set-key (kbd "M-z") 'undo)
   (global-set-key (kbd "M-Z") 'redo))
 
