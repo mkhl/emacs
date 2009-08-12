@@ -10,7 +10,10 @@
 (add-to-list 'load-path dot-emacs-dir)
 (add-to-list 'load-path (concat dot-emacs-dir "lisp"))
 (load "lisp/loaddefs" 'noerror)
-(add-to-list 'load-path (concat dot-emacs-dir "slime"))
+(let* ((vendor-dir (file-name-as-directory (concat dot-emacs-dir "vendor"))))
+  (dolist (subdir (directory-files vendor-dir))
+    (unless (member subdir '("." ".."))
+      (add-to-list 'load-path (concat vendor-dir subdir)))))
 
 ;; Initialization
 (load "mkhl/global")
