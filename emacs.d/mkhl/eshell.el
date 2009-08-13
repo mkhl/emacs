@@ -2,12 +2,12 @@
 (setq comint-prompt-read-only t
       eshell-save-history-on-exit t
       eshell-cmpl-cycle-completions nil
-      eshell-cmpl-dir-ignore (rx bot (or (and ?. (opt ?.))
+      eshell-cmpl-dir-ignore (rx bos (or (and ?. (opt ?.))
                                          "CVS"
                                          ".svn"
                                          ".git"
                                          ".hg")
-                                 eot))
+                                 eos))
 
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
@@ -22,6 +22,5 @@
      (setenv "PAGER" "cat")
      (setenv "EDITOR" "emacsclient")
      (setenv "VISUAL" "emacsclient")
-     (add-hook 'eshell-mode-hook
-               '(lambda () (define-key eshell-mode-map (kbd "C-a") 'eshell-bol)))
+     (define-key eshell-mode-map [(control a)] 'eshell-bol)
      (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color)))

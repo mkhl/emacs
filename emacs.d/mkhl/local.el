@@ -19,8 +19,8 @@
 ;; TextMate mode
 (when (fboundp 'textmate-mode)
   (textmate-mode t)
-  (define-key *textmate-mode-map* (kbd "C-c C-t") nil)
-  (define-key *textmate-mode-map* (kbd "M-<return>") nil))
+  (define-key *textmate-mode-map* [(control c) (control t)] nil)
+  (define-key *textmate-mode-map* [(meta return)] nil))
 
 ;; YASnippet
 (eval-after-load "yasnippet-bundle"

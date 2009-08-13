@@ -8,11 +8,12 @@
 (autoload 'indent-tabs-maybe "indent-tabs-maybe"
   "Set `indent-tabs-mode' according to buffer contents." t)
 (add-hook 'find-file-hook 'indent-tabs-maybe 'append)
-(defun mkhl/set-tab-stops (width)
+(defun my/define-tab-width (width)
+  "Define `tab-width' and `tab-stop-list' to match the given `width'."
   (setq tab-width width)
   (make-local-variable 'tab-stop-list)
-  (setq tab-stop-list (loop for i from width to 120 by width collect i)))
-(defun mkhl/set-indent-to-tab-stops ()
+  (setq tab-stop-list (number-sequence width 120 width)))
+(defun my/set-indent-to-tab-stops ()
   (make-local-variable 'indent-line-function)
   (setq indent-line-function 'tab-to-tab-stop)
   (when (boundp 'yas/indent-line)
@@ -72,8 +73,8 @@
     (turn-on-eldoc-mode)
     (turn-on-haskell-simple-indent)
     (require 'hs-lint nil 'noerror)
-    (mkhl/set-indent-to-tab-stops)
-    (mkhl/set-tab-stops 4)))
+    (my/set-indent-to-tab-stops)
+    (my/define-tab-width 4)))
 
 ;;  '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "linux"))))
 ;;  '(gud-tooltip-mode t)
