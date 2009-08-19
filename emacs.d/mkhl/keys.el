@@ -56,6 +56,10 @@
 (global-set-key [(meta \{)] 'insert-pair)
 (global-set-key [(meta \})] 'up-list)
 
+;; Finding symbols
+(global-set-key [(control x) (shift f)] 'find-function)
+(global-set-key [(control x) (shift v)] 'find-variable)
+
 ;; Indent yanked text
 ;; - This doesn't work because the defadvice bodies are only executed
 ;;   when the advised function was called, i.e. outside of the lexical
