@@ -28,6 +28,9 @@
 ;; Tab switching
 (windmove-default-keybindings 'control)
 
+;; File switching
+(global-set-key [(control x) (control n)] 'nav)
+
 ;; Next line (TextMate)
 (defun my/next-line-and-indent ()
   "Insert a newline after the current line and indent it."
