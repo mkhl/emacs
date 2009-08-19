@@ -66,6 +66,7 @@
   "Minor mode for pseudo-structurally editing Lisp code." t)
 
 ;;; Haskell
+(add-to-list 'completion-ignored-extensions ".hi")
 (remove-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 (remove-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook
