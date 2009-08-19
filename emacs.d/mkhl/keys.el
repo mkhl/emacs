@@ -31,6 +31,9 @@
 ;; File switching
 (global-set-key [(control x) (control n)] 'nav)
 
+;; Version control
+(global-set-key [(control x) (control g)] 'magit-status)
+
 ;; Next line (TextMate)
 (defun my/next-line-and-indent ()
   "Insert a newline after the current line and indent it."
