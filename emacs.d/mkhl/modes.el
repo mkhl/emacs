@@ -1,9 +1,6 @@
 
 (require 'generic-x)
 
-(require 'dired-x)
-(setq-default dired-omit-mode t)
-
 ;;; Indentation
 (autoload 'indent-tabs-maybe "indent-tabs-maybe"
   "Set `indent-tabs-mode' according to buffer contents." t)

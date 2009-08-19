@@ -1,4 +1,7 @@
 
+(require 'dired-x)
+(setq-default dired-omit-mode t)
+
 ;; Kill ring
 (eval-after-load "browse-kill-ring"
   '(progn
