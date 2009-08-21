@@ -71,6 +71,8 @@
     (turn-on-eldoc-mode)
     (turn-on-haskell-simple-indent)
     (require 'hs-lint nil 'noerror)
+    (local-set-key [(control c) (control h)] 'haskell-hoogle)
+    (local-set-key [(control c) (control v)] 'hs-lint)
     (my/set-indent-to-tab-stops)
     (my/define-tab-width 4)))
 
