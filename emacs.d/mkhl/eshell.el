@@ -22,5 +22,7 @@
      (setenv "PAGER" "cat")
      (setenv "EDITOR" "emacsclient")
      (setenv "VISUAL" "emacsclient")
-     (define-key eshell-mode-map [(control a)] 'eshell-bol)
+     (add-hook 'eshell-mode-hook
+       (lambda ()
+         (define-key eshell-mode-map [(control a)] 'eshell-bol)))
      (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color)))
