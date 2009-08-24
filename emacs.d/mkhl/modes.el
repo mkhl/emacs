@@ -76,5 +76,8 @@
     (my/set-indent-to-tab-stops)
     (my/define-tab-width 4)))
 
+;;; Python
+(add-hook 'python-mode-hook 'turn-on-eldoc-mode)
+
 ;;  '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "linux"))))
 ;;  '(gud-tooltip-mode t)
