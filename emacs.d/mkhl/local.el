@@ -1,6 +1,9 @@
 
+(eval-after-load "dired-x"
+  '(progn
+     (setq dired-omit-files (rx (| (: bos (? ".") "#") (: bos "."))))
+     (setq-default dired-omit-mode t)))
 (require 'dired-x)
-(setq-default dired-omit-mode t)
 
 ;; Kill ring
 (eval-after-load "browse-kill-ring"
