@@ -1023,7 +1023,7 @@ This is an exact copy of line-number-at-pos for use in emacs21."
   (add-to-invisibility-spec '(outline . t)))
 
 ;;;###autoload
-(add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
+(add-to-list 'auto-mode-alist `(,(rx (| ".markdown" (: ".md" (? "own"))) eos) . markdown-mode))
 
 (provide 'markdown-mode)
 
