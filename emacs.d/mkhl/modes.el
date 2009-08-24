@@ -62,6 +62,9 @@
 (autoload 'paredit-mode "paredit"
   "Minor mode for pseudo-structurally editing Lisp code." t)
 
+;;; Factor
+(load "fu" 'noerror)
+
 ;;; Haskell
 (add-to-list 'completion-ignored-extensions ".hi")
 (remove-hook 'haskell-mode-hook 'turn-on-haskell-indent)
