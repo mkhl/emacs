@@ -20,11 +20,11 @@
   (global-linum-mode 1))
 
 ;; Color theme
-(eval-after-load "color-theme"
-  '(progn
-     (color-theme-initialize)
-  (color-theme-xemacs)))
-(require 'color-theme nil 'noerror)
+(when (require 'color-theme nil 'noerror)
+  (color-theme-initialize)
+  (cond ((fboundp 'color-theme-quiet-light)
+         (color-theme-quiet-light))
+        (t (color-theme-xemacs))))
 
 ;; W3M
 (when (require 'w3m-load nil 'noerror)
