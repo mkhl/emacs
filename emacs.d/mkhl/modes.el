@@ -80,6 +80,13 @@
     (my/set-indent-to-tab-stops)
     (my/define-tab-width 4)))
 
+;;; Applescript
+(add-hook 'applescript-mode-hook
+  (lambda ()
+    (setq indent-tabs-mode t)
+    (my/set-indent-to-tab-stops)
+    (my/define-tab-width 4)))
+
 ;;; Python
 (add-hook 'python-mode-hook 'turn-on-eldoc-mode)
 
