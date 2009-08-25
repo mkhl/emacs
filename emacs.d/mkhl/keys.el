@@ -22,12 +22,15 @@
 (setq cua-highlight-region-shift-only t)
 (cua-selection-mode t)
 
-;; Meta motion
-(global-set-key [(meta up)] 'backward-paragraph)
-(global-set-key [(meta down)] 'forward-paragraph)
-
-;; Tab switching
-(windmove-default-keybindings 'control)
+;; Control/Meta motion
+(cond ((featurep 'aquamacs)
+       (global-set-key [(control left)] 'backward-word)
+       (global-set-key [(control right)] 'forward-word))
+      (t
+       (global-set-key [(meta up)] 'backward-paragraph)
+       (global-set-key [(meta down)] 'forward-paragraph)
+       ;; Tab switching
+       (windmove-default-keybindings 'control)))
 
 ;; File switching
 (global-set-key [(control x) (control n)] 'nav)
