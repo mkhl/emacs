@@ -43,3 +43,6 @@
          (yas/load-directory (concat dot-emacs-dir "snippets"))
          (yas/global-mode 1))))
 (require 'yasnippet-bundle nil 'noerror)
+
+;; Go home
+(find-file "~")
