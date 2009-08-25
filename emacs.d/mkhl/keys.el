@@ -60,10 +60,13 @@
   (define-key osx-key-mode-map [(alt \;)] 'comment-or-uncomment-region-or-line))
 
 ;; Auto-Pairs (TextMate)
-(global-set-key [(meta \[)] 'insert-pair)
-(global-set-key [(meta \])] 'up-list)
-(global-set-key [(meta \{)] 'insert-pair)
-(global-set-key [(meta \})] 'up-list)
+(setq parens-require-spaces nil)
+(global-set-key [(\()] 'insert-pair)
+(global-set-key [(\))] 'up-list)
+(global-set-key [(\[)] 'insert-pair)
+(global-set-key [(\])] 'up-list)
+(global-set-key [(\{)] 'insert-pair)
+(global-set-key [(\})] 'up-list)
 
 ;; Finding symbols
 (global-set-key [(control x) (shift f)] 'find-function)
