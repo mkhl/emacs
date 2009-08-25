@@ -54,9 +54,10 @@
      (save-excursion (forward-line -1)
                      (back-to-indentation)
                      (current-column)))))
-(if (featurep 'aquamacs)
-    (define-key osx-key-mode-map [(alt return)] 'my/next-line-and-indent)
-  (global-set-key [(meta return)] 'my/next-line-and-indent))
+(global-set-key [(meta return)] 'my/next-line-and-indent)
+(when (featurep 'aquamacs)
+  (define-key osx-key-mode-map [(alt return)] 'my/next-line-and-indent)
+  (define-key osx-key-mode-map [(alt \;)] 'comment-or-uncomment-region-or-line))
 
 ;; Auto-Pairs (TextMate)
 (global-set-key [(meta \[)] 'insert-pair)
