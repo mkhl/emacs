@@ -51,6 +51,8 @@
   (tool-bar-mode -1))
 ;; (when (fboundp 'scroll-bar-mode)
 ;;   (scroll-bar-mode -1))
+(when (fboundp 'tabbar-mode)
+  (tabbar-mode -1))
 
 (add-to-list 'default-frame-alist '(width . 80))
 (add-to-list 'default-frame-alist '(height . 40))
