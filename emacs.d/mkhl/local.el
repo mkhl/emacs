@@ -44,5 +44,11 @@
          (yas/global-mode 1))))
 (require 'yasnippet-bundle nil 'noerror)
 
+;; Proof General
+(add-hook 'after-init-hook
+  (lambda ()
+    (let ((proof-assistants '(isar)))
+      (require 'proof-site nil 'noerror))))
+
 ;; Go home
 (find-file "~")
