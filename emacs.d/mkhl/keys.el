@@ -50,8 +50,7 @@
 (global-set-key [(control x) (control n)] 'nav)
 
 ;; Version control
-(global-set-key [(control x) (control g)] 'gitsum)
-;; (global-set-key [(control x) (control g)] 'magit-status)
+(global-set-key [(control x) (control g)] 'magit-status)
 
 ;; Compilation
 (global-set-key [(control x) (control y)] 'compile)
