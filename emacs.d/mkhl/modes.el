@@ -8,14 +8,11 @@
 (defun my/define-tab-width (width)
   "Define `tab-width' and `tab-stop-list' to match the given `width'."
   (setq tab-width width)
-  (make-local-variable 'tab-stop-list)
-  (setq tab-stop-list (number-sequence width 120 width)))
+  (set (make-local-variable 'tab-stop-list) (number-sequence width 120 width)))
 (defun my/set-indent-to-tab-stops ()
-  (make-local-variable 'indent-line-function)
-  (setq indent-line-function 'tab-to-tab-stop)
+  (set (make-local-variable 'indent-line-function) 'tab-to-tab-stop)
   (when (boundp 'yas/indent-line)
-    (make-local-variable 'yas/indent-line)
-    (setq yas/indent-line 'fixed)))
+    (set (make-local-variable 'yas/indent-line) 'fixed)))
 
 ;;; Perl
 (defalias 'perl-mode 'cperl-mode)
@@ -51,11 +48,10 @@
      (define-key scheme-mode-map [(tab)] 'scheme-complete-or-indent)
      (add-hook 'scheme-mode-hook
                (lambda ()
-                 (make-local-variable 'lisp-indent-function)
-                 (setq lisp-indent-function 'scheme-smart-indent-function)
-                 (make-local-variable 'eldoc-documentation-function)
-                 (setq eldoc-documentation-function
-                       'scheme-get-current-symbol-info)
+                 (set (make-local-variable 'lisp-indent-function)
+                      'scheme-smart-indent-function)
+                 (set (make-local-variable 'eldoc-documentation-function)
+                      'scheme-get-current-symbol-info)
                  (turn-on-eldoc-mode)))))
 
 ;;; Paredit
