@@ -25,7 +25,11 @@
 ;; Control/Meta motion
 (cond ((featurep 'aquamacs)
        (global-set-key [(control left)] 'backward-word)
-       (global-set-key [(control right)] 'forward-word))
+       (global-set-key [(control right)] 'forward-word)
+       (define-key osx-key-mode-map [(alt control up)] 'up-list)
+       (define-key osx-key-mode-map [(alt control down)] 'down-list)
+       (define-key osx-key-mode-map [(alt control left)] 'backward-sexp)
+       (define-key osx-key-mode-map [(alt control right)] 'forward-sexp))
       (t
        (global-set-key [(meta up)] 'backward-paragraph)
        (global-set-key [(meta down)] 'forward-paragraph)
