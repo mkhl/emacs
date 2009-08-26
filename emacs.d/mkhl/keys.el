@@ -36,6 +36,16 @@
        ;; Tab switching
        (windmove-default-keybindings 'control)))
 
+;; Isearch
+(global-set-key [(control s)] 'isearch-forward)
+(global-set-key [(control shift s)] 'isearch-backward)
+(cond ((featurep 'aquamacs)
+       (global-set-key [(alt control s)] 'isearch-forward-regexp)
+       (global-set-key [(alt control shift s)] 'isearch-backward-regexp))
+      (t
+       (global-set-key [(meta control s)] 'isearch-forward-regexp)
+       (global-set-key [(meta control shift s)] 'isearch-backward-regexp)))
+
 ;; File switching
 (global-set-key [(control x) (control n)] 'nav)
 
