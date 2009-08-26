@@ -3,9 +3,9 @@
 (global-set-key [(control x) (control m)] 'execute-extended-command)
 
 ;; Buffer switching
-;; (global-set-key [(control x) (control b)] 'ibuffer)
+(global-set-key [(control x) (control b)] 'ibuffer)
 ;; (global-set-key [(control x) (control b)] 'ibuffer-bs-show)
-(global-set-key [(control x) (control b)] 'bs-show)
+;; (global-set-key [(control x) (control b)] 'bs-show)
 
 ;; Directory editing
 (global-set-key [(control x) (control d)] 'dired)
