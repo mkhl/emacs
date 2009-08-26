@@ -98,12 +98,15 @@
 ;;; C and friends
 (eval-after-load "cc-mode"
   '(progn
+     (setq c-default-style '((java-mode . "java")
+                             (awk-mode . "awk")
+                             (other . "bsd")))
      (add-hook 'c-mode-common-hook
                (lambda ()
+                 (setq c-basic-offset 4)
                  (c-toggle-syntactic-indentation 1)
                  (c-toggle-hungry-state 1)
                  (c-toggle-electric-state 1)
-                 (c-toggle-auto-newline 1)))))
-
-;;  '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "linux"))))
-;;  '(gud-tooltip-mode t)
+                 (c-toggle-auto-newline 1)))
+     (when (fboundp 'google-set-c-style)
+       (add-hook 'c-mode-common-hook 'google-set-c-style))))
