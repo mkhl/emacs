@@ -73,6 +73,7 @@
   (lambda ()
     (turn-on-eldoc-mode)
     (turn-on-haskell-simple-indent)
+    (c-subword-mode t)
     (require 'hs-lint nil 'noerror)
     (local-set-key [(control c) (control h)] 'haskell-hoogle)
     (local-set-key [(control c) (control v)] 'hs-lint)
