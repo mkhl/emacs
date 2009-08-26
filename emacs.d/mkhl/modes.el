@@ -50,7 +50,7 @@
     (map 'nil 'autoload-scm-cmpl functions)))
 (eval-after-load 'scheme
   '(progn
-     (define-key scheme-mode-map (kbd "<tab>") 'scheme-complete-or-indent)
+     (define-key scheme-mode-map [(tab)] 'scheme-complete-or-indent)
      (add-hook 'scheme-mode-hook
                (lambda ()
                  (make-local-variable 'lisp-indent-function)
