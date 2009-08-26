@@ -16,6 +16,8 @@
 
 ;; Initialization
 (load "mkhl/global")
+(when (featurep 'aquamacs)
+  (load "mkhl/aquamacs"))
 (load "mkhl/keys")
 (load "mkhl/mouse")
 (load "mkhl/aliases")
