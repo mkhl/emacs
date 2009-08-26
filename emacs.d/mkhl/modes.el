@@ -30,8 +30,6 @@
 (eval-after-load "slime"
   '(progn
      (setq slime-net-coding-system 'utf-8-unix)
-;;      (setq slime-complete-symbol*-fancy t)
-;;      (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)))
      (slime-setup '(slime-fancy))))
 
 ;;; Scheme
