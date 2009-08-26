@@ -91,5 +91,15 @@
 ;;; Python
 (add-hook 'python-mode-hook 'turn-on-eldoc-mode)
 
+;;; C and friends
+(eval-after-load "cc-mode"
+  '(progn
+     (add-hook 'c-mode-common-hook
+       (lambda ()
+         (c-toggle-syntactic-indentation 1)
+         (c-toggle-hungry-state 1)
+         (c-toggle-electric-state 1)
+         (c-toggle-auto-newline 1)))))
+
 ;;  '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "linux"))))
 ;;  '(gud-tooltip-mode t)
