@@ -74,12 +74,13 @@
 
 ;; Auto-Pairs (TextMate)
 (setq parens-require-spaces nil)
-(global-set-key [(\()] 'insert-pair)
-(global-set-key [(\))] 'up-list)
-(global-set-key [(\[)] 'insert-pair)
-(global-set-key [(\])] 'up-list)
-(global-set-key [(\{)] 'insert-pair)
-(global-set-key [(\})] 'up-list)
+(global-set-key [(meta \()] 'insert-pair)
+(global-set-key [(meta \))] 'up-list)
+(global-set-key [(meta \[)] 'insert-pair)
+(global-set-key [(meta \])] 'up-list)
+(global-set-key [(meta \{)] 'insert-pair)
+(global-set-key [(meta \})] 'up-list)
+(global-set-key [(meta \")] 'insert-pair)
 
 ;; Finding symbols
 (global-set-key [(control x) (shift f)] 'find-function)
