@@ -49,14 +49,16 @@
                       scheme-get-current-symbol-info)))
     (map 'nil 'autoload-scm-cmpl functions)))
 (eval-after-load 'scheme
-  '(define-key scheme-mode-map (kbd "<tab>") 'scheme-complete-or-indent))
-(add-hook 'scheme-mode-hook
-  (lambda ()
-    (make-local-variable 'lisp-indent-function)
-    (setq lisp-indent-function 'scheme-smart-indent-function)
-    (make-local-variable 'eldoc-documentation-function)
-    (setq eldoc-documentation-function 'scheme-get-current-symbol-info)
-    (turn-on-eldoc-mode)))
+  '(progn
+     (define-key scheme-mode-map (kbd "<tab>") 'scheme-complete-or-indent)
+     (add-hook 'scheme-mode-hook
+               (lambda ()
+                 (make-local-variable 'lisp-indent-function)
+                 (setq lisp-indent-function 'scheme-smart-indent-function)
+                 (make-local-variable 'eldoc-documentation-function)
+                 (setq eldoc-documentation-function
+                       'scheme-get-current-symbol-info)
+                 (turn-on-eldoc-mode)))))
 
 ;;; Paredit
 (autoload 'paredit-mode "paredit"
@@ -67,26 +69,30 @@
 
 ;;; Haskell
 (add-to-list 'completion-ignored-extensions ".hi")
-(remove-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-(remove-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook
-  (lambda ()
-    (turn-on-eldoc-mode)
-    (turn-on-haskell-simple-indent)
-    (c-subword-mode t)
-    (require 'hs-lint nil 'noerror)
-    (local-set-key [(control c) (control h)] 'haskell-hoogle)
-    (local-set-key [(control c) (control v)] 'hs-lint)
-    (setq haskell-hoogle-command nil)
-    (my/set-indent-to-tab-stops)
-    (my/define-tab-width 4)))
+(eval-after-load "haskell-mode"
+  '(progn
+     (remove-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+     (remove-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+     (add-hook 'haskell-mode-hook
+               (lambda ()
+                 (turn-on-eldoc-mode)
+                 (turn-on-haskell-simple-indent)
+                 (c-subword-mode t)
+                 (require 'hs-lint nil 'noerror)
+                 (local-set-key [(control c) (control h)] 'haskell-hoogle)
+                 (local-set-key [(control c) (control v)] 'hs-lint)
+                 (setq haskell-hoogle-command nil)
+                 (my/set-indent-to-tab-stops)
+                 (my/define-tab-width 4)))))
 
 ;;; Applescript
-(add-hook 'applescript-mode-hook
-  (lambda ()
-    (setq indent-tabs-mode t)
-    (my/set-indent-to-tab-stops)
-    (my/define-tab-width 4)))
+(eval-after-load "applescript-mode"
+  '(progn
+     (add-hook 'applescript-mode-hook
+               (lambda ()
+                 (setq indent-tabs-mode t)
+                 (my/set-indent-to-tab-stops)
+                 (my/define-tab-width 4)))))
 
 ;;; Python
 (add-hook 'python-mode-hook 'turn-on-eldoc-mode)
@@ -95,11 +101,11 @@
 (eval-after-load "cc-mode"
   '(progn
      (add-hook 'c-mode-common-hook
-       (lambda ()
-         (c-toggle-syntactic-indentation 1)
-         (c-toggle-hungry-state 1)
-         (c-toggle-electric-state 1)
-         (c-toggle-auto-newline 1)))))
+               (lambda ()
+                 (c-toggle-syntactic-indentation 1)
+                 (c-toggle-hungry-state 1)
+                 (c-toggle-electric-state 1)
+                 (c-toggle-auto-newline 1)))))
 
 ;;  '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "linux"))))
 ;;  '(gud-tooltip-mode t)
