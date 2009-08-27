@@ -94,6 +94,7 @@
 ;;; C and friends
 (eval-after-load "cc-mode"
   '(progn
+     (setq-default c-basic-offset 4)
      (setq c-default-style '((java-mode . "java")
                              (awk-mode . "awk")
                              (other . "bsd")))
@@ -106,3 +107,8 @@
                  (c-toggle-auto-newline 1)))
      (when (fboundp 'google-set-c-style)
        (add-hook 'c-mode-common-hook 'google-set-c-style))))
+
+;;; JavaScript
+(eval-after-load "js2-mode"
+  '(progn
+     (setq-default js2-basic-offset 4)))
