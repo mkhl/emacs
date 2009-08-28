@@ -75,9 +75,9 @@
                  (local-set-key [(control c) (control h)] 'haskell-hoogle)
                  (local-set-key [(control c) (control v)] 'hs-lint)
                  (setq haskell-hoogle-command nil)
-                 (my/set-indent-to-tab-stops)
                  (my/define-tab-width 4)
-                 (when (fboundp 'haskell-indentation-mode)
+                 (if (not (fboundp 'haskell-indentation-mode))
+                     (my/set-indent-to-tab-stops)
                    (haskell-indentation-mode t)
                    (setq haskell-indentation-layout-offset 4
                          haskell-indentation-left-offset 4
