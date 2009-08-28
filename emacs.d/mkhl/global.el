@@ -39,7 +39,8 @@
       bs-default-sort-name "by name"
       mark-holidays-in-calendar t
       generated-autoload-file (locate-library "lisp/loaddefs.el")
-      diff-switches "-u")
+      diff-switches "-u"
+      comment-auto-fill-only-comments t)
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward)
