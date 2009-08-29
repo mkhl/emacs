@@ -93,6 +93,7 @@
                  (my/define-tab-width 4)))))
 
 ;;; Python
+(setq gud-pdb-command-name "python -mpdb")
 (add-hook 'python-mode-hook 'turn-on-eldoc-mode)
 
 ;;; C and friends
