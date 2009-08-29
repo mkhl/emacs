@@ -35,8 +35,8 @@
 (when (locate-library "gambit")
   (autoload 'gambit-inferior-mode "gambit" "Hook Gambit mode into cmuscheme.")
   (autoload 'gambit-mode "gambit" "Hook Gambit mode into scheme.")
-  (add-hook 'inferior-scheme-mode-hook #'gambit-inferior-mode)
-  (add-hook 'scheme-mode-hook #'gambit-mode))
+  (add-hook 'inferior-scheme-mode-hook 'gambit-inferior-mode)
+  (add-hook 'scheme-mode-hook 'gambit-mode))
 ;; Scheme-Complete.el
 (dolist (func '(scheme-complete-or-indent
                 scheme-smart-indent-function
@@ -44,14 +44,14 @@
   (autoload func "scheme-complete" nil t))
 (eval-after-load 'scheme
   '(progn
+     (defun my/scheme-mode-hook ()
+       (set (make-local-variable 'lisp-indent-function)
+            'scheme-smart-indent-function)
+       (set (make-local-variable 'eldoc-documentation-function)
+            'scheme-get-current-symbol-info)
+       (turn-on-eldoc-mode))
      (define-key scheme-mode-map [(tab)] 'scheme-complete-or-indent)
-     (add-hook 'scheme-mode-hook
-               (lambda ()
-                 (set (make-local-variable 'lisp-indent-function)
-                      'scheme-smart-indent-function)
-                 (set (make-local-variable 'eldoc-documentation-function)
-                      'scheme-get-current-symbol-info)
-                 (turn-on-eldoc-mode)))))
+     (add-hook 'scheme-mode-hook 'my/scheme-mode-hook)))
 
 ;;; Paredit
 (autoload 'paredit-mode "paredit"
@@ -64,54 +64,56 @@
 (add-to-list 'completion-ignored-extensions ".hi")
 (eval-after-load "haskell-mode"
   '(progn
+     (defun my/haskell-mode-hook ()
+       (require 'hs-lint nil 'noerror)
+       (setq haskell-hoogle-command nil)
+       (my/define-tab-width 4)
+       (turn-on-eldoc-mode)
+       (c-subword-mode t)
+       (if (not (fboundp 'haskell-indentation-mode))
+           (my/set-indent-to-tab-stops)
+         (haskell-indentation-mode t)
+         (setq haskell-indentation-layout-offset 4
+               haskell-indentation-left-offset 4
+               haskell-indentation-ifte-offset 4)))
+     (define-key haskell-mode-map [(control c) (control h)] 'haskell-hoogle)
+     (define-key haskell-mode-map [(control c) (control v)] 'hs-lint)
      (remove-hook 'haskell-mode-hook 'turn-on-haskell-indent)
      (remove-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-     (add-hook 'haskell-mode-hook
-               (lambda ()
-                 (turn-on-eldoc-mode)
-                 (c-subword-mode t)
-                 (require 'hs-lint nil 'noerror)
-                 (local-set-key [(control c) (control h)] 'haskell-hoogle)
-                 (local-set-key [(control c) (control v)] 'hs-lint)
-                 (setq haskell-hoogle-command nil)
-                 (my/define-tab-width 4)
-                 (if (not (fboundp 'haskell-indentation-mode))
-                     (my/set-indent-to-tab-stops)
-                   (haskell-indentation-mode t)
-                   (setq haskell-indentation-layout-offset 4
-                         haskell-indentation-left-offset 4
-                         haskell-indentation-ifte-offset 4))))))
+     (add-hook 'haskell-mode-hook 'my/haskell-mode-hook)))
 
 ;;; Applescript
 (eval-after-load "applescript-mode"
   '(progn
-     (add-hook 'applescript-mode-hook
-               (lambda ()
-                 (setq indent-tabs-mode t)
-                 (my/set-indent-to-tab-stops)
-                 (my/define-tab-width 4)))))
+     (defun my/applescript-mode-hook ()
+       (setq indent-tabs-mode t)
+       (my/set-indent-to-tab-stops)
+       (my/define-tab-width 4))
+     (add-hook 'applescript-mode-hook 'my/applescript-mode-hook)))
 
 ;;; Python
-(setq gud-pdb-command-name "python -mpdb")
-(add-hook 'python-mode-hook
-          (lambda ()
-            (turn-on-eldoc-mode)
-            (my/define-tab-width 4)))
+(eval-after-load "python-mode"
+  '(progn
+     (defun my/python-mode-hook ()
+       (my/define-tab-width 4)
+       (turn-on-eldoc-mode))
+     (setq gud-pdb-command-name "python -mpdb")
+     (add-hook 'python-mode-hook 'my/python-mode-hook)))
 
 ;;; C and friends
 (eval-after-load "cc-mode"
   '(progn
+     (defun my/c-mode-common-hook ()
+       (setq c-basic-offset 4)
+       (c-toggle-syntactic-indentation 1)
+       (c-toggle-hungry-state 1)
+       (c-toggle-electric-state 1)
+       (c-toggle-auto-newline 1))
      (setq-default c-basic-offset 4)
      (setq c-default-style '((java-mode . "java")
                              (awk-mode . "awk")
                              (other . "bsd")))
-     (add-hook 'c-mode-common-hook
-               (lambda ()
-                 (setq c-basic-offset 4)
-                 (c-toggle-syntactic-indentation 1)
-                 (c-toggle-hungry-state 1)
-                 (c-toggle-electric-state 1)
-                 (c-toggle-auto-newline 1)))
+     (add-hook 'c-mode-common-hook 'my/c-mode-common-hook)
      (when (fboundp 'google-set-c-style)
        (add-hook 'c-mode-common-hook 'google-set-c-style))))
 
