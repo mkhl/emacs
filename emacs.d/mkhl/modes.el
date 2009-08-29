@@ -18,8 +18,15 @@
 (defalias 'perl-mode 'cperl-mode)
 
 ;;; Emacs-Lisp
-(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+(eval-after-load "lisp-mode"
+  '(progn
+     (dolist (mode-map (list emacs-lisp-mode-map
+                             lisp-interaction-mode-map
+                             lisp-mode-map))
+       (define-key mode-map [(meta \()] 'insert-parentheses)
+       (define-key mode-map [(meta \))] 'move-past-close-and-reindent))
+     (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+     (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)))
 
 ;;; Common Lisp
 (setq inferior-lisp-program "/opt/ccl/scripts/ccl64 -K utf-8")
@@ -51,6 +58,8 @@
             'scheme-get-current-symbol-info)
        (turn-on-eldoc-mode))
      (define-key scheme-mode-map [(tab)] 'scheme-complete-or-indent)
+     (define-key scheme-mode-map [(meta \()] 'insert-parentheses)
+     (define-key scheme-mode-map [(meta \))] 'move-past-close-and-reindent)
      (add-hook 'scheme-mode-hook 'my/scheme-mode-hook)))
 
 ;;; Paredit
