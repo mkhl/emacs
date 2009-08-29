@@ -38,11 +38,10 @@
   (add-hook 'inferior-scheme-mode-hook #'gambit-inferior-mode)
   (add-hook 'scheme-mode-hook #'gambit-mode))
 ;; Scheme-Complete.el
-(labels ((autoload-scm-cmpl (func) (autoload func "scheme-complete" nil t)))
-  (let* ((functions '(scheme-complete-or-indent
-                      scheme-smart-indent-function
-                      scheme-get-current-symbol-info)))
-    (map 'nil 'autoload-scm-cmpl functions)))
+(dolist (func '(scheme-complete-or-indent
+                scheme-smart-indent-function
+                scheme-get-current-symbol-info))
+  (autoload func "scheme-complete" nil t))
 (eval-after-load 'scheme
   '(progn
      (define-key scheme-mode-map [(tab)] 'scheme-complete-or-indent)
