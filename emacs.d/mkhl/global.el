@@ -58,4 +58,6 @@
 (add-to-list 'default-frame-alist '(width . 80))
 (add-to-list 'default-frame-alist '(height . 40))
 
+(setenv "TERM" "dumb")
+
 (server-start)
