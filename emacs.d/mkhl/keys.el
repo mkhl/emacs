@@ -4,8 +4,6 @@
 
 ;; Buffer switching
 (global-set-key [(control x) (control b)] 'ibuffer)
-;; (global-set-key [(control x) (control b)] 'ibuffer-bs-show)
-;; (global-set-key [(control x) (control b)] 'bs-show)
 
 ;; Directory editing
 (global-set-key [(control x) (control d)] 'dired)
@@ -32,9 +30,7 @@
        (define-key osx-key-mode-map [(alt control right)] 'forward-sexp))
       (t
        (global-set-key [(meta up)] 'backward-paragraph)
-       (global-set-key [(meta down)] 'forward-paragraph)
-       ;; Tab switching
-       (windmove-default-keybindings 'control)))
+       (global-set-key [(meta down)] 'forward-paragraph)))
 
 ;; Isearch
 (global-set-key [(control s)] 'isearch-forward)
