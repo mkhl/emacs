@@ -100,6 +100,15 @@
        (my/define-tab-width 4))
      (add-hook 'applescript-mode-hook 'my/applescript-mode-hook)))
 
+;;; Ruby
+(eval-after-load "ruby-mode"
+  '(progn
+     (defun my/ruby-mode-hook ()
+       (my/define-tab-width 2)
+       (ruby-electric-mode t))
+     (define-key ruby-mode-map (kbd "TAB") nil)
+     (add-hook 'ruby-mode-hook 'my/ruby-mode-hook)))
+
 ;;; Python
 (eval-after-load "python-mode"
   '(progn
