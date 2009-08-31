@@ -18,7 +18,7 @@
       require-final-newline t
       kill-whole-line t
       visible-bell t
-      ido-enable-prefix nil
+      ido-enable-prefix t
       ido-enable-flex-matching t
       ido-everywhere t
       ido-create-new-buffer 'always
