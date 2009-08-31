@@ -20,9 +20,9 @@
 (load "mkhl/aliases")
 (load "mkhl/eshell")
 (load "mkhl/modes")
-(load "mkhl/local")
 (load "mkhl/elpa")
 (load "mkhl/vendor")
+(load "mkhl/local")
 (load "mkhl/path")
 
 ;; Bugfixes
