@@ -11,6 +11,8 @@
 (global-hl-line-mode t)
 
 (setq-default indent-tabs-mode nil
+              tab-width 4
+              tab-stop-list (number-sequence 4 120 4)
               fill-column 72
               comment-column 40)
 
