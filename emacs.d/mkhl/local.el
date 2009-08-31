@@ -15,6 +15,10 @@
 (when (require 'centered-cursor-mode nil 'noerror)
   (global-centered-cursor-mode t))
 
+;; Line numbers
+(when (require 'linum)
+  (global-linum-mode 1))
+
 ;; Color theme
 (eval-after-load "color-theme"
   '(progn
