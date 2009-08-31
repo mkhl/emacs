@@ -11,17 +11,19 @@
 (global-hl-line-mode t)
 
 (setq-default indent-tabs-mode nil
-              show-trailing-whitespace t
               fill-column 72
               comment-column 40)
 
 (setq inhibit-startup-screen t
       require-final-newline t
+      kill-whole-line t
       visible-bell t
       ido-enable-prefix nil
       ido-enable-flex-matching t
+      ido-everywhere t
       ido-create-new-buffer 'always
-      ido-use-filename-at-point t
+      ido-use-filename-at-point 'ffap-guesser
+      ido-use-url-at-point t
       show-paren-style 'mixed
       frame-title-format '("%b" " - " invocation-name "@" system-name)
       column-number-mode t
