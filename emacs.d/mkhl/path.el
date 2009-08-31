@@ -1,11 +1,7 @@
 
-;; Load path components from /etc/paths.d/*
-(let ((files (directory-files "/etc/paths.d" 'full (rx bos (not (in "."))))))
-  (dolist (this-path (split-string
-                      (with-temp-buffer
-                        (dolist (this-file files)
-                          (insert-file-contents this-file))
-                        (buffer-string))))
-    (add-to-list 'exec-path this-path)))
-
-(setenv "PATH" (mapconcat 'identity exec-path path-separator))
+;; Load path components from environment.plist
+(let* ((read-command "defaults read $HOME/.MacOSX/environment PATH")
+       (path-value (shell-command-to-string read-command)))
+  (when (string-match (rx (0+ (any ?\r ?\n)) eos) path-value)
+    (setq path-value (replace-match "" 'fixed 'literal path-value)))
+  (setenv "PATH" path-value))
