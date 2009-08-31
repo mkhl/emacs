@@ -50,6 +50,7 @@
 
 ;; Compilation
 (global-set-key [(control x) (control y)] 'compile)
+(global-set-key [(control x) (control z)] 'compile)
 
 ;; Next line (TextMate)
 (defun my/next-line-and-indent ()
