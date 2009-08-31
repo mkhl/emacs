@@ -28,6 +28,13 @@
   (color-theme-xemacs)))
 (require 'color-theme nil 'noerror)
 
+;; W3M
+(eval-after-load "w3m-load"
+  '(progn
+     (setq browse-url-browser-function 'w3m-browse-url)))
+(require 'w3m-load nil 'noerror)
+
+
 ;; TextMate mode
 (eval-after-load "textmate"
   '(progn
