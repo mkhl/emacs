@@ -1,25 +1,19 @@
 
-(eval-after-load "dired-x"
-  '(progn
-     (setq dired-omit-files (rx (| (: bos (? ".") "#") (: bos "."))))
-     (setq-default dired-omit-mode t)))
-(require 'dired-x)
+(when (require 'dired-x)
+  (setq dired-omit-files (rx (| (: bos (? ".") "#") (: bos "."))))
+  (setq-default dired-omit-mode t))
 
 ;; Kill ring
-(eval-after-load "browse-kill-ring"
-  '(progn
-     (setq browse-kill-ring-highlight-current-entry t
-           browse-kill-ring-highlight-inserted-item t
-           browse-kill-ring-display-duplicates nil
-           browse-kill-ring-no-duplicates t)
-     (browse-kill-ring-default-keybindings)))
-(require 'browse-kill-ring nil 'noerror)
+(when (require 'browse-kill-ring nil 'noerror)
+  (setq browse-kill-ring-highlight-current-entry t
+        browse-kill-ring-highlight-inserted-item t
+        browse-kill-ring-display-duplicates nil
+        browse-kill-ring-no-duplicates t)
+  (browse-kill-ring-default-keybindings))
 
 ;; Centered cursor
-(eval-after-load "centered-cursor-mode"
-  '(progn
-     (global-centered-cursor-mode t)))
-(require 'centered-cursor-mode nil 'noerror)
+(when (require 'centered-cursor-mode nil 'noerror)
+  (global-centered-cursor-mode t))
 
 ;; Color theme
 (eval-after-load "color-theme"
@@ -29,33 +23,25 @@
 (require 'color-theme nil 'noerror)
 
 ;; W3M
-(eval-after-load "w3m-load"
-  '(progn
-     (setq browse-url-browser-function 'w3m-browse-url)))
-(require 'w3m-load nil 'noerror)
-
+(when (require 'w3m-load nil 'noerror)
+  (setq browse-url-browser-function 'w3m-browse-url))
 
 ;; TextMate mode
-(eval-after-load "textmate"
-  '(progn
-     (textmate-mode t)
-     (define-key *textmate-mode-map* [(control c) (control t)] nil)
-     (define-key *textmate-mode-map* [(meta return)] nil)))
-(require 'textmate nil 'noerror)
+(when (require 'textmate nil 'noerror)
+  (textmate-mode t)
+  (define-key *textmate-mode-map* [(control c) (control t)] nil)
+  (define-key *textmate-mode-map* [(meta return)] nil))
 
 ;; YASnippet
-(eval-after-load "yasnippet-bundle"
-  '(unwind-protect
-       (progn
-         (yas/load-directory (concat dot-emacs-dir "snippets"))
-         (yas/global-mode 1))))
-(require 'yasnippet-bundle nil 'noerror)
+(when (require 'yasnippet-bundle nil 'noerror)
+  (yas/load-directory (concat dot-emacs-dir "snippets"))
+  (yas/global-mode 1))
 
 ;; Proof General
 (add-hook 'after-init-hook
-  (lambda ()
-    (let ((proof-assistants '(isar)))
-      (require 'proof-site nil 'noerror))))
+          (lambda ()
+            (let ((proof-assistants '(isar)))
+              (require 'proof-site nil 'noerror))))
 
 ;; Go home
 (find-file "~")
