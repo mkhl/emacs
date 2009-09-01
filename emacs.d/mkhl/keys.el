@@ -35,14 +35,21 @@
        (global-set-key [(meta right)] 'end-of-line)))
 
 ;; Isearch
-(global-set-key [(control s)] 'isearch-forward)
-(global-set-key [(control shift s)] 'isearch-backward)
-(cond ((featurep 'aquamacs)
-       (global-set-key [(alt control s)] 'isearch-forward-regexp)
-       (global-set-key [(alt control shift s)] 'isearch-backward-regexp))
-      (t
-       (global-set-key [(meta control s)] 'isearch-forward-regexp)
-       (global-set-key [(meta control shift s)] 'isearch-backward-regexp)))
+(let* ((modifier (if (featurep 'aquamacs) 'alt 'meta))
+       (forward [(control s)])
+       (backward [(control shift s)])
+       (forward-regexp (vector (list 'control modifier 's)))
+       (backward-regexp (vector (list 'control modifier 'shift 's))))
+  (global-set-key forward 'isearch-forward)
+  (global-set-key backward 'isearch-backward)
+  (define-key isearch-mode-map forward 'isearch-repeat-forward)
+  (define-key isearch-mode-map backward 'isearch-repeat-backward)
+  (global-set-key forward-regexp 'isearch-forward-regexp)
+  (global-set-key backward-regexp 'isearch-backward-regexp)
+  (define-key isearch-mode-map forward-regexp
+    'isearch-repeat-forward-regexp)
+  (define-key isearch-mode-map backward-regexp
+    'isearch-repeat-backward-regexp))
 
 ;; File switching
 (global-set-key [(control x) (control n)] 'nav)
