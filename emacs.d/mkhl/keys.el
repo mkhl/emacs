@@ -74,10 +74,45 @@
      (save-excursion (forward-line -1)
                      (back-to-indentation)
                      (current-column)))))
+
+;; Select line (TextMate)
+(defun my/mark-line ()
+  "Put mark at end of this line, point at beginning."
+  (interactive)
+  (beginning-of-line)
+  (push-mark)
+  (forward-line)
+  (exchange-point-and-mark))
+
+;; Duplicate line/selection (TextMate)
+(defun my/duplicate-line-or-region ()
+  "Duplicate the current line or, if active, the region."
+  (interactive)
+  (let* ((had-mark mark-active)
+         beg end)
+    (if (and mark-active transient-mark-mode)
+        (setq beg (region-beginning)
+              end (region-end))
+      (save-excursion
+        (beginning-of-line)
+        (setq beg (point))
+        (forward-line)
+        (setq end (point))))
+    (goto-char beg)
+    (save-excursion
+      (insert (buffer-substring-no-properties beg end)))
+    (when had-mark
+      (goto-char end)
+      ;; TODO: I'd really like to keep the region marked...
+      (exchange-point-and-mark))))
+
 (global-set-key [(meta return)] 'my/next-line-and-indent)
+(global-set-key [(meta shift d)] 'my/duplicate-line-or-region)
+(global-set-key [(meta shift l)] 'my/mark-line)
 (when (featurep 'aquamacs)
   (define-key osx-key-mode-map [(alt return)] 'my/next-line-and-indent)
-  (define-key osx-key-mode-map [(alt \;)] 'comment-or-uncomment-region-or-line))
+  (define-key osx-key-mode-map [(alt \;)]
+    'comment-or-uncomment-region-or-line))
 
 ;; Auto-Pairs (TextMate)
 (setq parens-require-spaces nil)
