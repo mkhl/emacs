@@ -15,6 +15,7 @@
  '(isar-unicode-tokens-enable t)
  '(isar-x-symbol-enable nil)
  '(mac-option-modifier nil)
+ '(mac-pass-command-to-system nil)
  '(ns-alternate-modifier (quote none))
  '(ns-command-modifier (quote meta))
  '(proof-electric-terminator-enable t)
