@@ -36,6 +36,9 @@
        (global-set-key [(meta right)] 'end-of-line)))
 
 ;; Isearch
+(defun my/isearch-other-end ()
+  "Jump to the beginning of an isearch match after searching forward."
+  (when isearch-forward (goto-char isearch-other-end)))
 (let* ((modifier (if (featurep 'aquamacs) 'alt 'meta))
        (forward [(control s)])
        (backward [(control shift s)])
@@ -50,7 +53,8 @@
   (define-key isearch-mode-map forward-regexp
     'isearch-repeat-forward-regexp)
   (define-key isearch-mode-map backward-regexp
-    'isearch-repeat-backward-regexp))
+    'isearch-repeat-backward-regexp)
+  (add-hook 'isearch-mode-end-hook 'my/isearch-other-end))
 
 ;; File switching
 (global-set-key [(control x) (control n)] 'nav)
