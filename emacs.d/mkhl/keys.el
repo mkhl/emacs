@@ -39,22 +39,24 @@
 (defun my/isearch-other-end ()
   "Jump to the beginning of an isearch match after searching forward."
   (when isearch-forward (goto-char isearch-other-end)))
-(let* ((modifier (if (featurep 'aquamacs) 'alt 'meta))
-       (forward [(control s)])
-       (backward [(control shift s)])
-       (forward-regexp (vector (list 'control modifier 's)))
-       (backward-regexp (vector (list 'control modifier 'shift 's))))
-  (global-set-key forward 'isearch-forward)
-  (global-set-key backward 'isearch-backward)
-  (define-key isearch-mode-map forward 'isearch-repeat-forward)
-  (define-key isearch-mode-map backward 'isearch-repeat-backward)
-  (global-set-key forward-regexp 'isearch-forward-regexp)
-  (global-set-key backward-regexp 'isearch-backward-regexp)
-  (define-key isearch-mode-map forward-regexp
-    'isearch-repeat-forward-regexp)
-  (define-key isearch-mode-map backward-regexp
-    'isearch-repeat-backward-regexp)
-  (add-hook 'isearch-mode-end-hook 'my/isearch-other-end))
+(eval-after-load "isearch"
+  '(progn
+     (let* ((modifier (if (featurep 'aquamacs) 'alt 'meta))
+            (forward [(control s)])
+            (backward [(control shift s)])
+            (forward-regexp (vector (list 'control modifier 's)))
+            (backward-regexp (vector (list 'control modifier 'shift 's))))
+       (global-set-key forward 'isearch-forward)
+       (global-set-key backward 'isearch-backward)
+       (define-key isearch-mode-map forward 'isearch-repeat-forward)
+       (define-key isearch-mode-map backward 'isearch-repeat-backward)
+       (global-set-key forward-regexp 'isearch-forward-regexp)
+       (global-set-key backward-regexp 'isearch-backward-regexp)
+       (define-key isearch-mode-map forward-regexp
+         'isearch-repeat-forward-regexp)
+       (define-key isearch-mode-map backward-regexp
+         'isearch-repeat-backward-regexp)
+       (add-hook 'isearch-mode-end-hook 'my/isearch-other-end))))
 
 ;; Scrolling
 (global-set-key [(control v)] 'scroll-up)
