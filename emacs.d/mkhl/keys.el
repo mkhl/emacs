@@ -28,18 +28,12 @@
 (cua-selection-mode t)
 
 ;; Control/Meta motion
-(cond ((featurep 'aquamacs)
-       (global-set-key [(control left)] 'backward-word)
-       (global-set-key [(control right)] 'forward-word)
-       (define-key osx-key-mode-map [(alt control up)] 'up-list)
-       (define-key osx-key-mode-map [(alt control down)] 'down-list)
-       (define-key osx-key-mode-map [(alt control left)] 'backward-sexp)
-       (define-key osx-key-mode-map [(alt control right)] 'forward-sexp))
-      (t
-       (global-set-key [(meta up)] 'beginning-of-buffer)
-       (global-set-key [(meta down)] 'end-of-buffer)
-       (global-set-key [(meta left)] 'beginning-of-line)
-       (global-set-key [(meta right)] 'end-of-line)))
+(global-set-key [(control left)] 'backward-word)
+(global-set-key [(control right)] 'forward-word)
+(global-set-key [(meta up)] 'beginning-of-buffer)
+(global-set-key [(meta down)] 'end-of-buffer)
+(global-set-key [(meta left)] 'beginning-of-line)
+(global-set-key [(meta right)] 'end-of-line)
 
 ;; Isearch
 (defun my/isearch-other-end ()
@@ -125,10 +119,6 @@
 (global-set-key [(meta shift d)] 'my/duplicate-line-or-region)
 (global-set-key [(meta shift l)] 'my/mark-line)
 (global-set-key [(meta q)] 'my/fill-paragraph-or-region)
-(when (featurep 'aquamacs)
-  (define-key osx-key-mode-map [(alt return)] 'my/next-line-and-indent)
-  (define-key osx-key-mode-map [(alt \;)]
-    'comment-or-uncomment-region-or-line))
 
 ;; Auto-Pairs (TextMate)
 (setq parens-require-spaces nil)

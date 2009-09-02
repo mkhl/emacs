@@ -13,13 +13,13 @@
 
 ;; Initialization
 (load "mkhl/global")
-(when (featurep 'aquamacs)
-  (load "mkhl/aquamacs"))
 (load "mkhl/keys")
 (load "mkhl/mouse")
 (load "mkhl/aliases")
 (load "mkhl/eshell")
 (load "mkhl/modes")
+(when (featurep 'aquamacs)
+  (load "mkhl/aquamacs"))
 (load "mkhl/elpa")
 (load "mkhl/vendor")
 (load "mkhl/local")
