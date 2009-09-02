@@ -95,18 +95,13 @@
     (if (and mark-active transient-mark-mode)
         (setq beg (region-beginning)
               end (region-end))
-      (save-excursion
-        (beginning-of-line)
-        (setq beg (point))
-        (forward-line)
-        (setq end (point))))
-    (goto-char beg)
-    (save-excursion
-      (insert (buffer-substring-no-properties beg end)))
-    (when had-mark
-      (goto-char end)
-      ;; TODO: I'd really like to keep the region marked...
-      (exchange-point-and-mark))))
+      (setq beg (line-beginning-position 1)
+            end (line-beginning-position 2)))
+    (let* (deactivate-mark)
+      (goto-char beg)
+      (insert (buffer-substring-no-properties beg end))
+      (when had-mark
+        (push-mark (+ end (- end beg)) 'nomsg 'activate)))))
 
 (global-set-key [(meta return)] 'my/next-line-and-indent)
 (global-set-key [(meta shift d)] 'my/duplicate-line-or-region)
