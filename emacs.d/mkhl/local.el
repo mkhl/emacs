@@ -49,3 +49,14 @@
 
 ;; Go home
 (find-file "~")
+
+;; Fix hiding Emacs
+;; TODO: Find the proper way to hide Emacs.
+(defun my/mac-hide-emacs ()
+  (interactive)
+  (do-applescript "tell application \"System Events\"
+    tell application process \"Emacs\"
+        set visible to false
+    end tell
+end tell"))
+(global-set-key [(control meta shift h)] 'my/mac-hide-emacs)
