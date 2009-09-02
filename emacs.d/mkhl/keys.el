@@ -83,10 +83,8 @@
 (defun my/mark-line ()
   "Put mark at end of this line, point at beginning."
   (interactive)
-  (beginning-of-line)
-  (push-mark)
-  (forward-line)
-  (exchange-point-and-mark))
+  (goto-char (line-beginning-position 1))
+  (push-mark (line-beginning-position 2) 'nomsg 'activate))
 
 ;; Duplicate line/selection (TextMate)
 (defun my/duplicate-line-or-region ()
