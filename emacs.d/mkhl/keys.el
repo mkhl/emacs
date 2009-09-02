@@ -103,9 +103,18 @@
       (when had-mark
         (push-mark (+ end (- end beg)) 'nomsg 'activate)))))
 
+;; Fill paragraph/selection (TextMate)
+(defun my/fill-paragraph-or-region (beg end)
+  "Fill the current paragraph or, if active, the region."
+  (interactive "r")
+  (if (and mark-active transient-mark-mode)
+      (fill-region beg end)
+    (fill-paragraph nil)))
+
 (global-set-key [(meta return)] 'my/next-line-and-indent)
 (global-set-key [(meta shift d)] 'my/duplicate-line-or-region)
 (global-set-key [(meta shift l)] 'my/mark-line)
+(global-set-key [(meta q)] 'my/fill-paragraph-or-region)
 (when (featurep 'aquamacs)
   (define-key osx-key-mode-map [(alt return)] 'my/next-line-and-indent)
   (define-key osx-key-mode-map [(alt \;)]
