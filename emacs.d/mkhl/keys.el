@@ -56,6 +56,10 @@
     'isearch-repeat-backward-regexp)
   (add-hook 'isearch-mode-end-hook 'my/isearch-other-end))
 
+;; Scrolling
+(global-set-key [(control v)] 'scroll-up)
+(global-set-key [(control shift v)] 'scroll-down)
+
 ;; File switching
 (global-set-key [(control x) (control n)] 'nav)
 
