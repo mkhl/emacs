@@ -17,6 +17,12 @@
   (global-set-key [(meta Z)] 'redo)
   (global-set-key [(control z)] 'zap-to-char))
 
+;; Tiny Mac-CUA
+(global-set-key [(meta x)] 'kill-region)
+(global-set-key [(meta c)] 'copy-region-as-kill)
+(global-set-key [(meta v)] 'yank)
+(global-set-key [(meta shift v)] 'yank-pop)
+
 ;; Shifted motion
 (setq cua-highlight-region-shift-only t)
 (cua-selection-mode t)
