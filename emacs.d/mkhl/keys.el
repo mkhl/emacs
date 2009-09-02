@@ -94,8 +94,7 @@
 (defun my/duplicate-line-or-region ()
   "Duplicate the current line or, if active, the region."
   (interactive)
-  (let* ((had-mark mark-active)
-         beg end)
+  (let* ((had-mark mark-active) beg end)
     (if (and mark-active transient-mark-mode)
         (setq beg (region-beginning)
               end (region-end))
@@ -117,6 +116,7 @@
 
 (global-set-key [(meta return)] 'my/next-line-and-indent)
 (global-set-key [(meta shift d)] 'my/duplicate-line-or-region)
+(global-set-key [(meta shift k)] 'kill-whole-line)
 (global-set-key [(meta shift l)] 'my/mark-line)
 (global-set-key [(meta q)] 'my/fill-paragraph-or-region)
 
