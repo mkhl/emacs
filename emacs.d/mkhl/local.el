@@ -22,12 +22,13 @@
 ;; Color theme
 (when (require 'color-theme nil 'noerror)
   (color-theme-initialize)
-  (cond
-   ((fboundp 'color-theme-quiet-light)
-    (color-theme-quiet-light))
-   ((fboundp 'color-theme-espresso)
-    (color-theme-espresso))
-   (t (color-theme-xemacs))))
+  (let* ((theme (cond
+                 ((fboundp 'color-theme-quiet-light)
+                  'color-theme-quiet-light)
+                 ((fboundp 'color-theme-espresso)
+                  'color-theme-espresso)
+                 (t 'color-theme-xemacs))))
+    (add-hook 'after-init-hook theme)))
 
 ;; W3M
 (when (require 'w3m-load nil 'noerror)
