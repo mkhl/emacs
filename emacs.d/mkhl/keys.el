@@ -5,6 +5,9 @@
 ;; Buffer switching
 (global-set-key [(control x) (control b)] 'ibuffer)
 
+;; Server buffers
+(global-set-key [(control x) (control =)] 'server-edit)
+
 ;; Directory editing
 (global-set-key [(control x) (control d)] 'dired)
 
