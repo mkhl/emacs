@@ -37,7 +37,8 @@
 (when (require 'textmate nil 'noerror)
   (textmate-mode t)
   (define-key *textmate-mode-map* [(control c) (control t)] nil)
-  (define-key *textmate-mode-map* [(meta return)] nil))
+  (define-key *textmate-mode-map* [(meta return)] nil)
+  (define-key *textmate-mode-map* [(alt return)] nil))
 
 ;; YASnippet
 (when (require 'yasnippet-bundle nil 'noerror)
