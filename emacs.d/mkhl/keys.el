@@ -35,7 +35,8 @@
 ;; Isearch
 (defun my/isearch-other-end ()
   "Jump to the beginning of an isearch match after searching forward."
-  (when isearch-forward (goto-char isearch-other-end)))
+  (when (and isearch-forward isearch-other-end)
+    (goto-char isearch-other-end)))
 (eval-after-load "isearch"
   '(progn
      (let* ((modifier (if (featurep 'aquamacs) 'alt 'meta))
