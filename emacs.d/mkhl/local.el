@@ -31,8 +31,7 @@
     (add-hook 'after-init-hook theme)))
 
 ;; W3M
-(when (require 'w3m-load nil 'noerror)
-  (setq browse-url-browser-function 'w3m-browse-url))
+(require 'w3m-load nil 'noerror)
 
 ;; TextMate mode
 (when (require 'textmate nil 'noerror)
