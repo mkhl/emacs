@@ -10,13 +10,14 @@
                                  "*Ibuffer*"
                                  "*gitsum*"
                                  "*Completions*"
-                                 "*Ido Completions*")
-      special-display-regexps '("[ ]?\\*info.*\\*[ ]?"
-                                "[ ]?\\*[hH]elp.*"
-                                "[ ]?\\*Messages\\*[ ]?"
-                                "[ ]?\\*Open Recent\\*[ ]?"
-                                ".*SPEEDBAR.*"
-                                "[ ]?\\*.*\\*[ ]?"))
+                                 "*Ido Completions*"))
+(when special-display-regexps
+  (setq special-display-regexps '("[ ]?\\*info.*\\*[ ]?"
+                                  "[ ]?\\*[hH]elp.*"
+                                  "[ ]?\\*Messages\\*[ ]?"
+                                  "[ ]?\\*Open Recent\\*[ ]?"
+                                  ".*SPEEDBAR.*"
+                                  "[ ]?\\*.*\\*[ ]?")))
 
 (dolist (pair '((aquamacs osx-key-mode-map)
                 (mac-key-mode mac-key-mode-map)))
