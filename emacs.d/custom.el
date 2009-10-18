@@ -9,6 +9,7 @@
  '(create-frame-min-width 78)
  '(default-major-mode (quote text-mode))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
+ '(fringe-mode nil nil (fringe))
  '(hippie-expand-try-functions-list (quote (try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-lisp-symbol-partially try-complete-lisp-symbol yas/hippie-try-expand)))
  '(initial-major-mode (quote lisp-interaction-mode))
  '(isa-isatool-command "~/Projects/Hets/Isabelle/bin/isabelle")
