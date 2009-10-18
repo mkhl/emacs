@@ -2,14 +2,28 @@
 ;; Don't use Alt-x, use Ctrl-x-m
 (global-set-key [(control x) (control m)] 'execute-extended-command)
 
-;; Buffer switching
-(global-set-key [(control x) (control b)] 'ibuffer)
-
 ;; Server buffers
 (global-set-key [(control x) (control =)] 'server-edit)
 
+;; Buffer switching
+(global-set-key [(control x) (control b)] 'ibuffer)
+
 ;; Directory editing
 (global-set-key [(control x) (control d)] 'dired)
+
+;; File switching
+(global-set-key [(control x) (control n)] 'nav)
+
+;; Version control
+(global-set-key [(control x) (g)] 'magit-status)
+
+;; Compilation
+(global-set-key [(control x) (control y)] 'compile)
+(global-set-key [(control x) (control z)] 'compile)
+
+;; Scrolling
+(global-set-key [(control v)] 'scroll-up)
+(global-set-key [(control shift v)] 'scroll-down)
 
 ;; Symbol completion
 (global-set-key [(shift tab)] 'hippie-expand)
@@ -53,20 +67,6 @@
        (define-key isearch-mode-map backward-regexp
          'isearch-repeat-backward-regexp)
        (add-hook 'isearch-mode-end-hook 'my/isearch-other-end))))
-
-;; Scrolling
-(global-set-key [(control v)] 'scroll-up)
-(global-set-key [(control shift v)] 'scroll-down)
-
-;; File switching
-(global-set-key [(control x) (control n)] 'nav)
-
-;; Version control
-(global-set-key [(control x) (g)] 'magit-status)
-
-;; Compilation
-(global-set-key [(control x) (control y)] 'compile)
-(global-set-key [(control x) (control z)] 'compile)
 
 ;; Next line (TextMate)
 (defun my/next-line-and-indent ()
