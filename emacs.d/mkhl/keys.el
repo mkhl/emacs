@@ -27,10 +27,8 @@
 ;; Control/Meta motion
 (global-set-key [(control left)] 'backward-word)
 (global-set-key [(control right)] 'forward-word)
-(global-set-key [(meta up)] 'beginning-of-buffer)
-(global-set-key [(meta down)] 'end-of-buffer)
-(global-set-key [(meta left)] 'beginning-of-line)
-(global-set-key [(meta right)] 'end-of-line)
+(global-set-key [(meta up)] 'backward-paragraph)
+(global-set-key [(meta down)] 'forward-paragraph)
 
 ;; Isearch
 (defun my/isearch-other-end ()
