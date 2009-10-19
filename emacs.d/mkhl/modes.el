@@ -25,6 +25,8 @@
                              lisp-mode-map))
        (define-key mode-map [(meta \()] 'insert-parentheses)
        (define-key mode-map [(meta \))] 'move-past-close-and-reindent))
+       (define-key mode-map [(alt \()] 'insert-parentheses)
+       (define-key mode-map [(alt \))] 'move-past-close-and-reindent))
      (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
      (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)))
 
@@ -60,6 +62,8 @@
      (define-key scheme-mode-map [(tab)] 'scheme-complete-or-indent)
      (define-key scheme-mode-map [(meta \()] 'insert-parentheses)
      (define-key scheme-mode-map [(meta \))] 'move-past-close-and-reindent)
+     (define-key scheme-mode-map [(alt \()] 'insert-parentheses)
+     (define-key scheme-mode-map [(alt \))] 'move-past-close-and-reindent)
      (add-hook 'scheme-mode-hook 'my/scheme-mode-hook)))
 
 ;;; Paredit
