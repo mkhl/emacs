@@ -45,12 +45,10 @@
          (define-key ,mode-map [(alt \;)] 'comment-dwim)
 
          ;; Auto-Pairs (TextMate)
-         (define-key ,mode-map [(alt \()] 'insert-pair)
-         (define-key ,mode-map [(alt \))] 'up-list)
-         (define-key ,mode-map [(alt \[)] 'insert-pair)
-         (define-key ,mode-map [(alt \])] 'up-list)
-         (define-key ,mode-map [(alt \{)] 'insert-pair)
-         (define-key ,mode-map [(alt \})] 'up-list)
+         (dolist (pair '((\( . \)) (\[ . \]) (\{ . \})))
+           (destructuring-bind (car . cdr) pair
+             (define-key ,mode-map (vector (list 'alt car)) 'insert-pair)
+             (define-key ,mode-map (vector (list 'alt cdr)) 'up-list)))
          (define-key ,mode-map [(alt \')] 'my/insert-or-skip-pair)
          (define-key ,mode-map [(alt \")] 'my/insert-or-skip-pair)
 

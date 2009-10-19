@@ -120,12 +120,10 @@
 
 ;; Auto-Pairs (TextMate)
 (setq parens-require-spaces nil)
-(global-set-key [(meta \()] 'insert-pair)
-(global-set-key [(meta \))] 'up-list)
-(global-set-key [(meta \[)] 'insert-pair)
-(global-set-key [(meta \])] 'up-list)
-(global-set-key [(meta \{)] 'insert-pair)
-(global-set-key [(meta \})] 'up-list)
+(dolist (pair '((\( . \)) (\[ . \]) (\{ . \})))
+  (destructuring-bind (car . cdr) pair
+    (global-set-key (vector (list 'meta car)) 'insert-pair)
+    (global-set-key (vector (list 'meta cdr)) 'up-list)))
 (defun my/insert-pair-or-skip (&optional arg)
   (interactive "P")
   (let ((char last-command-char))
