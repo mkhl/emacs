@@ -126,7 +126,14 @@
 (global-set-key [(meta \])] 'up-list)
 (global-set-key [(meta \{)] 'insert-pair)
 (global-set-key [(meta \})] 'up-list)
-(global-set-key [(meta \")] 'insert-pair)
+(defun my/insert-pair-or-skip (&optional arg)
+  (interactive "P")
+  (let ((char last-command-char))
+    (if (looking-at (char-to-string char))
+        (forward-char)
+      (insert-pair arg))))
+(global-set-key [(meta \')] 'my/insert-or-skip-pair)
+(global-set-key [(meta \")] 'my/insert-or-skip-pair)
 
 ;; Finding symbols
 (global-set-key [(control x) (shift f)] 'find-function)

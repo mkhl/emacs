@@ -51,7 +51,8 @@
          (define-key ,mode-map [(alt \])] 'up-list)
          (define-key ,mode-map [(alt \{)] 'insert-pair)
          (define-key ,mode-map [(alt \})] 'up-list)
-         (define-key ,mode-map [(alt \")] 'insert-pair)
+         (define-key ,mode-map [(alt \')] 'my/insert-or-skip-pair)
+         (define-key ,mode-map [(alt \")] 'my/insert-or-skip-pair)
 
          ;; The end
          ))))
