@@ -17,7 +17,7 @@
 
 ;; Line numbers
 (when (require 'linum)
-  (global-linum-mode 1))
+  (global-linum-mode 0))
 
 ;; Color theme
 (when (require 'color-theme nil 'noerror)
