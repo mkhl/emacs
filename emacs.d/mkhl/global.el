@@ -42,7 +42,8 @@
       mark-holidays-in-calendar t
       generated-autoload-file (locate-library "lisp/loaddefs.el")
       diff-switches "-u"
-      comment-auto-fill-only-comments t)
+      comment-auto-fill-only-comments t
+      x-select-enable-clipboard t)
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward)
