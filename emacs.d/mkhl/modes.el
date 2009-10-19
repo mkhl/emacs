@@ -24,7 +24,7 @@
                              lisp-interaction-mode-map
                              lisp-mode-map))
        (define-key mode-map [(meta \()] 'insert-parentheses)
-       (define-key mode-map [(meta \))] 'move-past-close-and-reindent))
+       (define-key mode-map [(meta \))] 'move-past-close-and-reindent)
        (define-key mode-map [(alt \()] 'insert-parentheses)
        (define-key mode-map [(alt \))] 'move-past-close-and-reindent))
      (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
