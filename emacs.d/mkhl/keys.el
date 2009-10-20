@@ -115,7 +115,7 @@
         (push-mark (+ end (- end beg)) 'nomsg 'activate)))))
 
 ;; Fill paragraph/selection (TextMate)
-(defun my/fill-paragraph-or-region (beg end)
+(defun my/fill-paragraph-or-region (&optional beg end)
   "Fill the current paragraph or, if active, the region."
   (interactive "r")
   (if (and mark-active transient-mark-mode)
