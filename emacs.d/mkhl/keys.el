@@ -122,11 +122,41 @@
       (fill-region beg end)
     (fill-paragraph nil)))
 
+;; Uppercase (TextMate)
+(defun my/upcase-word-or-region (arg &optional beg end)
+  "Convert the following word or, if active, the region, to upper case."
+  (interactive "p\nr")
+  (if (and mark-active transient-mark-mode)
+      (upcase-region beg end)
+    (upcase-word arg)))
+
+;; Lowercase (TextMate)
+(defun my/downcase-word-or-region (arg &optional beg end)
+  "Convert the following word or, if active, the region, to lower case."
+  (interactive "p\nr")
+  (if (and mark-active transient-mark-mode)
+      (downcase-region beg end)
+    (downcase-word arg)))
+
+;; Titlecase (TextMate)
+(defun my/upcase-initials-line-or-region (&optional beg end)
+  "Convert the initial of each word in the current line or,
+if active, the region, to upper case."
+  (interactive "r")
+  (unless (and mark-active transient-mark-mode)
+    (setq beg (line-beginning-position 1)
+          end (line-beginning-position 2)))
+  (upcase-initials-region beg end))
+
+;; General TextMate emulation
 (global-set-key [(meta return)] 'my/next-line-and-indent)
 (global-set-key [(meta shift d)] 'my/duplicate-line-or-region)
 (global-set-key [(meta shift k)] 'kill-whole-line)
 (global-set-key [(meta shift l)] 'my/mark-line)
 (global-set-key [(meta q)] 'my/fill-paragraph-or-region)
+(global-set-key [(meta u)] 'my/upcase-word-or-region)
+(global-set-key [(meta shift u)] 'my/downcase-word-or-region)
+(global-set-key [(control meta u)] 'my/upcase-initials-line-or-region)
 
 ;; Auto-Pairs (TextMate)
 (setq parens-require-spaces nil)
