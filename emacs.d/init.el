@@ -9,6 +9,10 @@
                       (or (buffer-file-name) load-file-name))))
 (add-to-list 'load-path dot-emacs-dir)
 
+;; Packages
+(load "mkhl/elpa")
+(load "mkhl/vendor")
+(load "mkhl/lisp")
 ;; Initialization
 (load "mkhl/global")
 (load "mkhl/keys")
@@ -18,8 +22,6 @@
 (load "mkhl/aliases")
 (load "mkhl/eshell")
 (load "mkhl/modes")
-(load "mkhl/elpa")
-(load "mkhl/vendor")
 (load "mkhl/local")
 (load "mkhl/path")
 
