@@ -47,9 +47,6 @@
             (let ((proof-assistants '(isar)))
               (require 'proof-site nil 'noerror))))
 
-;; Go home
-(find-file "~")
-
 ;; Fix hiding Emacs
 ;; TODO: Find the proper way to hide Emacs.
 (defun my/mac-hide-emacs ()
