@@ -25,6 +25,9 @@
 (load "mkhl/local")
 (load "mkhl/path")
 
+(setq custom-file (concat dot-emacs-dir "custom.el"))
+(load custom-file 'noerror 'nomessage)
+
 ;; Bugfixes
 (when (eq system-type 'darwin)
   (setq system-name (car (split-string system-name "\\."))))
