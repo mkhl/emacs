@@ -40,6 +40,12 @@
 (when (require 'textmate nil 'noerror)
   (textmate-mode t)
   (define-key *textmate-mode-map* [(control c) (control t)] nil)
+  (define-key *textmate-mode-map* [(alt \[)] nil)
+  (define-key *textmate-mode-map* [(alt \])] nil)
+  (define-key *textmate-mode-map* [(control shift \[)] nil)
+  (define-key *textmate-mode-map* [(control shift \])] nil)
+  (define-key *textmate-mode-map* [(control alt \[)] 'textmate-shift-left)
+  (define-key *textmate-mode-map* [(control alt \])] 'textmate-shift-right)
   (define-key *textmate-mode-map* [(meta return)] nil)
   (define-key *textmate-mode-map* [(alt return)] nil))
 
