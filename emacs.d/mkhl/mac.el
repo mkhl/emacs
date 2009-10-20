@@ -49,8 +49,8 @@
            (destructuring-bind (car . cdr) pair
              (define-key ,mode-map (vector (list 'alt car)) 'insert-pair)
              (define-key ,mode-map (vector (list 'alt cdr)) 'up-list)))
-         (define-key ,mode-map [(alt \')] 'my/insert-or-skip-pair)
-         (define-key ,mode-map [(alt \")] 'my/insert-or-skip-pair)
+         (define-key ,mode-map [(alt \')] 'my/insert-pair-or-skip)
+         (define-key ,mode-map [(alt \")] 'my/insert-pair-or-skip)
 
          ;; The end
          ))))

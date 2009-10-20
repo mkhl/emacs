@@ -130,8 +130,8 @@
     (if (looking-at (char-to-string char))
         (forward-char)
       (insert-pair arg))))
-(global-set-key [(meta \')] 'my/insert-or-skip-pair)
-(global-set-key [(meta \")] 'my/insert-or-skip-pair)
+(global-set-key [(meta \')] 'my/insert-pair-or-skip)
+(global-set-key [(meta \")] 'my/insert-pair-or-skip)
 
 ;; Finding symbols
 (global-set-key [(control x) (shift f)] 'find-function)
