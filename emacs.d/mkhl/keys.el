@@ -25,6 +25,10 @@
 (global-set-key [(control v)] 'scroll-up)
 (global-set-key [(control shift v)] 'scroll-down)
 
+;; Finding symbols
+(global-set-key [(control x) (shift f)] 'find-function)
+(global-set-key [(control x) (shift v)] 'find-variable)
+
 ;; Symbol completion
 (global-set-key [(shift tab)] 'hippie-expand)
 
@@ -138,10 +142,6 @@
       (insert-pair arg))))
 (global-set-key [(meta \')] 'my/insert-pair-or-skip)
 (global-set-key [(meta \")] 'my/insert-pair-or-skip)
-
-;; Finding symbols
-(global-set-key [(control x) (shift f)] 'find-function)
-(global-set-key [(control x) (shift v)] 'find-variable)
 
 ;; Indent yanked text
 ;; - This doesn't work because the defadvice bodies are only executed
