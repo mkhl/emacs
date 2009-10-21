@@ -74,6 +74,7 @@
 (load "fu" 'noerror)
 
 ;;; Haskell
+(load "haskell-site-file" 'noerror)
 (add-to-list 'completion-ignored-extensions ".hi")
 (eval-after-load "haskell-mode"
   '(progn
