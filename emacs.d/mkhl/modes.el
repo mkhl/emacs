@@ -31,6 +31,9 @@
      (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)))
 
 ;;; Common Lisp
+(let* ((local-hyperspec-root "/opt/HyperSpec/"))
+  (when (file-exists-p local-hyperspec-root)
+    (setq common-lisp-hyperspec-root local-hyperspec-root)))
 (setq inferior-lisp-acl-program "/Applications/Developer/AllegroCL/alisp"
       inferior-lisp-ccl-program "/opt/ccl/scripts/ccl64 -K utf-8"
       inferior-lisp-sbcl-program "/opt/local/bin/sbcl")
