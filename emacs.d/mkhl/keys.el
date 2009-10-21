@@ -38,8 +38,15 @@
   (global-set-key [(meta Z)] 'redo)
   (global-set-key [(control z)] 'zap-to-char))
 
+;; Kill region or Execute extended command
+(defun my/kill-region-or-exc-ext-cmd ()
+  (interactive)
+  (if (and mark-active transient-mark-mode)
+      (call-interactively 'kill-region)
+    (call-interactively 'execute-extended-command)))
+
 ;; Tiny Mac-like CUA
-(global-set-key [(meta x)] 'kill-region)
+(global-set-key [(meta x)] 'my/kill-region-or-exc-ext-cmd)
 (global-set-key [(meta c)] 'copy-region-as-kill)
 (global-set-key [(meta v)] 'yank)
 (global-set-key [(meta shift v)] 'yank-pop)
