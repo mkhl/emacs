@@ -1,17 +1,17 @@
 
 ;; Same-window tweaks
-(setq same-window-buffer-names '("*scratch*"
-                                 "*eshell*"
-                                 "*shell*"
-                                 "*mail*"
-                                 "*inferior-lisp*"
-                                 "*ielm*"
-                                 "*scheme*"
-                                 "*Ibuffer*"
-                                 "*gitsum*"
-                                 "*Completions*"
-                                 "*Ido Completions*"))
-(when special-display-regexps
+(when (featurep 'aquamacs)
+  (setq same-window-buffer-names '("*scratch*"
+                                   "*eshell*"
+                                   "*shell*"
+                                   "*mail*"
+                                   "*inferior-lisp*"
+                                   "*ielm*"
+                                   "*scheme*"
+                                   "*Ibuffer*"
+                                   "*gitsum*"
+                                   "*Completions*"
+                                   "*Ido Completions*"))
   (setq special-display-regexps '("[ ]?\\*info.*\\*[ ]?"
                                   "[ ]?\\*[hH]elp.*"
                                   "[ ]?\\*Messages\\*[ ]?"
