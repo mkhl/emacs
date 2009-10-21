@@ -44,6 +44,17 @@
          (define-key ,mode-map [(alt shift l)] 'my/mark-line)
          (define-key ,mode-map [(alt \;)] 'comment-dwim)
 
+         ;; General TextMate emulation
+         (define-key ,mode-map [(alt return)] 'my/next-line-and-indent)
+         (define-key ,mode-map [(alt shift d)] 'my/duplicate-line-or-region)
+         (define-key ,mode-map [(alt shift k)] 'kill-whole-line)
+         (define-key ,mode-map [(alt shift l)] 'my/mark-line)
+         (define-key ,mode-map [(alt q)] 'my/fill-paragraph-or-region)
+         (define-key ,mode-map [(alt u)] 'my/upcase-word-or-region)
+         (define-key ,mode-map [(alt shift u)] 'my/downcase-word-or-region)
+         (define-key ,mode-map [(control alt u)]
+           'my/upcase-initials-line-or-region)
+
          ;; Auto-Pairs (TextMate)
          (dolist (pair '((\( . \)) (\[ . \]) (\{ . \})))
            (destructuring-bind (car . cdr) pair
