@@ -32,7 +32,7 @@
 
 ;; Bugfixes
 (when (eq system-type 'darwin)
-  (setq system-name (car (split-string system-name "\\."))))
+  (setq system-name (downcase (car (split-string system-name "\\.")))))
 
 ;; Go home
 (find-file "~")
