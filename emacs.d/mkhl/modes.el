@@ -31,7 +31,10 @@
      (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)))
 
 ;;; Common Lisp
-(setq inferior-lisp-program "/opt/ccl/scripts/ccl64 -K utf-8")
+(setq inferior-lisp-acl-program "/Applications/Developer/AllegroCL/alisp"
+      inferior-lisp-ccl-program "/opt/ccl/scripts/ccl64 -K utf-8"
+      inferior-lisp-sbcl-program "/opt/local/bin/sbcl")
+(setq inferior-lisp-program inferior-lisp-ccl-program)
 (require 'slime-autoloads nil 'noerror)
 (eval-after-load "slime"
   '(progn
