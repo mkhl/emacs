@@ -14,9 +14,10 @@
 (load "mkhl/elpa")
 (load "mkhl/vendor")
 (load "mkhl/lisp")
+
 ;; Initialization
 (load "mkhl/global")
-(load "mkhl/textmate")
+(load "mkhl/functions")
 (load "mkhl/keys")
 (load "mkhl/mouse")
 (when (eq window-system 'mac)
