@@ -1,3 +1,5 @@
+;; Make sure `Info-additional-directory-list' is available
+(require 'info)
 
 (let* ((vendor-dir (file-name-as-directory (concat dot-emacs-dir "vendor")))
        (non-hidden (rx bos (not (in ".")))))

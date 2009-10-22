@@ -1,5 +1,4 @@
 (require 'cl)
-(require 'info)
 
 ;;; Uncomment to disable loading the "default" library at startup
 ;; (setq inhibit-default-init t)
