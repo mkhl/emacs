@@ -34,6 +34,7 @@
       history-length 100
       history-delete-duplicates t
       delete-by-moving-to-trash t
+      auto-save-default nil
       version-control t
       kept-new-versions 10
       kept-old-versions 2
