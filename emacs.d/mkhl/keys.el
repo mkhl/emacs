@@ -30,13 +30,13 @@
 (global-set-key [(control x) (shift v)] 'find-variable)
 
 ;; Window switching
-(global-set-key [(meta \`)] 'my/next-window)
-(global-set-key [(meta ~)] 'my/previous-window)
+(global-set-key [(meta \`)] 'switch-to-next-window)
+(global-set-key [(meta ~)] 'switch-to-previous-window)
 
-(defun my/next-window (arg)
+(defun switch-to-next-window (arg)
   (interactive "p")
   (other-window arg))
-(defun my/previous-window (arg)
+(defun switch-to-previous-window (arg)
   (interactive "p")
   (other-window (- arg)))
 
@@ -52,14 +52,14 @@
 ;; Kill region or Execute extended command
 (defvar extended-command-command 'execute-extended-command
   "Command to run extended commands.")
-(defun my/kill-region-or-m-x ()
+(defun kill-region-or-m-x ()
   (interactive)
   (if (and mark-active transient-mark-mode)
       (call-interactively 'kill-region)
     (call-interactively extended-command-command)))
 
 ;; Tiny Mac-like CUA
-(global-set-key [(meta x)] 'my/kill-region-or-m-x)
+(global-set-key [(meta x)] 'kill-region-or-m-x)
 (global-set-key [(meta c)] 'copy-region-as-kill)
 (global-set-key [(meta v)] 'yank)
 (global-set-key [(meta shift v)] 'yank-pop)
@@ -75,7 +75,7 @@
 (global-set-key [(meta down)] 'forward-paragraph)
 
 ;; Isearch
-(defun my/isearch-other-end ()
+(defun isearch-other-end ()
   "Jump to the beginning of an isearch match after searching forward."
   (when (and isearch-forward isearch-other-end)
     (goto-char isearch-other-end)))
@@ -97,21 +97,21 @@
        (define-key isearch-mode-map backward-regexp
          'isearch-repeat-backward-regexp)
        (global-set-key [(control *)] 'isearch-forward-at-point)
-       (add-hook 'isearch-mode-end-hook 'my/isearch-other-end))))
+       (add-hook 'isearch-mode-end-hook 'isearch-other-end))))
 
 ;; General TextMate emulation
-(global-set-key [(meta return)] 'my/next-line-and-indent)
-(global-set-key [(meta shift d)] 'my/duplicate-line-or-region)
+(global-set-key [(meta return)] 'next-line-and-indent)
+(global-set-key [(meta shift d)] 'duplicate-line-or-region)
 (global-set-key [(meta shift k)] 'kill-whole-line)
-(global-set-key [(meta shift l)] 'my/mark-line)
-(global-set-key [(meta q)] 'my/fill-paragraph-or-region)
-(global-set-key [(meta u)] 'my/upcase-word-or-region)
-(global-set-key [(meta shift u)] 'my/downcase-word-or-region)
-(global-set-key [(control meta u)] 'my/upcase-initials-line-or-region)
+(global-set-key [(meta shift l)] 'mark-line)
+(global-set-key [(meta q)] 'fill-paragraph-or-region)
+(global-set-key [(meta u)] 'upcase-word-or-region)
+(global-set-key [(meta shift u)] 'downcase-word-or-region)
+(global-set-key [(control meta u)] 'upcase-initials-line-or-region)
 
 ;; Auto-Pairs (TextMate)
 (setq parens-require-spaces nil)
-(defun my/insert-pair-or-skip (&optional arg)
+(defun insert-pair-or-skip (&optional arg)
   (interactive "P")
   (let ((char1 (char-to-string last-command-char))
         (char2 (char-to-string (event-basic-type last-command-event))))
@@ -123,8 +123,8 @@
   (destructuring-bind (car . cdr) pair
     (global-set-key (vector (list 'meta car)) 'insert-pair)
     (global-set-key (vector (list 'meta cdr)) 'up-list)))
-(global-set-key [(meta \')] 'my/insert-pair-or-skip)
-(global-set-key [(meta \")] 'my/insert-pair-or-skip)
+(global-set-key [(meta \')] 'insert-pair-or-skip)
+(global-set-key [(meta \")] 'insert-pair-or-skip)
 
 ;; Indent yanked text
 ;; - This doesn't work because the defadvice bodies are only executed
@@ -143,13 +143,13 @@
 ;;              (when (member major-mode indenting-modes)
 ;;                (let ((mark-even-if-inactive t))
 ;;                  (indent-region (region-beginning) (region-end) nil)))))
-;;     (defadvice yank (after my/indent-region activate)
+;;     (defadvice yank (after indent-region activate)
 ;;       (funcall #'indent-yanked-region))
-;;     (defadvice yank-pop (after my/indent-region activate)
+;;     (defadvice yank-pop (after indent-region activate)
 ;;       (funcall #'indent-yanked-region))))
 
 ;; Kill and join
-(defadvice kill-line (around my/kill-or-join-line activate)
+(defadvice kill-line (around kill-or-join-line activate)
   (if (and (eolp) (not (bolp)))
       (delete-indentation t)
     ad-do-it))
