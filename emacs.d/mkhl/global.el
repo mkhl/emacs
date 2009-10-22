@@ -61,6 +61,11 @@
 
 (add-to-list 'default-frame-alist '(width . 100))
 (add-to-list 'default-frame-alist '(height . 50))
+(add-hook 'after-init-hook
+          (lambda ()
+            (add-to-list 'default-frame-alist
+                         `(font . ,(face-font 'default)))))
+
 (add-to-list 'initial-frame-alist '(top . 100))
 (add-to-list 'initial-frame-alist '(left . 180))
 
