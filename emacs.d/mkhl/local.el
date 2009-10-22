@@ -37,6 +37,11 @@
 ;; TextMate mode
 (require 'textmate nil 'noerror)
 
+;; Smex
+(when (require 'smex nil 'noerror)
+  (let* ((smex-save-base (file-name-nondirectory smex-save-file)))
+    (setq smex-save-file (concat dot-emacs-dir smex-save-base)))
+  (smex-initialize))
 ;; YASnippet
 (when (require 'yasnippet-bundle nil 'noerror)
   (yas/load-directory (concat dot-emacs-dir "snippets"))
