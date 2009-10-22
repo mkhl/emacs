@@ -42,6 +42,11 @@
   (yas/load-directory (concat dot-emacs-dir "snippets"))
   (yas/global-mode 1))
 
+;; Gist
+(eval-after-load "gist"
+  '(progn
+     (setq gist-view-gist t)))
+
 ;; Proof General
 (add-hook 'after-init-hook
           (lambda ()
