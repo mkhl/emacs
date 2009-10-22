@@ -83,6 +83,7 @@
          'isearch-repeat-forward-regexp)
        (define-key isearch-mode-map backward-regexp
          'isearch-repeat-backward-regexp)
+       (global-set-key [(control *)] 'isearch-forward-at-point)
        (add-hook 'isearch-mode-end-hook 'my/isearch-other-end))))
 
 ;; General TextMate emulation
