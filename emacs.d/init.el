@@ -16,8 +16,8 @@
 (load "mkhl/lisp")
 
 ;; Initialization
-(load "mkhl/global")
 (load "mkhl/functions")
+(load "mkhl/global")
 (load "mkhl/keys")
 (load "mkhl/mouse")
 (when (eq window-system 'mac)
