@@ -1,3 +1,3 @@
 
-(load "elpa/package" 'noerror)
-(package-initialize)
+(when (load "elpa/package" 'noerror)
+  (package-initialize))
