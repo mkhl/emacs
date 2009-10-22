@@ -59,8 +59,8 @@
 (when (fboundp 'tabbar-mode)
   (tabbar-mode -1))
 
-(add-to-list 'default-frame-alist '(width . 80))
-(add-to-list 'default-frame-alist '(height . 44))
+(add-to-list 'default-frame-alist '(width . 100))
+(add-to-list 'default-frame-alist '(height . 50))
 (add-to-list 'initial-frame-alist '(top . 100))
 (add-to-list 'initial-frame-alist '(left . 180))
 
