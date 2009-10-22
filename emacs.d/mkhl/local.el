@@ -1,4 +1,5 @@
 
+;; More dired
 (when (require 'dired-x)
   (setq dired-omit-files (rx (| (: bos (? ".") "#") (: bos "."))))
   (setq-default dired-omit-mode t))
