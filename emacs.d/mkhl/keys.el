@@ -41,7 +41,7 @@
   (other-window (- arg)))
 
 ;; Symbol completion
-(global-set-key [(shift tab)] 'hippie-expand)
+(global-set-key [(control tab)] 'hippie-expand)
 
 ;; Undo/Redo
 (when (require 'redo nil 'noerror)
