@@ -1,3 +1,9 @@
+;;; Initialization
+
+(defmacro eval-after-init (&rest body)
+  `(eval-after-load user-init-file
+     '(progn
+        ,@body)))
 
 ;;; Pretty symbols
 
