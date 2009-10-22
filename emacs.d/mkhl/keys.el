@@ -50,14 +50,16 @@
   (global-set-key [(control z)] 'zap-to-char))
 
 ;; Kill region or Execute extended command
-(defun my/kill-region-or-exc-ext-cmd ()
+(defvar extended-command-command 'execute-extended-command
+  "Command to run extended commands.")
+(defun my/kill-region-or-m-x ()
   (interactive)
   (if (and mark-active transient-mark-mode)
       (call-interactively 'kill-region)
-    (call-interactively 'execute-extended-command)))
+    (call-interactively extended-command-command)))
 
 ;; Tiny Mac-like CUA
-(global-set-key [(meta x)] 'my/kill-region-or-exc-ext-cmd)
+(global-set-key [(meta x)] 'my/kill-region-or-m-x)
 (global-set-key [(meta c)] 'copy-region-as-kill)
 (global-set-key [(meta v)] 'yank)
 (global-set-key [(meta shift v)] 'yank-pop)
