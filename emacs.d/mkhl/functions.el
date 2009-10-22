@@ -1,6 +1,7 @@
 ;;; Initialization
 
 (defmacro eval-after-init (&rest body)
+  (declare (indent 0))
   `(eval-after-load user-init-file
      '(progn
         ,@body)))
