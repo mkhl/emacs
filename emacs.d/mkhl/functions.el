@@ -39,11 +39,9 @@
   (end-of-line)
   (if (not (eq indent-line-function 'tab-to-tab-stop))
       (newline-and-indent)
-    (newline)
-    (indent-to-column
-     (save-excursion (forward-line -1)
-                     (back-to-indentation)
-                     (current-column)))))
+    (let ((column (save-excursion (back-to-indentation) (current-column))))
+      (newline)
+      (indent-to-column column))))
 
 (defun mark-line ()
   "Put mark at end of this line, point at beginning."
