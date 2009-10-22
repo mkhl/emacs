@@ -33,8 +33,7 @@
 
 ;;; TextMate emulation
 
-;; Next line
-(defun my/next-line-and-indent ()
+(defun next-line-and-indent ()
   "Insert a newline after the current line and indent it."
   (interactive)
   (end-of-line)
@@ -46,15 +45,13 @@
                      (back-to-indentation)
                      (current-column)))))
 
-;; Select line
-(defun my/mark-line ()
+(defun mark-line ()
   "Put mark at end of this line, point at beginning."
   (interactive)
   (goto-char (line-beginning-position 1))
   (push-mark (line-beginning-position 2) 'nomsg 'activate))
 
-;; Duplicate line/selection
-(defun my/duplicate-line-or-region ()
+(defun duplicate-line-or-region ()
   "Duplicate the current line or, if active, the region."
   (interactive)
   (let* ((had-mark mark-active) beg end)
@@ -69,32 +66,28 @@
       (when had-mark
         (push-mark (+ end (- end beg)) 'nomsg 'activate)))))
 
-;; Fill paragraph/selection
-(defun my/fill-paragraph-or-region (&optional beg end)
+(defun fill-paragraph-or-region (arg &optional beg end)
   "Fill the current paragraph or, if active, the region."
-  (interactive "r")
+  (interactive "p\nr")
   (if (and mark-active transient-mark-mode)
       (fill-region beg end)
-    (fill-paragraph nil)))
+    (fill-paragraph arg)))
 
-;; Uppercase
-(defun my/upcase-word-or-region (arg &optional beg end)
+(defun upcase-word-or-region (arg &optional beg end)
   "Convert the following word or, if active, the region, to upper case."
   (interactive "p\nr")
   (if (and mark-active transient-mark-mode)
       (upcase-region beg end)
     (upcase-word arg)))
 
-;; Lowercase
-(defun my/downcase-word-or-region (arg &optional beg end)
+(defun downcase-word-or-region (arg &optional beg end)
   "Convert the following word or, if active, the region, to lower case."
   (interactive "p\nr")
   (if (and mark-active transient-mark-mode)
       (downcase-region beg end)
     (downcase-word arg)))
 
-;; Titlecase
-(defun my/upcase-initials-line-or-region (&optional beg end)
+(defun upcase-initials-line-or-region (&optional beg end)
   "Convert the initial of each word in the current line or,
 if active, the region, to upper case."
   (interactive "r")
