@@ -61,6 +61,8 @@
 
 (add-to-list 'default-frame-alist '(width . 80))
 (add-to-list 'default-frame-alist '(height . 44))
+(add-to-list 'initial-frame-alist '(top . 100))
+(add-to-list 'initial-frame-alist '(left . 180))
 
 (setenv "TERM" "dumb")
 
