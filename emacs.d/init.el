@@ -23,7 +23,7 @@
 (when (eq window-system 'mac)
   (load "mkhl/mac"))
 (load "mkhl/aliases")
-(load "mkhl/eshell")
+(load "mkhl/shell")
 (load "mkhl/modes")
 (load "mkhl/local")
 (load "mkhl/path")
