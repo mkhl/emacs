@@ -1,8 +1,17 @@
 
 ;; More dired
 (when (require 'dired-x)
-  (setq dired-omit-files (rx (| (: bos (? ".") "#") (: bos "."))))
-  (setq-default dired-omit-mode t))
+  (setq-default dired-omit-mode t)
+  (setq dired-omit-files (rx (| (: bos (? ".") "#")
+                                (: bos ".")))))
+(defun dired-open-file ()
+  (interactive)
+  (let* ((file-name (dired-get-file-for-visit))
+         (open-program "/usr/bin/open"))
+    (when (file-exists-p file-name)
+      (call-process open-program nil 0 nil file-name))))
+(define-key dired-mode-map [(meta o)] 'dired-open-file)
+(define-key dired-mode-map [(-)] 'dired-up-directory)
 
 ;; Kill ring
 (when (require 'browse-kill-ring nil 'noerror)
