@@ -19,6 +19,7 @@
       require-final-newline t
       kill-whole-line t
       visible-bell t
+      default-truncate-lines t
       ido-enable-prefix t
       ido-enable-flex-matching t
       ido-everywhere t
