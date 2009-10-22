@@ -29,6 +29,17 @@
 (global-set-key [(control x) (shift f)] 'find-function)
 (global-set-key [(control x) (shift v)] 'find-variable)
 
+;; Window switching
+(global-set-key [(meta \`)] 'my/next-window)
+(global-set-key [(meta ~)] 'my/previous-window)
+
+(defun my/next-window (arg)
+  (interactive "p")
+  (other-window arg))
+(defun my/previous-window (arg)
+  (interactive "p")
+  (other-window (- arg)))
+
 ;; Symbol completion
 (global-set-key [(shift tab)] 'hippie-expand)
 
