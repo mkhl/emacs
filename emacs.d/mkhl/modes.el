@@ -5,14 +5,6 @@
 (autoload 'indent-tabs-maybe "indent-tabs-maybe"
   "Set `indent-tabs-mode' according to buffer contents." t)
 (add-hook 'find-file-hook 'indent-tabs-maybe 'append)
-(defun my/define-tab-width (width)
-  "Define `tab-width' and `tab-stop-list' to match the given `width'."
-  (setq tab-width width)
-  (set (make-local-variable 'tab-stop-list) (number-sequence width 120 width)))
-(defun my/set-indent-to-tab-stops ()
-  (set (make-local-variable 'indent-line-function) 'tab-to-tab-stop)
-  (when (boundp 'yas/indent-line)
-    (set (make-local-variable 'yas/indent-line) 'fixed)))
 
 ;;; Perl
 (defalias 'perl-mode 'cperl-mode)
