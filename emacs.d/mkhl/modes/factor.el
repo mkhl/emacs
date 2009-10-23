@@ -1,0 +1,2 @@
+
+(load "fu" 'noerror)
