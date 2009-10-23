@@ -12,7 +12,7 @@
 ;; Packages
 (load "mkhl/elpa")
 (load "mkhl/vendor")
-(load "mkhl/lisp")
+(load "mkhl/site-lisp")
 
 ;; Initialization
 (load "mkhl/functions")
