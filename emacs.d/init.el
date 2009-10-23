@@ -13,7 +13,7 @@
 (load "mkhl/packages")
 
 ;; Initialization
-(load "mkhl/functions")
+(load "mkhl/helpers")
 (load "mkhl/global")
 (load "mkhl/keys")
 (load "mkhl/mouse")
