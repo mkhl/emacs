@@ -41,12 +41,6 @@
                  (t 'color-theme-xemacs))))
     (add-hook 'after-init-hook theme)))
 
-;; Magit colors
-(eval-after-load 'magit
-  '(progn
-     (set-face-foreground 'magit-diff-add "green3")
-     (set-face-foreground 'magit-diff-del "red3")))
-
 ;; W3M
 (require 'w3m-load nil 'noerror)
 
