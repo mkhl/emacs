@@ -10,9 +10,7 @@
 (add-to-list 'load-path dot-emacs-dir)
 
 ;; Packages
-(load "mkhl/elpa")
-(load "mkhl/vendor")
-(load "mkhl/site-lisp")
+(load "mkhl/packages")
 
 ;; Initialization
 (load "mkhl/functions")
