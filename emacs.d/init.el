@@ -29,8 +29,8 @@
 (load custom-file 'noerror 'nomessage)
 
 ;; Bugfixes
-(when (eq system-type 'darwin)
-  (setq system-name (downcase (car (split-string system-name "\\.")))))
+(case system-type
+  ('darwin (setq system-name (first (split-string system-name "\\.")))))
 
 ;; Go home
 (find-file "~")
