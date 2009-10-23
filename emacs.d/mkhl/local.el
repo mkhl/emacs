@@ -27,6 +27,7 @@
 
 ;; Line numbers
 (when (require 'linum)
+  (setq linum-format " %4d ")
   (global-linum-mode 1))
 
 ;; Color theme
