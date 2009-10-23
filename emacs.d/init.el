@@ -19,8 +19,6 @@
 (load "mkhl/global")
 (load "mkhl/keys")
 (load "mkhl/mouse")
-(when (eq window-system 'mac)
-  (load "mkhl/mac"))
 (load "mkhl/aliases")
 (load "mkhl/shell")
 (load "mkhl/modes")
