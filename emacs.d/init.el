@@ -24,14 +24,10 @@
 (load "mkhl/shell")
 (load-component "mkhl/modes")
 (load "mkhl/local")
-(load "mkhl/path")
+(load-component "mkhl/system")
 
 (setq custom-file (concat dot-emacs-dir "custom.el"))
 (load custom-file 'noerror 'nomessage)
-
-;; Bugfixes
-(case system-type
-  ('darwin (setq system-name (first (split-string system-name "\\.")))))
 
 ;; Go home
 (find-file "~")
