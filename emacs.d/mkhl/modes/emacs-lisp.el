@@ -8,3 +8,6 @@
        (define-key mode-map [(meta \))] 'move-past-close-and-reindent))
      (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
      (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)))
+
+(global-set-key [(control x) (shift f)] 'find-function)
+(global-set-key [(control x) (shift v)] 'find-variable)
