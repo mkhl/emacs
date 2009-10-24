@@ -9,17 +9,20 @@
                       (or (buffer-file-name) load-file-name))))
 (add-to-list 'load-path dot-emacs-dir)
 
+;; Loading components
+(load "mkhl/load-component")
+
 ;; Packages
-(load "mkhl/packages")
+(load-component "mkhl/packages")
 
 ;; Initialization
-(load "mkhl/helpers")
+(load-component "mkhl/helpers")
 (load "mkhl/global")
 (load "mkhl/keys")
 (load "mkhl/mouse")
 (load "mkhl/aliases")
 (load "mkhl/shell")
-(load "mkhl/modes")
+(load-component "mkhl/modes")
 (load "mkhl/local")
 (load "mkhl/path")
 

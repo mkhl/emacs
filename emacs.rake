@@ -1,1 +1,1 @@
-submodule :emacs, homedir, '.%f', :exclude => ['README.mdown', '**/load-elisp.el']
+submodule :emacs, homedir, '.%f', :exclude => 'README.mdown'

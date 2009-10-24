@@ -1,7 +1,7 @@
 
-;; Load elisp from the directory named like this file
-(let* ((file-name (or (buffer-file-name) load-file-name))
-       (elisp-dir (file-name-as-directory (file-name-sans-extension file-name)))
-       (elisp (rx ".el" eos)))
-  (dolist (file (directory-files elisp-dir 'full elisp))
-    (load file)))
+(defun load-component (component)
+  "Load elisp sources from COMPONENT."
+  (let* ((elisp-dir (file-name-as-directory (concat dot-emacs-dir component)))
+         (elisp (rx ".el" eos)))
+    (dolist (file (directory-files elisp-dir 'full elisp))
+      (load file))))
