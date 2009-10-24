@@ -1,6 +1,9 @@
 
-(load "haskell-site-file" 'noerror)
 (add-to-list 'completion-ignored-extensions ".hi")
+
+;; haskell-mode autoloads
+(load "haskell-site-file" 'noerror)
+
 (eval-after-load "haskell-mode"
   '(progn
      (defun mk/haskell-mode-hook ()

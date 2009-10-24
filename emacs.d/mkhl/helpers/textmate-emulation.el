@@ -5,7 +5,7 @@
   (end-of-line)
   (if (not (eq indent-line-function 'tab-to-tab-stop))
       (newline-and-indent)
-    (let ((column (save-excursion (back-to-indentation) (current-column))))
+    (let* ((column (save-excursion (back-to-indentation) (current-column))))
       (newline)
       (indent-to-column column))))
 

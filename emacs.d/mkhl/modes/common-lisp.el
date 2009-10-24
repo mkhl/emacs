@@ -10,8 +10,10 @@
       inferior-lisp-sbcl-program "/opt/local/bin/sbcl")
 (setq inferior-lisp-program inferior-lisp-ccl-program)
 
-;; slime
+;; slime autoloads
 (require 'slime-autoloads nil 'noerror)
+
+;; slime
 (eval-after-load "slime"
   '(progn
      (setq slime-net-coding-system 'utf-8-unix)
