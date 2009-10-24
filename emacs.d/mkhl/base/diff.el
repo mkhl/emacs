@@ -1,0 +1,2 @@
+
+(setq diff-switches "-u")
