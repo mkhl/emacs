@@ -1,6 +1,5 @@
 
 (when (featurep 'mouse)
-  ;; Mouse
   (setq mouse-yank-at-point t
         mouse-wheel-follow-mouse t
         mouse-wheel-progressive-speed nil
