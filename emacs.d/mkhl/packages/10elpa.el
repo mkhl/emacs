@@ -1,4 +1,5 @@
 
 ;; Load packages installed via `elpa'
-(when (require 'package "elpa/package" 'noerror)
-  (package-initialize))
+(let* ((elpa-path (concat dot-emacs-dir "elpa/package")))
+  (when (require 'package elpa-path 'noerror)
+    (package-initialize)))

@@ -3,31 +3,30 @@
 ;;; Uncomment to disable loading the "default" library at startup
 ;; (setq inhibit-default-init t)
 
-;; Load path
+;; load-path
 (setq dot-emacs-dir (file-name-as-directory
                      (file-name-directory
                       (or (buffer-file-name) load-file-name))))
-(add-to-list 'load-path dot-emacs-dir)
+;; (add-to-list 'load-path dot-emacs-dir)
 
-;; Loading components
-(load "mkhl/load-component")
+;; load-component
+(load (concat dot-emacs-dir "mkhl/load-component"))
 
-;; Packages
+;;; packages
 (load-component "mkhl/packages")
 
-;; Initialization
+;;; components
 (load-component "mkhl/helpers")
-(load "mkhl/global")
-(load "mkhl/keys")
-(load "mkhl/mouse")
-(load "mkhl/aliases")
-(load "mkhl/shell")
+(load-component "mkhl/base")
+(load-component "mkhl/tools")
+(load-component "mkhl/extras")
 (load-component "mkhl/modes")
-(load "mkhl/local")
 (load-component "mkhl/system")
 
+;;; custom
 (setq custom-file (concat dot-emacs-dir "custom.el"))
 (load custom-file 'noerror 'nomessage)
 
-;; Go home
-(find-file "~")
+;;; go home
+(eval-after-init
+  (find-file "~"))
