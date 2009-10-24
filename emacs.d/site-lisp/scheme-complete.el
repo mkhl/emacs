@@ -4390,6 +4390,7 @@ when scheme-complete can't infer the current implementation."
      (t
       (scheme-do-completion sym (scheme-env-filter #'(lambda (x) t) env)) ))))
 
+;;;###autoload
 (defun scheme-complete-or-indent (&optional arg)
   (interactive "P")
   (let* ((end (point))
@@ -4408,6 +4409,7 @@ when scheme-complete can't infer the current implementation."
 
 ;; Copied from scheme-indent-function, but ignore
 ;; scheme-indent-function property for local variables.
+;;;###autoload
 (defun scheme-smart-indent-function (indent-point state)
   (let ((normal-indent (current-column)))
     (goto-char (1+ (elt state 1)))
@@ -4479,6 +4481,7 @@ when scheme-complete can't infer the current implementation."
 (defun scheme-sexp-to-string (sexp)
   (with-output-to-string (princ sexp)))
 
+;;;###autoload
 (defun scheme-get-current-symbol-info ()
   (let* ((sym (eldoc-current-symbol))
          (fnsym0 (eldoc-fnsym-in-current-sexp))

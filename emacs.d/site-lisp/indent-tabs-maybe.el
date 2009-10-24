@@ -35,6 +35,7 @@ See `indent-tabs-maybe'."
   :group 'indent
   :type 'integer)
 
+;;;###autoload
 (defun indent-tabs-maybe ()
     "Set `indent-tabs-mode' according to buffer contents.
 If the current buffer contains a line with a leading tab within the first
