@@ -6,3 +6,6 @@
        (ruby-electric-mode t))
      (define-key ruby-mode-map (kbd "TAB") nil)
      (add-hook 'ruby-mode-hook 'mk/ruby-mode-hook)))
+
+(add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
+(add-to-list 'auto-mode-alist `(,(rx ".rake" eos) . ruby-mode))
