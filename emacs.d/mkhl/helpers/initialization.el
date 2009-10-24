@@ -1,9 +1,6 @@
 
 (defmacro eval-after-init (&rest body)
-  "Arrange that, if `user-init-file' is ever loaded, BODY will be run
-at that time.  If `user-init-file' is already loaded, evaluate BODY
-right now."
+  "Arrange that BODY will be run in `after-init-hook'."
   (declare (indent 0))
-  `(eval-after-load user-init-file
-     '(progn
-        ,@body)))
+  `(add-hook 'after-init-hook
+             (lambda () ,@body)))
