@@ -8,6 +8,7 @@
 
 ;; default frame
 (eval-after-init
+  (add-to-list 'default-frame-alist '(cursor-type . bar))
   (add-to-list 'default-frame-alist '(height . 50))
   (add-to-list 'default-frame-alist `(font . ,(face-font 'default))))
 
