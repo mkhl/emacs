@@ -11,6 +11,7 @@
        (require 'eshell-vc)
        (defun mk/eshell-mode-hook ()
          (define-key eshell-mode-map [(control a)] 'eshell-bol)
-         (pushnew 'eshell-handle-ansi-color eshell-output-filter-functions)))))
+         (pushnew 'eshell-handle-ansi-color eshell-output-filter-functions))
+       (add-hook 'eshell-mode-hook 'mk/eshell-mode-hook))))
 
 (global-set-key [(control x) (control z)] 'eshell-toggle-cd)
