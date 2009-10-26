@@ -3,12 +3,14 @@
   "When looking at the character to be inserted, skip over it.
 Otherwise call `insert-pair', which see."
   (interactive)
-  (let* ((char1 last-command-char)
-         (char2 (event-basic-type last-command-event)))
-    (if (or (looking-at (char-to-string char1))
-            (looking-at (char-to-string char2)))
-        (call-interactively 'forward-char)
-      (call-interactively 'insert-pair))))
+  (labels ((looking-at-char? (char)
+             (and (characterp char) (looking-at (char-to-string char)))))
+    (let* ((char1 last-command-char)
+           (char2 (event-basic-type last-command-event)))
+      (if (or (looking-at-char? char1)
+              (looking-at-char? char2))
+          (call-interactively 'forward-char)
+        (call-interactively 'insert-pair)))))
 
 (setq parens-require-spaces nil)
 
