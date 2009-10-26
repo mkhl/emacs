@@ -8,7 +8,6 @@
     (setq eshell-cmpl-dir-ignore (eval vc-regexp)))
   (eval-after-load 'eshell
     '(progn
-       (require 'eshell-vc)
        (defun mk/eshell-mode-hook ()
          (setenv "TERM" "ansi")
          (define-key eshell-mode-map [(control a)] 'eshell-bol)
