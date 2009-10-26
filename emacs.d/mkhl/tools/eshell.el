@@ -10,6 +10,7 @@
     '(progn
        (require 'eshell-vc)
        (defun mk/eshell-mode-hook ()
+         (setenv "TERM" "ansi")
          (define-key eshell-mode-map [(control a)] 'eshell-bol)
          (pushnew 'eshell-handle-ansi-color eshell-output-filter-functions))
        (add-hook 'eshell-mode-hook 'mk/eshell-mode-hook))))
