@@ -1,4 +1,8 @@
 
+(eval-after-load 'dired
+  '(progn
+     (setq dired-listing-switches "-alh")))
+
 (defun dired-open-file ()
   "In Dired, open the file or directory named on this line in Finder.app."
   (interactive)
