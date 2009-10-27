@@ -17,10 +17,10 @@
 (eval-after-load "slime"
   '(progn
      (setq slime-net-coding-system 'utf-8-unix)
-     (add-to-list 'slime-lisp-implementations
-                  `(sbcl ,(split-string inferior-lisp-sbcl-program)))
-     (add-to-list 'slime-lisp-implementations
-                  `(acl ,(split-string inferior-lisp-acl-program)))
-     (add-to-list 'slime-lisp-implementations
-                  `(ccl ,(split-string inferior-lisp-ccl-program)))
+     (dolist (pair `((sbcl ,inferior-lisp-sbcl-program)
+                     (acl ,inferior-lisp-acl-program)
+                     (ccl ,inferior-lisp-ccl-program)))
+       (destructuring-bind (sym spec) pair
+         (add-to-list 'slime-lisp-implementations
+                      `(,sym ,(split-string spec)))))
      (slime-setup '(slime-fancy))))
