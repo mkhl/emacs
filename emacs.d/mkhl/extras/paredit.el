@@ -2,11 +2,13 @@
 (when (fboundp 'paredit-mode)
   (unless (fboundp 'enable-paredit-mode)
     (defun enable-paredit-mode () (paredit-mode 1)))
-  (dolist (hook '(emacs-lisp-mode-hook
-                  lisp-interaction-mode-hook
-                  lisp-mode-hook
-                  scheme-mode-hook))
-    (add-hook hook 'enable-paredit-mode)))
+  (eval-after-load 'lisp-mode
+    '(dolist (hook '(emacs-lisp-mode-hook
+                     lisp-interaction-mode-hook
+                     lisp-mode-hook))
+       (add-hook hook 'enable-paredit-mode)))
+  (eval-after-load 'scheme
+    '(add-hook 'scheme-mode-hook 'enable-paredit-mode)))
 
 (eval-after-load 'paredit
   '(progn
