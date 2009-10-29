@@ -14,4 +14,4 @@
          (pushnew 'eshell-handle-ansi-color eshell-output-filter-functions))
        (add-hook 'eshell-mode-hook 'mk/eshell-mode-hook))))
 
-(global-set-key [(control x) (control z)] 'eshell-toggle-cd)
+(global-set-key [(control x) (control z)] 'eshell-toggle)
