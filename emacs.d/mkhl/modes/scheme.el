@@ -8,8 +8,10 @@
 
 ;; gambit
 (when (locate-library "gambit")
-  (add-hook 'inferior-scheme-mode-hook 'gambit-inferior-mode)
-  (add-hook 'scheme-mode-hook 'gambit-mode))
+  (eval-after-load 'scheme
+    '(add-hook 'scheme-mode-hook 'gambit-mode))
+  (eval-after-load 'cmuscheme
+    '(add-hook 'inferior-scheme-mode-hook 'gambit-inferior-mode)))
 
 ;; scheme-mode
 (eval-after-load 'scheme
