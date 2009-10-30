@@ -19,7 +19,7 @@
   "Duplicate the current line or, if active, the region."
   (interactive)
   (let* ((had-mark mark-active) beg end)
-    (if (and mark-active transient-mark-mode)
+    (if (region-active-p)
         (setq beg (region-beginning)
               end (region-end))
       (setq beg (line-beginning-position 1)
@@ -33,21 +33,21 @@
 (defun fill-paragraph-or-region (arg &optional beg end)
   "Fill the current paragraph or, if active, the region."
   (interactive "p\nr")
-  (if (and mark-active transient-mark-mode)
+  (if (region-active-p)
       (fill-region beg end)
     (fill-paragraph arg)))
 
 (defun upcase-word-or-region (arg &optional beg end)
   "Convert the following word or, if active, the region, to upper case."
   (interactive "p\nr")
-  (if (and mark-active transient-mark-mode)
+  (if (region-active-p)
       (upcase-region beg end)
     (upcase-word arg)))
 
 (defun downcase-word-or-region (arg &optional beg end)
   "Convert the following word or, if active, the region, to lower case."
   (interactive "p\nr")
-  (if (and mark-active transient-mark-mode)
+  (if (region-active-p)
       (downcase-region beg end)
     (downcase-word arg)))
 
@@ -55,7 +55,7 @@
   "Convert the initial of each word in the current line or,
 if active, the region, to upper case."
   (interactive "r")
-  (unless (and mark-active transient-mark-mode)
+  (unless (region-active-p)
     (setq beg (line-beginning-position 1)
           end (line-beginning-position 2)))
   (upcase-initials-region beg end))
