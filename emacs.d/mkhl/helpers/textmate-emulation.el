@@ -30,26 +30,23 @@
       (when had-mark
         (push-mark (+ end (- end beg)) 'nomsg 'activate)))))
 
-(defun fill-paragraph-or-region (arg &optional beg end)
+(defun fill-paragraph-or-region ()
   "Fill the current paragraph or, if active, the region."
-  (interactive "p\nr")
-  (if (region-active-p)
-      (fill-region beg end)
-    (fill-paragraph arg)))
+  (interactive)
+  (call-interactively
+   (if (region-active-p) 'fill-region 'fill-paragraph)))
 
-(defun upcase-word-or-region (arg &optional beg end)
+(defun upcase-word-or-region ()
   "Convert the following word or, if active, the region, to upper case."
-  (interactive "p\nr")
-  (if (region-active-p)
-      (upcase-region beg end)
-    (upcase-word arg)))
+  (interactive)
+  (call-interactively
+   (if (region-active-p) 'upcase-region 'upcase-word)))
 
-(defun downcase-word-or-region (arg &optional beg end)
-  "Convert the following word or, if active, the region, to lower case."
-  (interactive "p\nr")
-  (if (region-active-p)
-      (downcase-region beg end)
-    (downcase-word arg)))
+(defun downcase-word-or-region ()
+  "convert the following word or, if active, the region, to lower case."
+  (interactive)
+  (call-interactively
+   (if (region-active-p) 'downcase-region 'downcase-word)))
 
 (defun upcase-initials-line-or-region (&optional beg end)
   "Convert the initial of each word in the current line or,
