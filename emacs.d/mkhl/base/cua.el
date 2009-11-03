@@ -5,7 +5,7 @@
 (defun kill-region-or-meta-x ()
   "Kill the region, if active, otherwise run `extended-command-command'."
   (interactive)
-  (if (and mark-active transient-mark-mode)
+  (if (region-active-p)
       (call-interactively 'kill-region)
     (call-interactively extended-command-command)))
 
