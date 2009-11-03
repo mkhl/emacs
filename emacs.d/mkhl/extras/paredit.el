@@ -11,11 +11,10 @@
     '(add-hook 'scheme-mode-hook 'enable-paredit-mode)))
 
 (eval-after-load 'paredit
-  '(progn
-     (dolist (key '("M-<up>" "ESC <up>"
-                    "M-<down>" "ESC <down>"
-                    "C-<right>"
-                    "C-<left>"
-                    "C-M-<left>" "ESC C-<left>"
-                    "C-M-<right>" "ESC C-<right>"))
-       (define-key paredit-mode-map (read-kbd-macro key) nil))))
+  '(dolist (key '("M-<up>" "ESC <up>"
+                  "M-<down>" "ESC <down>"
+                  "C-<right>"
+                  "C-<left>"
+                  "C-M-<left>" "ESC C-<left>"
+                  "C-M-<right>" "ESC C-<right>"))
+     (define-key paredit-mode-map (read-kbd-macro key) nil)))
