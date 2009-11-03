@@ -20,6 +20,9 @@
  '(proof-electric-terminator-enable t)
  '(proof-home-directory "~/Projects/Hets/ProofGeneral/")
  '(ps-paper-type (quote a4))
+ '(sudoku-download-method "native-url-lib")
+ '(sudoku-level "medium")
+ '(sudoku-puzzle-source "built-in")
  '(user-full-name "Martin Kühl")
  '(user-mail-address "martin.kuehl@gmail.com"))
 (custom-set-faces
