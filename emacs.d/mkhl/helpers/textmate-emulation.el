@@ -33,20 +33,23 @@
 (defun fill-paragraph-or-region ()
   "Fill the current paragraph or, if active, the region."
   (interactive)
-  (call-interactively
-   (if (region-active-p) 'fill-region 'fill-paragraph)))
+  (call-interactively (if (region-active-p)
+                          'fill-region
+                        'fill-paragraph)))
 
 (defun upcase-word-or-region ()
   "Convert the following word or, if active, the region, to upper case."
   (interactive)
-  (call-interactively
-   (if (region-active-p) 'upcase-region 'upcase-word)))
+  (call-interactively (if (region-active-p)
+                          'upcase-region
+                        'upcase-word)))
 
 (defun downcase-word-or-region ()
   "convert the following word or, if active, the region, to lower case."
   (interactive)
-  (call-interactively
-   (if (region-active-p) 'downcase-region 'downcase-word)))
+  (call-interactively (if (region-active-p)
+                          'downcase-region
+                        'downcase-word)))
 
 (defun upcase-initials-line-or-region (&optional beg end)
   "Convert the initial of each word in the current line or,
