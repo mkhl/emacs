@@ -1,3 +1,3 @@
 
-(when (require 'uniquify nil 'noerror)
-  (setq uniquify-buffer-name-style 'post-forward))
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'post-forward)
