@@ -15,7 +15,6 @@
     'isearch-repeat-forward-regexp)
   (define-key isearch-mode-map [(control meta S)]
     'isearch-repeat-backward-regexp)
-  (global-set-key [(control *)] 'isearch-forward-at-point)
   (add-hook 'isearch-mode-end-hook 'isearch-goto-other-end))
 
 (eval-after-load "isearch"
