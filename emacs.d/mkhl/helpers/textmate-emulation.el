@@ -15,20 +15,18 @@
   (goto-char (line-beginning-position 1))
   (push-mark (line-beginning-position 2) 'nomsg 'activate))
 
-(defun duplicate-line-or-region ()
+(defun duplicate-line-or-region (&optional beg end)
   "Duplicate the current line or, if active, the region."
-  (interactive)
-  (let* ((had-mark mark-active) beg end)
-    (if (region-active-p)
-        (setq beg (region-beginning)
-              end (region-end))
-      (setq beg (line-beginning-position 1)
-            end (line-beginning-position 2)))
-    (let* (deactivate-mark)
-      (goto-char beg)
-      (insert (buffer-substring-no-properties beg end))
-      (when had-mark
-        (push-mark (+ end (- end beg)) 'nomsg 'activate)))))
+  (interactive "r")
+  (unless (region-active-p)
+    (setq beg (line-beginning-position 1)
+          end (line-beginning-position 2)))
+  (let* ((mark-was-active mark-active)
+         deactivate-mark)
+    (goto-char beg)
+    (insert (buffer-substring-no-properties beg end))
+    (when mark-was-active
+      (push-mark (+ end (- end beg)) 'nomsg 'activate))))
 
 (defun fill-paragraph-or-region ()
   "Fill the current paragraph or, if active, the region."
