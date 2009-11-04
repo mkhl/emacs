@@ -1,8 +1,4 @@
 
-(eval-after-load 'dired
-  '(progn
-     (setq dired-listing-switches "-alh")))
-
 (defun dired-open-file ()
   "In Dired, open the file or directory named on this line in Finder.app."
   (interactive)
@@ -17,10 +13,11 @@
   (dolist (file (dired-get-marked-files nil current-prefix-arg))
     (update-file-autoloads file 'save)))
 
-(when (require 'dired-x)
-  (setq-default dired-omit-mode t)
-  (setq dired-omit-files (rx bos (| (: (? ".") "#")
-                                    (: ".")))))
+(require 'dired-x)
+(setq-default dired-omit-mode t)
+(setq dired-omit-files (rx bos (| (: (? ".") "#")
+                                  (: "."))))
+(setq dired-listing-switches "-alh")
 
 (define-key dired-mode-map [(meta o)] 'dired-open-file)
 (define-key dired-mode-map [(-)] 'dired-up-directory)
