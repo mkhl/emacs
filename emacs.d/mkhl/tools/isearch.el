@@ -5,16 +5,14 @@
     (goto-char isearch-other-end)))
 
 (defun mk/eval-after-isearch ()
-  (global-set-key [(control s)] 'isearch-forward)
-  (global-set-key [(control S)] 'isearch-backward)
-  (global-set-key [(control meta s)] 'isearch-forward-regexp)
-  (global-set-key [(control meta S)] 'isearch-backward-regexp)
-  (define-key isearch-mode-map [(control s)] 'isearch-repeat-forward)
-  (define-key isearch-mode-map [(control S)] 'isearch-repeat-backward)
-  (define-key isearch-mode-map [(control meta s)]
-    'isearch-repeat-forward-regexp)
-  (define-key isearch-mode-map [(control meta S)]
-    'isearch-repeat-backward-regexp)
+  (global-set-key (kbd "C-s") 'isearch-forward)
+  (global-set-key (kbd "C-S") 'isearch-backward)
+  (global-set-key (kbd "C-M-s") 'isearch-forward-regexp)
+  (global-set-key (kbd "C-M-S") 'isearch-backward-regexp)
+  (define-key isearch-mode-map (kbd "C-s") 'isearch-repeat-forward)
+  (define-key isearch-mode-map (kbd "C-S") 'isearch-repeat-backward)
+  (define-key isearch-mode-map (kbd "C-M-s") 'isearch-repeat-forward-regexp)
+  (define-key isearch-mode-map (kbd "C-M-S") 'isearch-repeat-backward-regexp)
   (add-hook 'isearch-mode-end-hook 'isearch-goto-other-end))
 
 (eval-after-load "isearch"

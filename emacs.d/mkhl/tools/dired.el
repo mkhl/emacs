@@ -19,7 +19,7 @@
                                   (: "."))))
 (setq dired-listing-switches "-alh")
 
-(define-key dired-mode-map [(meta o)] 'dired-open-file)
-(define-key dired-mode-map [(-)] 'dired-up-directory)
+(define-key dired-mode-map (kbd "M-o") 'dired-open-file)
+(define-key dired-mode-map (kbd "-") 'dired-up-directory)
 
-(global-set-key [(control x) (control d)] 'dired)
+(global-set-key (kbd "C-x C-o") 'dired)

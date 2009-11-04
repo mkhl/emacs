@@ -7,7 +7,7 @@
   (ibuffer-set-filter-groups-by-mode))
 
 (defun mk/eval-after-ibuffer ()
-  (define-key ibuffer-mode-map [(tab)] 'ibuffer-toggle-filter-group)
+  (define-key ibuffer-mode-map (kbd "TAB") 'ibuffer-toggle-filter-group)
   (add-hook 'ibuffer-mode-hook 'mk/ibuffer-mode-hook))
 
 (eval-after-load 'ibuffer

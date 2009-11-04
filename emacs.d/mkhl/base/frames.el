@@ -13,8 +13,8 @@
   (add-to-list 'default-frame-alist `(font . ,(face-font 'default))))
 
 ;; switch frames
-(global-set-key [(control meta \`)] 'switch-to-next-frame)
-(global-set-key [(control meta ~)] 'switch-to-previous-frame)
+(global-set-key (kbd "C-M-`") 'switch-to-next-frame)
+(global-set-key (kbd "C-M-~") 'switch-to-previous-frame)
 
 (defun switch-to-next-frame (arg)
   (interactive "p")

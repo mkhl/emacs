@@ -23,9 +23,9 @@
 
 (defun mk/eval-after-scheme ()
   (when (fboundp 'scheme-complete-or-indent)
-    (define-key scheme-mode-map [(tab)] 'scheme-complete-or-indent))
-  (define-key scheme-mode-map [(meta \()] 'insert-parentheses)
-  (define-key scheme-mode-map [(meta \))] 'move-past-close-and-reindent)
+    (define-key scheme-mode-map (kbd "TAB") 'scheme-complete-or-indent))
+  (define-key scheme-mode-map (kbd "M-(") 'insert-parentheses)
+  (define-key scheme-mode-map (kbd "M-)") 'move-past-close-and-reindent)
   (add-hook 'scheme-mode-hook 'mk/scheme-mode-hook))
 
 (eval-after-load 'scheme

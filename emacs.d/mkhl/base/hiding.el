@@ -1,2 +1,2 @@
 
-(global-set-key [(control meta shift h)] 'ns-do-hide-emacs)
+(global-set-key (kbd "C-M-H") 'ns-do-hide-emacs)

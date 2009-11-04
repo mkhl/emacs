@@ -1,2 +1,2 @@
 
-(global-set-key [(control x) (control n)] 'nav)
+(global-set-key (kbd "C-x C-n") 'nav)

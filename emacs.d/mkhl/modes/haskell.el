@@ -18,8 +18,8 @@
 
 (defun mk/eval-after-haskell-mode ()
   (require 'hs-lint nil 'noerror)
-  (define-key haskell-mode-map [(control c) (control h)] 'haskell-hoogle)
-  (define-key haskell-mode-map [(control c) (control v)] 'hs-lint)
+  (define-key haskell-mode-map (kbd "C-c C-h") 'haskell-hoogle)
+  (define-key haskell-mode-map (kbd "C-c C-v") 'hs-lint)
   (remove-hook 'haskell-mode-hook 'turn-on-haskell-indent)
   (remove-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
   (add-hook 'haskell-mode-hook 'mk/haskell-mode-hook))

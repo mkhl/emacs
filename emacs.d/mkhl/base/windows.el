@@ -1,7 +1,7 @@
 
 ;; switch windows
-(global-set-key [(meta \`)] 'switch-to-next-window)
-(global-set-key [(meta ~)] 'switch-to-previous-window)
+(global-set-key (kbd "M-`") 'switch-to-next-window)
+(global-set-key (kbd "M-~") 'switch-to-previous-window)
 
 (defun switch-to-next-window (arg)
   (interactive "p")

@@ -1,5 +1,5 @@
 
-(global-set-key [(control left)] 'backward-word)
-(global-set-key [(control right)] 'forward-word)
-(global-set-key [(meta up)] 'backward-paragraph)
-(global-set-key [(meta down)] 'forward-paragraph)
+(global-set-key (kbd "<C-left>") 'backward-word)
+(global-set-key (kbd "<C-right>") 'forward-word)
+(global-set-key (kbd "<M-up>") 'backward-paragraph)
+(global-set-key (kbd "<M-down>") 'forward-paragraph)

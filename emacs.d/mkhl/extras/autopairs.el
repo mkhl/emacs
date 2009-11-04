@@ -11,10 +11,12 @@ Otherwise call `insert-pair', which see."
 
 (setq parens-require-spaces nil)
 
-(dolist (pair '((\( . \)) (\[ . \]) (\{ . \})))
+(dolist (pair '(("M-(" . "M-)")
+                ("M-[" . "M-]")
+                ("M-{" . "M-}")))
   (destructuring-bind (car . cdr) pair
-    (global-set-key `[(meta ,car)] 'insert-pair)
-    (global-set-key `[(meta ,cdr)] 'up-list)))
+    (global-set-key (read-kbd-macro car) 'insert-pair)
+    (global-set-key (read-kbd-macro cdr) 'up-list)))
 
-(global-set-key [(meta \')] 'insert-pair-or-skip)
-(global-set-key [(meta \")] 'insert-pair-or-skip)
+(global-set-key (kbd "M-\'") 'insert-pair-or-skip)
+(global-set-key (kbd "M-\"") 'insert-pair-or-skip)

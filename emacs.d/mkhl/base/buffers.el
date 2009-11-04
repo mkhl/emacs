@@ -1,4 +1,4 @@
 
-(global-set-key [(control x) (control b)] 'ibuffer)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
-(global-set-key [(control x) (control =)] 'server-edit)
+(global-set-key (kbd "C-x C-=") 'server-edit)

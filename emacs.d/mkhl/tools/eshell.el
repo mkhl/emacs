@@ -2,7 +2,7 @@
 (defun mk/eshell-mode-hook ()
   (setenv "TERM" "ansi")
   (pushnew 'eshell-handle-ansi-color eshell-output-filter-functions)
-  (define-key eshell-mode-map [(control a)] 'eshell-bol))
+  (define-key eshell-mode-map (kbd "C-a") 'eshell-bol))
 
 (defun mk/eval-after-eshell ()
   (add-hook 'eshell-mode-hook 'mk/eshell-mode-hook))
@@ -17,4 +17,4 @@
   (let* ((vc-dir-list '("CVS" ".svn" ".git" ".hg" "_darcs"))
          (vc-regexp `(rx bos (| (: "." (? ".")) ,@vc-dir-list) eos)))
     (setq eshell-cmpl-dir-ignore (eval vc-regexp)))
-  (global-set-key [(control x) (control z)] 'eshell-toggle))
+  (global-set-key (kbd "C-x C-z") 'eshell-toggle))

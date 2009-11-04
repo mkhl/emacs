@@ -9,10 +9,10 @@
       (call-interactively 'kill-region)
     (call-interactively extended-command-command)))
 
-(global-set-key [(meta x)] 'kill-region-or-meta-x)
-(global-set-key [(meta c)] 'copy-region-as-kill)
-(global-set-key [(meta v)] 'yank)
-(global-set-key [(meta V)] 'yank-pop)
+(global-set-key (kbd "M-x") 'kill-region-or-meta-x)
+(global-set-key (kbd "M-c") 'copy-region-as-kill)
+(global-set-key (kbd "M-v") 'yank)
+(global-set-key (kbd "M-V") 'yank-pop)
 
 (setq cua-highlight-region-shift-only t)
 (cua-selection-mode t)
