@@ -1,5 +1,5 @@
 
-;; Load path components from environment.plist
+;; Load path components from `environment.plist'
 (case system-type
   ('darwin
    (let* ((defaults "/usr/bin/defaults")
