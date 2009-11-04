@@ -9,7 +9,8 @@
                           lisp-interaction-mode-map
                           lisp-mode-map))
     (define-key mode-map (kbd "M-(") 'insert-parentheses)
-    (define-key mode-map (kbd "M-)") 'move-past-close-and-reindent))
+    (define-key mode-map (kbd "M-)") 'move-past-close-and-reindent)
+    (define-key mode-map (kbd "<C-tab>") 'lisp-complete-symbol))
   (add-hook 'emacs-lisp-mode-hook 'mk/emacs-lisp-mode-hook)
   (add-hook 'lisp-interaction-mode-hook 'mk/emacs-lisp-mode-hook))
 
