@@ -4,8 +4,11 @@
       ibuffer-show-empty-filter-groups nil)
 
 (defun mk/ibuffer-mode-hook ()
-  (define-key ibuffer-mode-map [(tab)] 'ibuffer-toggle-filter-group)
   (ibuffer-set-filter-groups-by-mode))
 
+(defun mk/eval-after-ibuffer ()
+  (define-key ibuffer-mode-map [(tab)] 'ibuffer-toggle-filter-group)
+  (add-hook 'ibuffer-mode-hook 'mk/ibuffer-mode-hook))
+
 (eval-after-load 'ibuffer
-  '(add-hook 'ibuffer-mode-hook 'mk/ibuffer-mode-hook))
+  '(mk/eval-after-ibuffer))
