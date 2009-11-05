@@ -7,7 +7,6 @@
 (setq dot-emacs-dir (file-name-as-directory
                      (file-name-directory
                       (or (buffer-file-name) load-file-name))))
-;; (add-to-list 'load-path dot-emacs-dir)
 
 ;; load-component
 (load (concat dot-emacs-dir "mkhl/load-component"))
