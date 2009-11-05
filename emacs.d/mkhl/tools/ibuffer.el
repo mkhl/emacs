@@ -13,6 +13,8 @@
                         (name . ,(rx bos "*Messages*" eos))
                         (name . ,(rx bos "*Completions*" eos))
                         (name . ,(rx bos "*Ido Completions*" eos))
+                        (name . ,(rx bos "*Compile-Log*" eos))
+                        (name . ,(rx bos "*Occur*" eos))
                         (name . ,(rx bos "*Help*" eos))
                         (name . ,(rx bos "*Apropos*" eos))
                         (name . ,(rx bos "*Shell Command Output*" eos))
