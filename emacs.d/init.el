@@ -3,10 +3,11 @@
 ;;; Uncomment to disable loading the "default" library at startup
 ;; (setq inhibit-default-init t)
 
-;; load-path
-(setq dot-emacs-dir (file-name-as-directory
-                     (file-name-directory
-                      (or (buffer-file-name) load-file-name))))
+;; dot-emacs
+(unless (boundp 'dot-emacs-dir)
+  (setq dot-emacs-dir (file-name-as-directory
+                       (file-name-directory
+                        (or (buffer-file-name) load-file-name)))))
 
 ;; load-component
 (load (concat dot-emacs-dir "mkhl/load-component"))
