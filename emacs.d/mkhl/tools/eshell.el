@@ -1,6 +1,6 @@
 
 (defun mk/eshell-mode-hook ()
-  (setenv "TERM" "ansi")
+  (setenv "TERM" "eshell")
   (pushnew 'eshell-handle-ansi-color eshell-output-filter-functions)
   (define-key eshell-mode-map (kbd "C-a") 'eshell-bol))
 
