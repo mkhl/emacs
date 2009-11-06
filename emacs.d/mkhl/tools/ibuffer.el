@@ -19,6 +19,7 @@
                         (name . ,(rx bos "*Apropos*" eos))
                         (name . ,(rx bos "*Shell Command Output*" eos))
                         (name . ,(rx bos "*vc*" eos))))
+           ("Custom" (name . ,(rx bos "*Customize")))
            ("Magit" (name . ,(rx bos "*magit")))
            ("Slime" (or (mode . lisp-mode)
                         (name . ,(rx bos "*slime-events*" eos))
