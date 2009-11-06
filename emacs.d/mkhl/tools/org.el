@@ -9,4 +9,5 @@
       (global-set-key (org-kbd "l") 'org-store-link)
       (global-set-key (org-kbd "a") 'org-agenda)
       (global-set-key (org-kbd "b") 'org-iswitchb)))
-  (add-to-list 'auto-mode-alist `(,(rx ".org" eos) . org-mode)))
+  (add-to-list 'auto-mode-alist `(,(rx ".org" eos) . org-mode))
+  (add-hook 'org-mode-hook 'yas/fix-trigger-key))
