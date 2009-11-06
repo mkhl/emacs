@@ -1,4 +1,8 @@
 
+(defun hs-minor-mode-maybe ()
+  (when (assoc major-mode hs-special-modes-alist)
+    (hs-minor-mode 1)))
+
 (defun hs-display-code-line-counts (overlay)
   (case (overlay-get overlay 'hs)
     ('code (let* ((beg (overlay-start overlay))

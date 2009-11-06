@@ -4,6 +4,7 @@
   (turn-on-eldoc-mode))
 
 (defun mk/eval-after-python-mode ()
+  (add-hook 'python-mode-hook 'hs-minor-mode-maybe)
   (add-hook 'python-mode-hook 'mk/python-mode-hook))
 
 (eval-after-load 'python-mode

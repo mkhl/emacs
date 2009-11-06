@@ -5,6 +5,7 @@
 
 (defun mk/eval-after-ruby-mode ()
   (define-key ruby-mode-map (kbd "TAB") nil)
+  (add-hook 'ruby-mode-hook 'hs-minor-mode-maybe)
   (add-hook 'ruby-mode-hook 'mk/ruby-mode-hook))
 
 (eval-after-load 'ruby-mode
