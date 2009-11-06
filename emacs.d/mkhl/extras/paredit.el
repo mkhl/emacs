@@ -10,11 +10,14 @@
   (eval-after-load 'scheme
     '(add-hook 'scheme-mode-hook 'enable-paredit-mode)))
 
+(defun mk/eval-after-paredit ()
+  (dolist (key '("M-<up>" "ESC <up>"
+                 "M-<down>" "ESC <down>"
+                 "C-<right>"
+                 "C-<left>"
+                 "C-M-<left>" "ESC C-<left>"
+                 "C-M-<right>" "ESC C-<right>"))
+    (define-key paredit-mode-map (read-kbd-macro key) nil)))
+
 (eval-after-load 'paredit
-  '(dolist (key '("M-<up>" "ESC <up>"
-                  "M-<down>" "ESC <down>"
-                  "C-<right>"
-                  "C-<left>"
-                  "C-M-<left>" "ESC C-<left>"
-                  "C-M-<right>" "ESC C-<right>"))
-     (define-key paredit-mode-map (read-kbd-macro key) nil)))
+  '(mk/eval-after-paredit))
