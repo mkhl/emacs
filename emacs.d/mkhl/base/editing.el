@@ -8,5 +8,6 @@
 
 (add-hook 'find-file-hook 'do-truncate-lines)
 (add-hook 'dired-mode-hook 'do-truncate-lines)
+
 (defun do-truncate-lines ()
   (setq truncate-lines t))
