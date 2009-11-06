@@ -36,7 +36,6 @@
   (setq mode-name "treetop")
   (run-hooks 'treetop-mode-hook))
 
-;;;###autoload
-(add-to-list 'auto-mode-alist '("\\.treetop\\'" . treetop-mode))
+;;;###autoload (add-to-list 'auto-mode-alist '("\\.treetop\\'" . treetop-mode))
 
 (provide 'treetop-mode)

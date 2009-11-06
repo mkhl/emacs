@@ -388,8 +388,7 @@ margin."
   (message "yaml-mode %s" yaml-mode-version)
   yaml-mode-version)
 
-;;;###autoload
-(push `(,(rx ".y" (? "a") "ml" eos) . yaml-mode) auto-mode-alist)
+;;;###autoload (push `(,(rx ".y" (? "a") "ml" eos) . yaml-mode) auto-mode-alist)
 
 (provide 'yaml-mode)
 

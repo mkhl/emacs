@@ -398,8 +398,7 @@ non-matching parentheses"
   "Face used to highlight acronyms links."
   :group 'textile-faces)
 
-;;;###autoload
-(add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
+;;;###autoload (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
 
 (provide 'textile-mode)
  ;;; textile-mode.el ends here

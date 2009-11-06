@@ -473,8 +473,7 @@
   (setq mode-name "Io")
   (run-hooks 'io-mode-hook))
 
-;;;###autoload
-(push `(,(rx ".io" eos) . io-mode) auto-mode-alist)
+;;;###autoload (push `(,(rx ".io" eos) . io-mode) auto-mode-alist)
 
 (provide 'io-mode)
 

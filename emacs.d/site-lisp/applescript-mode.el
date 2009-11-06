@@ -461,8 +461,7 @@ contain this package.")
     ;; else
     (t (intern retstr))))
 
-;;;###autoload
-(add-to-list 'auto-mode-alist '("\\.applescript$" . applescript-mode))
+;;;###autoload (add-to-list 'auto-mode-alist '("\\.applescript$" . applescript-mode))
 
 (provide 'applescript-mode)
 ;;; applescript-mode.el ends here

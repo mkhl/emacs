@@ -617,7 +617,6 @@ end run
   (set (make-local-variable 'comment-start-skip) "\" *")
   (run-hooks 'fs-mode-hook))
 
-;;;###autoload
-(push `(,(rx ".fs" (? "cript") eos) . fs-mode) auto-mode-alist)
+;;;###autoload (push `(,(rx ".fs" (? "cript") eos) . fs-mode) auto-mode-alist)
 
 (provide 'fs-mode)

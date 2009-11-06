@@ -1022,8 +1022,7 @@ This is an exact copy of line-number-at-pos for use in emacs21."
   ;; Cause use of ellipses for invisible text.
   (add-to-invisibility-spec '(outline . t)))
 
-;;;###autoload
-(add-to-list 'auto-mode-alist `(,(rx "." (| "markdown" "mkdn" (: "md" (? "own"))) eos) . markdown-mode))
+;;;###autoload (add-to-list 'auto-mode-alist `(,(rx "." (| "markdown" "mkdn" (: "md" (? "own"))) eos) . markdown-mode))
 
 (provide 'markdown-mode)
 
