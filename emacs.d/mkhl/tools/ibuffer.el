@@ -16,6 +16,7 @@
                         (name . ,(rx bos "*Compile-Log*" eos))
                         (name . ,(rx bos "*Occur*" eos))
                         (name . ,(rx bos "*Help*" eos))
+                        (name . ,(rx bos "*info*" eos))
                         (name . ,(rx bos "*Apropos*" eos))
                         (name . ,(rx bos "*Shell Command Output*" eos))
                         (name . ,(rx bos "*vc*" eos))))
