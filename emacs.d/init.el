@@ -26,7 +26,3 @@
 ;;; custom
 (setq custom-file (concat dot-emacs-dir "custom.el"))
 (load custom-file 'noerror 'nomessage)
-
-;;; go home
-(eval-after-init
-  (find-file "~"))
