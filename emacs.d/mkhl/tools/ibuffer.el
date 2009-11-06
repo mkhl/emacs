@@ -30,7 +30,8 @@
                        (name . ,(rx bos "*fuel messages*" eos))
                        (name . ,(rx bos "*fuel listener*" eos))))
            ("Eshell" (mode . eshell-mode))
-           ("Dired" (mode . dired-mode)))))
+           ("Dired" (mode . dired-mode))
+           ("Unknown" (mode . fundamental-mode)))))
   (define-key ibuffer-mode-map (kbd "TAB") 'ibuffer-toggle-filter-group)
   (add-hook 'ibuffer-mode-hook 'mk/ibuffer-mode-hook))
 
