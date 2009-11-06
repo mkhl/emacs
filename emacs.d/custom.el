@@ -11,6 +11,8 @@
  '(isa-isatool-command "~/Projects/Hets/Isabelle/bin/isabelle")
  '(isar-unicode-tokens-enable t)
  '(isar-x-symbol-enable nil)
+ '(mac-pass-command-to-system nil)
+ '(mac-pass-control-to-system nil)
  '(ns-alternate-modifier (quote none))
  '(ns-command-modifier (quote meta))
  '(proof-electric-terminator-enable t)
