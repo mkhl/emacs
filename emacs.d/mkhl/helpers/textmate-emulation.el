@@ -9,24 +9,29 @@
       (newline)
       (indent-to-column column))))
 
+(defun region-or-line-beginning-end ()
+  "Return the pair `(beg . end)' of posisions denoting the
+beginning and end of the current line or, if active, the region."
+  (if (region-active-p)
+      (cons (region-beginning) (region-end))
+    (cons (line-beginning-position 1) (line-beginning-position 2))))
+
 (defun mark-line ()
   "Put mark at end of this line, point at beginning."
   (interactive)
   (goto-char (line-beginning-position 1))
   (push-mark (line-beginning-position 2) 'nomsg 'activate))
 
-(defun duplicate-line-or-region (&optional beg end)
+(defun duplicate-line-or-region ()
   "Duplicate the current line or, if active, the region."
-  (interactive "r")
-  (unless (region-active-p)
-    (setq beg (line-beginning-position 1)
-          end (line-beginning-position 2)))
-  (let* ((mark-was-active mark-active)
-         deactivate-mark)
-    (goto-char beg)
-    (insert (buffer-substring-no-properties beg end))
-    (when mark-was-active
-      (push-mark (+ end (- end beg)) 'nomsg 'activate))))
+  (interactive)
+  (destructuring-bind (beg . end) (region-or-line-beginning-end)
+    (let* ((mark-was-active mark-active)
+           deactivate-mark)
+      (goto-char beg)
+      (insert (buffer-substring-no-properties beg end))
+      (when mark-was-active
+        (push-mark (+ end (- end beg)) 'nomsg 'activate)))))
 
 (defun fill-paragraph-or-region ()
   "Fill the current paragraph or, if active, the region."
@@ -52,8 +57,6 @@
 (defun upcase-initials-line-or-region (&optional beg end)
   "Convert the initial of each word in the current line or,
 if active, the region, to upper case."
-  (interactive "r")
-  (unless (region-active-p)
-    (setq beg (line-beginning-position 1)
-          end (line-beginning-position 2)))
-  (upcase-initials-region beg end))
+  (interactive)
+  (destructuring-bind (beg . end) (region-or-line-beginning-end)
+    (upcase-initials-region beg end)))
