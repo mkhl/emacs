@@ -9,6 +9,7 @@
 
 (defun mk/eval-after-hideshow ()
   (mk/setup-ruby-hs-mode)
+  (mk/setup-python-hs-mode)
   (setq hs-set-up-overlay 'hs-display-code-line-counts))
 
 (defun mk/setup-ruby-hs-mode ()
@@ -17,6 +18,17 @@
                  (rx bow "end" eow)
                  "#"
                  'ruby-end-of-block
+                 nil)
+           hs-special-modes-alist
+           :key 'car))
+
+(defun mk/setup-python-hs-mode ()
+  (pushnew (list 'python-mode
+                 (rx bow (| "class" "def") eow)
+                 nil
+                 "#"
+                 (lambda (&optional arg)
+                   (py-end-of-def-or-class 'either arg))
                  nil)
            hs-special-modes-alist
            :key 'car))
