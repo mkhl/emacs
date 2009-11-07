@@ -42,3 +42,23 @@
 
 (when (require 'flymake nil 'noerror)
   (mk/eval-after-flymake))
+
+;;; `flymake' compatible `next-error' replacements
+
+(defun mk/navigate-errors (compile-func flymake-func)
+  (if (condition-case nil (next-error-find-buffer) (error nil))
+      (call-interactively compile-func)
+    (call-interactively flymake-func)
+    (let ((err (get-char-property (point) 'help-echo)))
+      (when err (message err)))))
+
+(defun mk/next-error ()
+  (interactive)
+  (mk/navigate-errors 'next-error 'flymake-goto-next-error))
+
+(defun mk/previous-error ()
+  (interactive)
+  (mk/navigate-errors 'previous-error 'flymake-goto-prev-error))
+
+(global-set-key [remap next-error] 'mk/next-error)
+(global-set-key [remap previous-error] 'mk/previous-error)
