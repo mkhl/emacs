@@ -4,6 +4,8 @@
   (turn-on-eldoc-mode))
 
 (defun mk/eval-after-python-mode ()
+  (setq py-pychecker-command "pyflakes"
+        py-pychecker-command-args nil)
   (add-hook 'python-mode-hook 'hs-minor-mode-maybe)
   (add-hook 'python-mode-hook 'mk/python-mode-hook))
 
