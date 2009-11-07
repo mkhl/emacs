@@ -27,5 +27,5 @@
   (mk/flymake-allow-modes)
   (add-hook 'find-file-hook 'flymake-find-file-hook))
 
-(eval-after-load 'flymake
-  '(mk/eval-after-flymake))
+(when (require 'flymake nil 'noerror)
+  (mk/eval-after-flymake))
