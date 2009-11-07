@@ -13,8 +13,16 @@
    (lambda (source base-dir)
      `("ruby" ("-wc" ,source)))))
 
+(defun flymake-js-init ()
+  (flymake-simple-make-init-impl
+   'flymake-create-temp-inplace t t
+   (file-name-nondirectory buffer-file-name)
+   (lambda (source base-dir)
+     `("js" ("-s" ,source)))))
+
 (setq flymake-allowed-mode-alist '((python-mode . flymake-python-init)
-                                   (ruby-mode . flymake-ruby-init)))
+                                   (ruby-mode . flymake-ruby-init)
+                                   (espresso-mode . flymake-js-init)))
 
 (defun mk/flymake-allow-modes ()
   (dolist (mode-pair flymake-allowed-mode-alist)
