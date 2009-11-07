@@ -1,27 +1,17 @@
 
-(defmacro define-flymake-init-function (name args &rest body)
-  "Define a `flymake-*-init' function.
-\nThe generated function will create a temporary file containing
-a copy of the current buffer, bind its relative name to VAR, and
-then evaluate BODY.  The result should be a list
-\(COMMAND (COMMAND-ARGS ...)) to be executed by flymake.
-\n(fn NAME (VAR) BODY...)"
-  (declare (indent 2))
-  (destructuring-bind (var) args
-    (let* ((temp-file (gensym)))
-      `(defun ,name ()
-         (let* ((,temp-file (flymake-init-create-temp-buffer-copy
-                             'flymake-create-temp-inplace))
-                (,var (file-relative-name
-                       ,temp-file
-                       (file-name-directory buffer-file-name))))
-           ,@body)))))
+(defun flymake-python-init ()
+  (flymake-simple-make-init-impl
+   'flymake-create-temp-inplace t t
+   (file-name-nondirectory buffer-file-name)
+   (lambda (source base-dir)
+     `("pyflakes" (,source)))))
 
-(define-flymake-init-function flymake-python-init (local-file)
-  `("pyflakes" (,local-file)))
-
-(define-flymake-init-function flymake-ruby-init (local-file)
-  `("ruby" ("-wc" ,local-file)))
+(defun flymake-ruby-init ()
+  (flymake-simple-make-init-impl
+   'flymake-create-temp-inplace t t
+   (file-name-nondirectory buffer-file-name)
+   (lambda (source base-dir)
+     `("ruby" ("-wc" ,source)))))
 
 (setq flymake-allowed-mode-alist '((python-mode . flymake-python-init)
                                    (ruby-mode . flymake-ruby-init)))
