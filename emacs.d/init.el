@@ -7,7 +7,7 @@
 (unless (boundp 'dot-emacs-dir)
   (setq dot-emacs-dir (file-name-as-directory
                        (file-name-directory
-                        (or (buffer-file-name) load-file-name)))))
+                        (or load-file-name (buffer-file-name))))))
 
 ;; load-component
 (load (concat dot-emacs-dir "mkhl/load-component"))
