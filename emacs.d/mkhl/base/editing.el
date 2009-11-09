@@ -6,7 +6,6 @@
       kill-whole-line t
       comment-auto-fill-only-comments t)
 
-(add-hook 'find-file-hook 'do-truncate-lines)
 (add-hook 'dired-mode-hook 'do-truncate-lines)
 
 (defun do-truncate-lines ()
