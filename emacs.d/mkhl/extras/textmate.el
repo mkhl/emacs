@@ -7,4 +7,5 @@
 (global-set-key (kbd "M-q") 'fill-paragraph-or-region)
 (global-set-key (kbd "M-u") 'upcase-word-or-region)
 (global-set-key (kbd "M-U") 'downcase-word-or-region)
-(global-set-key (kbd "C-M-u") 'upcase-initials-line-or-region)
+(global-set-key (kbd "C-M-u") 'upcase-initials-word-or-region)
+(global-set-key (kbd "C-M-U") 'upcase-initials-line-or-region)
