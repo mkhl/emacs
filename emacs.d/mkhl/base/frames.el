@@ -3,8 +3,8 @@
 (setq frame-title-format '("%b" " - " invocation-name "@" system-name))
 
 ;; initial frame
-(add-to-list 'initial-frame-alist '(top . 100))
-(add-to-list 'initial-frame-alist '(left . 180))
+(add-to-list 'initial-frame-alist '(top . 40))
+(add-to-list 'initial-frame-alist '(left . 100))
 
 ;; default frame
 (eval-after-init
