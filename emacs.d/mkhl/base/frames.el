@@ -8,7 +8,10 @@
 
 ;; default frame
 (eval-after-init
+  (add-to-list 'default-frame-alist '(background-color . "WhiteSmoke"))
+  (add-to-list 'default-frame-alist '(cursor-color . "black"))
   (add-to-list 'default-frame-alist '(cursor-type . bar))
+  (add-to-list 'default-frame-alist '(weight . 80))
   (add-to-list 'default-frame-alist '(height . 50))
   (add-to-list 'default-frame-alist `(font . ,(face-font 'default))))
 
