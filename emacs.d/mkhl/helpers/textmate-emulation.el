@@ -9,23 +9,33 @@
       (newline)
       (indent-to-column column))))
 
-(defun region-or-line-beginning-end ()
-  "Return the pair `(beg . end)' of posisions denoting the
-beginning and end of the current line or, if active, the region."
+(defun bounds-of-thing-at-point-or-region (thing)
+  "Determine the start and end buffer locations for the THING at
+point, or, if active, the region. THING is a symbol which
+specifies the kind of syntactic entity you want.  Possibilities
+include `symbol', `list', `sexp', `defun', `filename', `url',
+`word', `sentence', `whitespace', `line', `page' and others.
+
+See the file `thingatpt.el' for documentation on how to define
+a symbol as a valid THING.
+
+The value is a cons cell (START . END) giving the start and end positions
+of the textual entity that was found."
   (if (region-active-p)
       (cons (region-beginning) (region-end))
-    (cons (line-beginning-position 1) (line-beginning-position 2))))
+    (bounds-of-thing-at-point thing)))
 
 (defun mark-line ()
   "Put mark at end of this line, point at beginning."
   (interactive)
-  (goto-char (line-beginning-position 1))
-  (push-mark (line-beginning-position 2) 'nomsg 'activate))
+  (destructuring-bind (beg . end) (bounds-of-thing-at-point 'line)
+    (goto-char beg)
+    (push-mark end 'nomsg 'activate)))
 
 (defun duplicate-line-or-region ()
   "Duplicate the current line or, if active, the region."
   (interactive)
-  (destructuring-bind (beg . end) (region-or-line-beginning-end)
+  (destructuring-bind (beg . end) (bounds-of-thing-at-point-or-region 'line)
     (let* ((mark-was-active mark-active)
            deactivate-mark)
       (goto-char beg)
@@ -58,5 +68,5 @@ beginning and end of the current line or, if active, the region."
   "Convert the initial of each word in the current line or,
 if active, the region, to upper case."
   (interactive)
-  (destructuring-bind (beg . end) (region-or-line-beginning-end)
+  (destructuring-bind (beg . end) (bounds-of-thing-at-point-or-region 'line)
     (upcase-initials-region beg end)))
