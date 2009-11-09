@@ -64,7 +64,14 @@ of the textual entity that was found."
                           'downcase-region
                         'downcase-word)))
 
-(defun upcase-initials-line-or-region (&optional beg end)
+(defun upcase-initials-word-or-region ()
+  "Convert the initial of the current word or, if active, the
+region, to upper case."
+  (interactive)
+  (destructuring-bind (beg . end) (bounds-of-thing-at-point-or-region 'word)
+    (upcase-initials-region beg end)))
+
+(defun upcase-initials-line-or-region ()
   "Convert the initial of each word in the current line or,
 if active, the region, to upper case."
   (interactive)
