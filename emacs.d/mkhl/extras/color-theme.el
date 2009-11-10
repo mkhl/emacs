@@ -7,7 +7,7 @@
       (funcall theme)
       (return))))
 
-(when (require 'color-theme nil 'noerror)
+(when (load "color-theme-autoloads" 'noerror)
   (color-theme-initialize)
   (eval-after-init
     (mk/after-init-color-theme)))
