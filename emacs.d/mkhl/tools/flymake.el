@@ -28,11 +28,10 @@
         (espresso-mode . flymake-js-init)))
 
 (defun mk/flymake-allow-modes ()
-  (dolist (mode-pair flymake-allowed-mode-alist)
-    (destructuring-bind (mode . func) mode-pair
-      (dolist (auto-pair (remove* mode auto-mode-alist :test-not 'eq :key 'cdr))
-        (destructuring-bind (regexp . ignored) auto-pair
-          (pushnew (list regexp func) flymake-allowed-file-name-masks))))))
+  (dolist* ((mode . func) flymake-allowed-mode-alist)
+    (dolist* ((regexp . ignored)
+              (remove* mode auto-mode-alist :test-not 'eq :key 'cdr))
+      (pushnew (list regexp func) flymake-allowed-file-name-masks))))
 
 ;;; `flymake' configuration
 

@@ -1,5 +1,4 @@
 
-
 (defun restart ()
   "Kill all unmodified buffers except for `shell', `eshell' and `org-agenda'."
   (interactive)

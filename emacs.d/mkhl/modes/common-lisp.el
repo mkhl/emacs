@@ -17,12 +17,11 @@
 (setq slime-net-coding-system 'utf-8-unix)
 
 (defun mk/eval-after-slime ()
-  (dolist (pair `((sbcl ,inferior-lisp-sbcl-program)
-                  (acl ,inferior-lisp-acl-program)
-                  (ccl ,inferior-lisp-ccl-program)))
-    (destructuring-bind (sym spec) pair
-      (add-to-list 'slime-lisp-implementations
-                   `(,sym ,(split-string spec)))))
+  (dolist* ((sym spec) `((sbcl ,inferior-lisp-sbcl-program)
+                         (acl ,inferior-lisp-acl-program)
+                         (ccl ,inferior-lisp-ccl-program)))
+    (add-to-list 'slime-lisp-implementations
+                 `(,sym ,(split-string spec))))
   (slime-setup '(slime-fancy)))
 
 (eval-after-load 'slime
