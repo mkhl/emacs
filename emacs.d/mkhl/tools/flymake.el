@@ -36,6 +36,9 @@
 ;;; `flymake' configuration
 
 (defun mk/eval-after-flymake ()
+  ;; Override the broken default `flymake-xml-init'
+  (defun flymake-xml-init ()
+    (list "xmllint" (list "--valid" (flymake-init-create-temp-buffer-copy 'flymake-create-temp-inplace))))
   (mk/flymake-allow-modes)
   (add-hook 'find-file-hook 'flymake-find-file-hook))
 
