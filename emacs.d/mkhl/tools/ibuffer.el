@@ -38,6 +38,7 @@
            ("Dired" (mode . dired-mode))
            ("Slime" (mode . lisp-mode))
            ("Fuel" (mode . factor-mode))
+           ("Org" (or (mode . org-mode)))
            ("Unknown" (mode . fundamental-mode)))))
   (define-key ibuffer-mode-map (kbd "TAB") 'ibuffer-toggle-filter-group)
   (add-hook 'ibuffer-mode-hook 'mk/ibuffer-mode-hook))
