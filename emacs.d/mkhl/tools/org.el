@@ -11,3 +11,9 @@
       (global-set-key (org-kbd "b") 'org-iswitchb)))
   (add-to-list 'auto-mode-alist `(,(rx ".org" eos) . org-mode))
   (add-hook 'org-mode-hook 'yas/fix-trigger-key))
+
+(defadvice org-publish-projects
+  (around org-publish-disable-flymake activate)
+  "Disable `flymake' while publishing `org-mode' files."
+  (let ((flymake-allowed-file-name-masks))
+    ad-do-it))
