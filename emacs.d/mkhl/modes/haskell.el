@@ -16,13 +16,15 @@
           haskell-indentation-left-offset 4
           haskell-indentation-ifte-offset 4)))
 
-(defun mk/eval-after-haskell-mode ()
-  (require 'hs-lint nil 'noerror)
+(defun mk/haskell-keys ()
   (define-key haskell-mode-map (kbd "C-c C-h") 'haskell-hoogle)
-  (define-key haskell-mode-map (kbd "C-c C-v") 'hs-lint)
+  (define-key haskell-mode-map (kbd "C-c C-v") 'hs-lint))
+
+(defun mk/setup-haskell-mode ()
+  (mk/haskell-keys)
   (remove-hook 'haskell-mode-hook 'turn-on-haskell-indent)
   (remove-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
   (add-hook 'haskell-mode-hook 'mk/haskell-mode-hook))
 
 (eval-after-load 'haskell-mode
-  '(mk/eval-after-haskell-mode))
+  '(mk/setup-haskell-mode))

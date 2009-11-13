@@ -16,13 +16,16 @@
 ;; slime
 (setq slime-net-coding-system 'utf-8-unix)
 
-(defun mk/eval-after-slime ()
+(defun mk/slime-implementations ()
   (dolist* ((sym spec) `((sbcl ,inferior-lisp-sbcl-program)
                          (acl ,inferior-lisp-acl-program)
                          (ccl ,inferior-lisp-ccl-program)))
     (add-to-list 'slime-lisp-implementations
-                 `(,sym ,(split-string spec))))
+                 `(,sym ,(split-string spec)))))
+
+(defun mk/setup-slime ()
+  (mk/slime-implementations)
   (slime-setup '(slime-fancy)))
 
 (eval-after-load 'slime
-  '(mk/eval-after-slime))
+  '(mk/setup-slime))

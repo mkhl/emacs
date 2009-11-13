@@ -21,12 +21,15 @@
        'scheme-get-current-symbol-info)
   (turn-on-eldoc-mode))
 
-(defun mk/eval-after-scheme ()
+(defun mk/scheme-keys ()
   (when (fboundp 'scheme-complete-or-indent)
     (define-key scheme-mode-map (kbd "TAB") 'scheme-complete-or-indent))
   (define-key scheme-mode-map (kbd "M-(") 'insert-parentheses)
-  (define-key scheme-mode-map (kbd "M-)") 'move-past-close-and-reindent)
+  (define-key scheme-mode-map (kbd "M-)") 'move-past-close-and-reindent))
+
+(defun mk/setup-scheme ()
+  (mk/scheme-keys)
   (add-hook 'scheme-mode-hook 'mk/scheme-mode-hook))
 
 (eval-after-load 'scheme
-  '(mk/eval-after-scheme))
+  '(mk/setup-scheme))
