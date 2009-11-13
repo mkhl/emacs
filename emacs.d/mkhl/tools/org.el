@@ -9,9 +9,12 @@
 
 (defun mk/org-remember ()
   (org-remember-insinuate)
+  (setq org-default-notes-file (concat org-directory "notes.org"))
   (global-set-key (kbd "C-x C-r") 'org-remember))
 
 (defun mk/setup-org ()
+  (eval-after-load 'org
+    '(setq org-directory (file-name-as-directory org-directory)))
   (setq org-replace-disputed-keys t
         org-completion-use-ido t)
   (mk/org-keys)
