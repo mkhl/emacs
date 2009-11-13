@@ -3,7 +3,8 @@
   (c-toggle-syntactic-indentation 1)
   (c-toggle-hungry-state 1)
   (c-toggle-electric-state 1)
-  (c-toggle-auto-newline 1))
+  (c-toggle-auto-newline 1)
+  (c-subword-mode t))
 
 (defun mk/setup-cc-mode ()
   (setq-default c-basic-offset 4)
