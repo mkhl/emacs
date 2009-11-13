@@ -115,6 +115,7 @@
        (list 'hs-lint-finish-hook))
   )
 
+;;;###autoload
 (defun hs-lint ()
   "Run HLint for current buffer with haskell source"
   (interactive)
