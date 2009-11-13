@@ -4,7 +4,7 @@
   (when (and isearch-forward isearch-other-end)
     (goto-char isearch-other-end)))
 
-(defun mk/eval-after-isearch ()
+(defun mk/setup-isearch ()
   (global-set-key (kbd "C-s") 'isearch-forward)
   (global-set-key (kbd "C-S-s") 'isearch-backward)
   (global-set-key (kbd "C-M-s") 'isearch-forward-regexp)
@@ -16,4 +16,4 @@
   (add-hook 'isearch-mode-end-hook 'isearch-goto-other-end))
 
 (eval-after-load "isearch"
-  '(mk/eval-after-isearch))
+  '(mk/setup-isearch))

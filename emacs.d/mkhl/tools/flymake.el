@@ -35,7 +35,7 @@
 
 ;;; `flymake' configuration
 
-(defun mk/eval-after-flymake ()
+(defun mk/setup-flymake ()
   ;; Override the broken default `flymake-xml-init'
   (defun flymake-xml-init ()
     (list "xmllint" (list "--valid" (flymake-init-create-temp-buffer-copy 'flymake-create-temp-inplace))))
@@ -43,7 +43,7 @@
   (add-hook 'find-file-hook 'flymake-find-file-hook))
 
 (when (require 'flymake nil 'noerror)
-  (mk/eval-after-flymake))
+  (mk/setup-flymake))
 
 ;;; `flymake' compatible `next-error' replacements
 

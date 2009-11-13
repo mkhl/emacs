@@ -6,7 +6,7 @@
 (defun mk/ibuffer-mode-hook ()
   (ibuffer-switch-to-saved-filter-groups "mkhl"))
 
-(defun mk/eval-after-ibuffer ()
+(defun mk/setup-ibuffer ()
   (setq ibuffer-saved-filter-groups
         `(("mkhl"
            ("Emacs" (or (name . ,(rx bos "*scratch*" eos))
@@ -45,4 +45,4 @@
   (add-hook 'ibuffer-mode-hook 'mk/ibuffer-mode-hook))
 
 (eval-after-load 'ibuffer
-  '(mk/eval-after-ibuffer))
+  '(mk/setup-ibuffer))
