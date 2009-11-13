@@ -16,7 +16,6 @@
         org-completion-use-ido t)
   (mk/org-keys)
   (mk/org-remember)
-  (add-to-list 'auto-mode-alist `(,(rx ".org" eos) . org-mode))
   (add-hook 'org-mode-hook 'yas/fix-trigger-key))
 
 (when (require 'org-install nil 'noerror)
@@ -28,3 +27,5 @@
   "Disable `flymake' while publishing `org-mode' files."
   (let ((flymake-allowed-file-name-masks))
     ad-do-it))
+
+(add-to-list 'auto-mode-alist `(,(rx ".org" eos) . org-mode))
