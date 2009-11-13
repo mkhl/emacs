@@ -1,2 +1,3 @@
 
-(setq bs-default-sort-name "by name")
+(setq bs-default-configuration "all-intern-last")
+(setq bs-default-sort-name "by filename")
