@@ -24,6 +24,8 @@
                        (mode . Man-mode)
                        (mode . woman-mode)
                        (name . ,(rx bos "*WoMan-Log*" eos))))
+           ("Packaging" (or (name . ,(rx bos "*Packages*"))
+                            (name . ,(rx bos "*Package Info*"))))
            ("Version Control" (or (name . ,(rx bos "*magit"))
                                   (name . ,(rx bos "*gitsum"))
                                   (name . ,(rx bos "*darcsum"))
