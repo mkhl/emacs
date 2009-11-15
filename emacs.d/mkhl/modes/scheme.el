@@ -1,7 +1,7 @@
 
 ;; scheme-program
 (setq inferior-scheme-gsi-program "gsi -:d-"
-      inferior-scheme-csi-program "csi"
+      inferior-scheme-csi-program "csi -:c"
       inferior-scheme-guile-program "guile"
       inferior-scheme-scsh-program "scsh")
 (setq scheme-program-name inferior-scheme-gsi-program)
