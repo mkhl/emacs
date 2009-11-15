@@ -1,8 +1,6 @@
 
 (defun mk/after-init-color-theme ()
-  (dolist (theme '(color-theme-quiet-light
-                   color-theme-espresso
-                   color-theme-gtk-ide))
+  (dolist (theme '(color-theme-xemacs))
     (when (fboundp theme)
       (funcall theme)
       (return))))
