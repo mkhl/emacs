@@ -1,7 +1,4 @@
 
-;; frame-title
-(setq frame-title-format '("[%*] " "%b" " " "%@" " " invocation-name))
-
 ;; initial frame
 (add-to-list 'initial-frame-alist '(top . 40))
 (add-to-list 'initial-frame-alist '(left . 100))
