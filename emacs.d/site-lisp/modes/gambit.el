@@ -613,7 +613,6 @@ enlarge the window if it is too small."
     (define-key map (concat prefix "l") 'gambit-leap-continuation)
     (define-key map (concat prefix "_") 'gambit-kill-last-popup)))
 
-;;;###autoload
 (defun gambit-inferior-mode ()
 
   (gambit-install-comment-syntax)
@@ -636,7 +635,6 @@ enlarge the window if it is too small."
             t
             t)) ; hook is buffer-local
 
-;;;###autoload
 (defun gambit-mode ()
   (gambit-install-comment-syntax)
   (gambit-extend-mode-map scheme-mode-map))
