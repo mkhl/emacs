@@ -3400,9 +3400,6 @@ Key bindings:
   (run-mode-hooks 'espresso-mode-hook))
 
 
-;;;###autoload (push `(,(rx ".js" eos) . espresso-mode) auto-mode-alist)
-
-
 (eval-after-load 'hideshow
   '(add-to-list 'hs-special-modes-alist
                 '(espresso-mode "{" "}" "/[*/]"

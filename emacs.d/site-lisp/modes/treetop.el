@@ -1,5 +1,3 @@
-;;; treetop.el
-;;; Source: <http://github.com/hornbeck/public_emacs>
 (defvar treetop-mode-hook nil)
 
 (defvar treetop-mode-map
@@ -8,10 +6,14 @@
              treetop-mode-map)
              "Keymap for treetop major mode")
 
+(add-to-list 'auto-mode-alist '("\\.treetop\\'" . treetop-mode))
+
 (defconst treetop-font-lock-keywords
   (list
    '("\\<\\grammar\\|rule\\|def\\|end\\>" . font-lock-builtin-face))
    "Minimal highlighting expressions for treetop mode")
+
+
 
 (defvar treetop-mode-syntax-table
   (let ((treetop-mode-syntax-table (make-syntax-table)))
@@ -22,7 +24,6 @@
     treetop-mode-syntax-table)
   "Syntax table for treetop-mode")
 
-;;;###autoload
 (defun treetop-mode ()
   "Major mode for editing treetop files"
   (interactive)
@@ -35,7 +36,5 @@
   (setq major-mode 'treetop-mode)
   (setq mode-name "treetop")
   (run-hooks 'treetop-mode-hook))
-
-;;;###autoload (add-to-list 'auto-mode-alist '("\\.treetop\\'" . treetop-mode))
 
 (provide 'treetop-mode)

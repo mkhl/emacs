@@ -358,8 +358,8 @@
 
 ;;; Code:
 
-;; (if io-mode-auto-mode-p
-;;     (add-to-list 'auto-mode-alist '("\\.io\\'" . io-mode)))
+(if io-mode-auto-mode-p
+    (add-to-list 'auto-mode-alist '("\\.io\\'" . io-mode)))
 
 (defvar io-mode-hook nil
   "Io mode hook")
@@ -460,7 +460,6 @@
     (set-marker marker nil))
   (blink-matching-open))
 
-;;;###autoload
 (defun io-mode ()
   "Io mode"
   (interactive)
@@ -472,8 +471,6 @@
   (setq major-mode 'io-mode)
   (setq mode-name "Io")
   (run-hooks 'io-mode-hook))
-
-;;;###autoload (push `(,(rx ".io" eos) . io-mode) auto-mode-alist)
 
 (provide 'io-mode)
 

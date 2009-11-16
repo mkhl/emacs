@@ -3431,7 +3431,6 @@ column is used (fill-column vs. end of previous/next line)."
    ((fboundp 'region-active-p) (region-active-p))
    ((boundp 'transient-mark-mode) transient-mark-mode mark-active)))
 
-;;;###autoload (push `(,(rx ".r" (? "e") "st" eos) . rst-mode) auto-mode-alist)
 
 
 (provide 'rst)
