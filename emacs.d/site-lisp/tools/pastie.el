@@ -64,7 +64,6 @@
   (if *pastie-restricted* "http://pastie.org/private/%s"
     "http://pastie.org/paste/%s"))
 
-;;;###autoload
 (defun pastie-region (begin end &optional toggle-restricted)
   "Post the current region as a new paste at pastie.org.
 Copies the URL into the kill ring.
@@ -117,7 +116,6 @@ With a prefix argument, toggle the current value of
 	  (message "Error occured: %s" status))))
     (kill-buffer *pastie-buffer*)))
 
-;;;###autoload
 (defun pastie-buffer (&optional toggle-restricted)
   "Post the current buffer as a new paste at pastie.org.
 Copies the URL into the kill ring.
@@ -127,7 +125,6 @@ With a prefix argument, toggle the current value of
   (interactive "P")
   (pastie-region (point-min) (point-max) toggle-restricted))
 
-;;;###autoload
 (defun pastie-get (id)
   "Fetch the contents of the paste from pastie.org into a new buffer."
   (interactive "nPastie #: ")
@@ -156,7 +153,6 @@ With a prefix argument, toggle the current value of
           (message "Error occured: %s" status)
           (kill-buffer *pastie-buffer*))))))
 
-;;;###autoload
 (defun pastie-browse ()
   (interactive)
   (browse-url *pastie-last-url*))

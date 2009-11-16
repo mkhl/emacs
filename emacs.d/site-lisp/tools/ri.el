@@ -63,12 +63,11 @@
   (let ((ri-buffer-name (format "*ri %s*" ri-documented)))
     (if (get-buffer ri-buffer-name)
         (switch-to-buffer ri-buffer-name)
-      (let ((ri-buffer (get-buffer-create ri-buffer-name))
-            (ri-command-format "ri --format plain --no-pager '%s'"))
+      (let ((ri-buffer (get-buffer-create ri-buffer-name)))
         (display-buffer ri-buffer)
         (with-current-buffer ri-buffer
           (erase-buffer)
-          (insert (shell-command-to-string (format ri-command-format
+          (insert (shell-command-to-string (format "ri %s"
                                                    ri-documented)))
           (goto-char (point-min))
           (ri-mode))))))
