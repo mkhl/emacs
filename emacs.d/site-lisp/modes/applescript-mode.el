@@ -260,8 +260,8 @@ This function does not modify point or mark."
      ((eq position 'bod) (as-beginning-of-handler 'either))
      ((eq position 'eod) (as-end-of-handler 'either))
      ;; Kind of funny, I know, but useful for as-up-exception.
-     ((eq position 'bob) (beginning-of-buffer))
-     ((eq position 'eob) (end-of-buffer))
+     ((eq position 'bob) (goto-char (point-min)))
+     ((eq position 'eob) (goto-char (point-max)))
      ((eq position 'boi) (back-to-indentation))
      ((eq position 'bos) (as-goto-initial-line))
      (t (error "Unknown buffer position requested: %s" position)))
@@ -456,7 +456,7 @@ contain this package.")
 
    ;; as integer
    ((string-match "\\`\\s-*\\([0-9]+\\)\\s-*\\'" retstr)
-    (string-to-int (match-string 1 retstr)))
+    (string-to-number (match-string 1 retstr)))
 
     ;; else
     (t (intern retstr))))
