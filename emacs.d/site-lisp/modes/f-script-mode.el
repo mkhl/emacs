@@ -50,7 +50,8 @@ end run
 
 (defcustom fs-error-message-regexp
   "Error: Point at \\([0-9]+\\) length \\([0-9]+\\)"
-  "Regexp for getting the error point and length")
+  "Regexp for getting the error point and length"
+  :group 'f-script)
 
 (defcustom fs-eval-pboard
   ""
@@ -132,12 +133,11 @@ end run
 
 (defconst fs-font-lock-keywords
   (list
-   '("\\<\\(NS\\|FS\\)\\sw*\\>"			. font-lock-constant-face)
+   '("\\<\\(NS\\|FS\\)\\w*\\>"			. font-lock-type-face)
    '("\\<[A-Z_]+\\>"				. font-lock-constant-face)
-   '("-?[0-9]+\\(\\.[0-9]+\\)?\\(e-?[0-9]+\\)?"	. font-lock-constant-face)
    '("#\\([A-Za-z_][A-Za-z0-9_]*:\\)+"		. font-lock-constant-face)
    '("#[A-Za-z_][A-Za-z0-9_]*"			. font-lock-constant-face)
-   '("\\<[A-Za-z_][A-Za-z0-9_]*\s*:="		. font-lock-function-name-face)
+   '("\\<[A-Za-z_][A-Za-z0-9_]*\\s*:="		. font-lock-function-name-face)
    '("\\<[A-Za-z_][A-Za-z0-9_]*:"		. font-lock-type-face)
    '("\\([-+<>=*/?~!%&@^|\\\\]+\\|:=\\)"	. font-lock-keyword-face))
   "Basic F-Script keywords font-locking")
@@ -446,11 +446,11 @@ end run
       (compilation-mode)
       (view-buffer buf 'fs-kill-buffer)
       (shrink-window-if-larger-than-buffer)
-      (beginning-of-buffer)
+      (goto-char (point-min))
       (search-forward-regexp fs-error-message-regexp)
       (when (match-beginning 1)
-        (let ((pos (string-to-int (match-string 1)))
-              (len (string-to-int (match-string 2))))
+        (let ((pos (string-to-number (match-string 1)))
+              (len (string-to-number (match-string 2))))
           (switch-to-buffer-other-window source)
           (push-mark)
           (push-mark (+ pos len))
