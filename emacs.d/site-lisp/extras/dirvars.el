@@ -196,13 +196,11 @@ A few variable names are treated specially."
         (t (make-local-variable var)
            (set var val))))
 
-;;;###autoload
 (defun dirvars-hack-local-variables-before ()
   (let ((dirvars-file (dirvars-find-upwards dirvars-file-name)))
     (if dirvars-file
         (dirvars-hack-local-variables dirvars-file))))
 
-;;;###autoload
 (defadvice hack-local-variables
   (before dirvars-hack-local-variables-before activate)
   "Process dirvars before a file's local variables are processed."

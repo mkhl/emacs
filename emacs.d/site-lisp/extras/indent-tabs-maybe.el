@@ -35,25 +35,24 @@ See `indent-tabs-maybe'."
   :group 'indent
   :type 'integer)
 
-;;;###autoload
 (defun indent-tabs-maybe ()
-    "Set `indent-tabs-mode' according to buffer contents.
+  "Set `indent-tabs-mode' according to buffer contents.
 If the current buffer contains a line with a leading tab within the first
 `indent-tabs-maybe-search-size' characters, use t, otherwise nil.
 Exception: do nothing if buffer is empty.
 Intended for use in `find-file-hooks'."
-    (when (> (point-max) 1)
-      (save-excursion
-        (save-restriction
-          (widen)
-          (goto-char 1)
-          (if (re-search-forward "^\t" indent-tabs-maybe-search-size t)
-              (setq indent-tabs-mode t)
-            (setq indent-tabs-mode nil))))))
+  (when (> (point-max) 1)
+    (save-excursion
+      (save-restriction
+	(widen)
+	(goto-char 1)
+	(if (re-search-forward "^\t" indent-tabs-maybe-search-size t)
+	    (setq indent-tabs-mode t)
+	  (setq indent-tabs-mode nil))))))
 
 ;; Have it show up in the right place under Custom.
-(add-hook 'find-file-hooks
-          'indent-tabs-maybe)
+(put 'find-file-hooks 'custom-options
+     (cons 'indent-tabs-maybe (get 'find-file-hooks 'custom-options)))
 
 (provide 'indent-tabs-maybe)
 ;;; indent-tabs-maybe.el ends here

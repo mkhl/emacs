@@ -232,7 +232,6 @@ Signal an error if no clause matches."
 (defvar paredit-mode-map (make-sparse-keymap)
   "Keymap for the paredit minor mode.")
 
-;;;###autoload
 (define-minor-mode paredit-mode
   "Minor mode for pseudo-structurally editing Lisp code.
 \\<paredit-mode-map>"
@@ -255,7 +254,6 @@ Signal an error if no clause matches."
 
 ;;; Old functions from when there was a different mode for emacs -nw.
 
-;;;###autoload
 (defun enable-paredit-mode ()
   "Turn on pseudo-structural editing of Lisp code.
 
@@ -263,7 +261,6 @@ Deprecated: use `paredit-mode' instead."
   (interactive)
   (paredit-mode +1))
 
-;;;###autoload
 (defun disable-paredit-mode ()
   "Turn off pseudo-structural editing of Lisp code.
 

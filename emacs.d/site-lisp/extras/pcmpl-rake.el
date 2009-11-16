@@ -43,7 +43,7 @@
 
 ;;;###autoload
 (defun pcomplete/rake ()
-  "Completion rules for the `rake' command."
+  "Completion rules for the `ssh' command."
   (pcomplete-here (pcmpl-rake-tasks)))
 
 (defun pcmpl-rake-tasks ()
