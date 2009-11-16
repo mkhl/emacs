@@ -16,7 +16,8 @@
   (eval-after-load 'org
     '(setq org-directory (file-name-as-directory org-directory)))
   (setq org-replace-disputed-keys t
-        org-completion-use-ido t)
+        org-completion-use-ido t
+        org-startup-folded 'content)
   (mk/org-keys)
   (mk/org-remember)
   (add-hook 'org-mode-hook 'yas/fix-trigger-key))
