@@ -1,0 +1,66 @@
+;;; -*-emacs-lisp-*-
+
+(require 'cl)
+
+(defun generate-autoloads ()
+  (interactive)
+  (require 'autoload)
+  (setf generated-autoload-file (pop command-line-args-left))
+  (batch-update-autoloads))
+
+;;; Manually created autoloads for `site-lisp/tools'
+
+(autoload 'pastie-region "pastie" nil t)
+(autoload 'pastie-buffer "pastie" nil t)
+(autoload 'pastie-get "pastie" nil t)
+(autoload 'pastie-browse "pastie" nil t)
+
+;;; Manually created autoloads for `site-lisp/modes'
+
+(autoload 'applescript-mode "applescript-mode" nil t)
+(add-to-list 'auto-mode-alist `(,(rx ".applescript" eos) . applescript-mode))
+
+(add-to-list 'auto-mode-alist `(,(rx ".js" eos) . espresso-mode))
+
+(autoload 'fs-mode "f-script-mode" nil t)
+(add-to-list 'auto-mode-alist `(,(rx ".fs" (? "cript") eos) . fs-mode))
+
+(autoload 'gambit-inferior-mode "gambit" "Hook Gambit mode into cmuscheme.")
+(autoload 'gambit-mode "gambit" "Hook Gambit mode into scheme.")
+
+(autoload 'google-set-c-style "google-c-style" nil t)
+(autoload 'google-make-newline-indent "google-c-style" nil t)
+
+(autoload 'hs-lint "hs-lint" nil t)
+
+(autoload 'io-mode "io-mode" nil t)
+(add-to-list 'auto-mode-alist `(,(rx ".io" eos) . io-mode))
+
+(autoload 'pod-mode "pod-mode" nil t)
+(add-to-list 'auto-mode-alist `(,(rx ".pod" eos) . pod-mode))
+
+(add-to-list 'auto-mode-alist `(,(rx ".r" (? "e") "st" eos) . rst-mode))
+
+(autoload 'scheme-complete-or-indent "scheme-complete-0.8.9" nil t)
+(autoload 'scheme-smart-indent-function "scheme-complete-0.8.9")
+(autoload 'scheme-get-current-symbol-info "scheme-complete-0.8.9")
+
+(autoload 'scheme48-mode "scheme48" nil t)
+
+(autoload 'treetop-mode "treetop" nil t)
+(add-to-list 'auto-mode-alist `(,(rx ".treetop" eos) . treetop-mode))
+
+(autoload 'yaml-mode "yaml-mode" nil t)
+(add-to-list 'auto-mode-alist `(,(rx ".y" (? "a") "ml" eos) . yaml-mode))
+
+;;; Manually created autoloads for `site-lisp/extras'
+
+(autoload 'indent-tabs-maybe "indent-tabs-maybe")
+
+(autoload 'paredit-mode "paredit-21" nil t)
+(autoload 'enable-paredit-mode "paredit-21" nil t)
+
+(autoload 'undo "redo" nil t)
+(autoload 'redo "redo" nil t)
+
+;;; Generated autoloads (made by autoload.el)
