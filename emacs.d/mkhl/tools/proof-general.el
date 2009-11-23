@@ -1,4 +1,4 @@
 
-(eval-after-load user-init-file
-  '(let ((proof-assistants '(isar)))
-     (require 'proof-site nil 'noerror)))
+(eval-after-init
+  (let ((proof-assistants '(isar)))
+    (require 'proof-site nil 'noerror)))
