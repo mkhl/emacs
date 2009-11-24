@@ -11,8 +11,8 @@
   (global-set-key (kbd "C-M-S-s") 'isearch-backward-regexp)
   (define-key isearch-mode-map (kbd "C-s") 'isearch-repeat-forward)
   (define-key isearch-mode-map (kbd "C-S-s") 'isearch-repeat-backward)
-  (define-key isearch-mode-map (kbd "C-M-s") 'isearch-repeat-forward-regexp)
-  (define-key isearch-mode-map (kbd "C-M-S-s") 'isearch-repeat-backward-regexp)
+  (define-key isearch-mode-map (kbd "C-M-s") 'isearch-repeat-forward)
+  (define-key isearch-mode-map (kbd "C-M-S-s") 'isearch-repeat-backward)
   (add-hook 'isearch-mode-end-hook 'isearch-goto-other-end))
 
 (eval-after-load "isearch"
