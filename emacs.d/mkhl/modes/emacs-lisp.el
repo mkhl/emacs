@@ -11,10 +11,7 @@
   (dolist (mode-map (list emacs-lisp-mode-map
                           lisp-interaction-mode-map))
     (define-key mode-map (kbd "M-.") #'find-function-at-point)
-    (define-key mode-map (kbd "C-x F") #'find-function)
-    (define-key mode-map (kbd "C-x K") #'find-function-on-key)
-    (define-key mode-map (kbd "C-x L") #'find-library)
-    (define-key mode-map (kbd "C-x V") #'find-variable)))
+  (find-function-setup-keys))
 
 (defun mk/lisp-keys ()
   (dolist (mode-map (list emacs-lisp-mode-map
