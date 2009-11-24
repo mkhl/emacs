@@ -4,8 +4,7 @@
   (when (fboundp 'highlight-parentheses-mode)
     (highlight-parentheses-mode t)))
 
-(defun mk/lisp-interaction-keys ()
-  (define-key lisp-interaction-mode-map (kbd "C-S-j") 'eval-print-last-sexp))
+(defun mk/lisp-interaction-keys ())
 
 (defun mk/emacs-lisp-keys ()
   (dolist (mode-map (list emacs-lisp-mode-map
