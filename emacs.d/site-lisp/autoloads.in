@@ -39,6 +39,9 @@
 (autoload 'pod-mode "pod-mode" nil t)
 (add-to-list 'auto-mode-alist `(,(rx ".pod" eos) . pod-mode))
 
+(autoload 'rdoc-mode "rdoc-mode" nil t)
+(add-to-list 'auto-mode-alist `(,(rx ".rd" (? "oc") eos) . rdoc-mode))
+
 (add-to-list 'auto-mode-alist `(,(rx ".r" (? "e") "st" eos) . rst-mode))
 
 (autoload 'scheme-complete-or-indent "scheme-complete-0.8.9" nil t)
