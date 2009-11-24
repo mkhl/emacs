@@ -42,6 +42,7 @@
 (add-to-list 'auto-mode-alist `(,(rx ".r" (? "e") "st" eos) . rst-mode))
 
 (autoload 'scheme-complete-or-indent "scheme-complete-0.8.9" nil t)
+(autoload 'scheme-smart-complete "scheme-complete-0.8.9" nil t)
 (autoload 'scheme-smart-indent-function "scheme-complete-0.8.9")
 (autoload 'scheme-get-current-symbol-info "scheme-complete-0.8.9")
 
