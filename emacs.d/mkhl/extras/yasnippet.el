@@ -7,4 +7,5 @@
 
 (defun yas/fix-trigger-key ()
   (setq yas/fallback-behavior `(apply ,(local-key-binding (kbd "TAB"))))
-  (local-set-key (kbd "<tab>") 'yas/expand))
+  (local-unset-key (kbd "TAB"))
+  (local-unset-key (kbd "<tab>")))
