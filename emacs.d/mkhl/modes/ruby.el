@@ -1,4 +1,6 @@
 
+;;; `ruby-mode'
+
 (defun mk/ruby-mode-hook ()
   (define-tab-width 2)
   (ruby-electric-mode t))
@@ -13,3 +15,11 @@
 
 (add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
 (add-to-list 'auto-mode-alist `(,(rx ".rake" eos) . ruby-mode))
+
+;;; `inf-ruby'
+
+(defun mk/setup-inf-ruby ()
+  (add-hook 'inf-ruby-mode-hook 'ansi-color-for-comint-mode))
+
+(eval-after-load 'inf-ruby
+  '(mk/setup-inf-ruby))
