@@ -10,6 +10,7 @@
   (dolist (mode-map (list emacs-lisp-mode-map
                           lisp-interaction-mode-map))
     (define-key mode-map (kbd "M-.") #'find-function-at-point)
+    (define-key mode-map (kbd "M-,") #'find-variable-at-point))
   (find-function-setup-keys))
 
 (defun mk/lisp-keys ()
