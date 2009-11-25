@@ -19,7 +19,7 @@
 ;;; `inf-ruby'
 
 (defun mk/setup-inf-ruby ()
-  (add-hook 'inf-ruby-mode-hook 'ansi-color-for-comint-mode))
+  (add-hook 'inf-ruby-mode-hook 'ansi-color-for-comint-mode-on))
 
 (eval-after-load 'inf-ruby
   '(mk/setup-inf-ruby))
