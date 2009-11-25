@@ -23,6 +23,8 @@
                        (mode . Man-mode)
                        (mode . woman-mode)
                        (name . ,(rx bos "*WoMan-Log*" eos))))
+           ("Calculator" (or (mode . calc-mode)
+                             (mode . calc-trail-mode)))
            ("Packaging" (or (name . ,(rx bos "*Packages*"))
                             (name . ,(rx bos "*Package Info*"))))
            ("Version Control" (or (name . ,(rx bos "*magit"))
