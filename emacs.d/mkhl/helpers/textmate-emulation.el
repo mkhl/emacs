@@ -1,13 +1,6 @@
 
-(defun next-line-and-indent ()
-  "Insert a newline after the current line and indent it."
-  (interactive)
-  (end-of-line)
-  (if (not (eq indent-line-function 'tab-to-tab-stop))
-      (newline-and-indent)
-    (let* ((column (save-excursion (back-to-indentation) (current-column))))
-      (newline)
-      (indent-to-column column))))
+;;; `things'
+
 
 (defun bounds-of-thing-at-point-or-region (thing)
   "Determine the start and end buffer locations for the THING at
@@ -43,12 +36,16 @@ of the textual entity that was found."
       (when mark-was-active
         (push-mark (+ end (- end beg)) 'nomsg 'activate)))))
 
+;;; Reformat ...
+
 (defun fill-paragraph-or-region ()
   "Fill the current paragraph or, if active, the region."
   (interactive)
   (call-interactively (if (region-active-p)
                           'fill-region
                         'fill-paragraph)))
+
+;;; Text -> Convert -> ...
 
 (defun upcase-word-or-region ()
   "Convert the following word or, if active, the region, to upper case."
@@ -77,3 +74,15 @@ if active, the region, to upper case."
   (interactive)
   (destructuring-bind (beg . end) (bounds-of-thing-at-point-or-region 'line)
     (upcase-initials-region beg end)))
+
+;;; Source -> Move to EOL -> ...
+
+(defun next-line-and-indent ()
+  "Insert a newline after the current line and indent it."
+  (interactive)
+  (end-of-line)
+  (if (not (eq indent-line-function 'tab-to-tab-stop))
+      (newline-and-indent)
+    (let* ((column (save-excursion (back-to-indentation) (current-column))))
+      (newline)
+      (indent-to-column column))))
