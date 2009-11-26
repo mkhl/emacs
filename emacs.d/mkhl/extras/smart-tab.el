@@ -17,6 +17,11 @@
   (pushnew '(shell-mode . comint-dynamic-complete)
            smart-tab-completion-functions-alist))
 
+(defun mk/setup-smart-tab-emacs-lisp ()
+  (dolist (spec '((emacs-lisp-mode . lisp-complete-symbol)
+                  (lisp-interaction-mode . lisp-complete-symbol)))
+    (pushnew spec smart-tab-completion-functions-alist)))
+
 (defun mk/setup-smart-tab-scheme-complete ()
   (when (fboundp 'scheme-smart-complete)
     (pushnew '(scheme-mode . scheme-smart-complete)
@@ -27,6 +32,7 @@
   (mk/setup-smart-tab-org)
   (mk/setup-smart-tab-eshell)
   (mk/setup-smart-tab-shell)
+  (mk/setup-smart-tab-emacs-lisp)
   (mk/setup-smart-tab-scheme-complete))
 
 (eval-after-load 'smart-tab
