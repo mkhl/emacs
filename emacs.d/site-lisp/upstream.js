@@ -31,6 +31,9 @@
         "file": "htmlize.el",
         "src": "http://fly.srk.fer.hr/~hniksic/emacs/htmlize.el"
     }, {
+        "file": "igrep.el",
+        "src": "http://www.emacswiki.org/emacs/download/igrep.el"
+    }, {
         "file": "itunes.el",
         "src": "http://www.emacswiki.org/emacs/download/itunes.el"
     }, {
