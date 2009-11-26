@@ -1,2 +1,2 @@
 
-(setq mark-holidays-in-calendar t)
+(setq calendar-mark-holidays-flag t)
