@@ -26,3 +26,8 @@
 ;;; custom
 (setq custom-file (concat dot-emacs-dir "custom.el"))
 (load custom-file 'noerror 'nomessage)
+
+;;; `emacs-init-time'
+;; Useful for benchmarking startup time.
+;; (eval-after-init
+;;   (setq initial-scratch-message (emacs-init-time)))
