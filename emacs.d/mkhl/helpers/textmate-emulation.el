@@ -1,6 +1,21 @@
 
 ;;; `things'
 
+(defvar primary-thing-mode-alist
+  '((emacs-lisp-mode . sexp)
+    (lisp-interaction-mode . sexp)
+    (lisp-mode . sexp)
+    (scheme-mode . sexp))
+  "Alist of major mode symbols vs corresponding primary `thing's.
+
+Each element looks like (MODE . THING).
+THING should be a symbol specifying the kind of `building blocks'
+MODE buffers use (like `line's, say), and should be recognized by
+`thing-at-point', which see.")
+
+(defun primary-thing ()
+  "Determine the primary kind of `thing' used by `major-mode'."
+  (or (cdr (assq major-mode primary-thing-mode-alist)) 'line))
 
 (defun bounds-of-thing-at-point-or-region (thing)
   "Determine the start and end buffer locations for the THING at
@@ -18,17 +33,17 @@ of the textual entity that was found."
       (cons (region-beginning) (region-end))
     (bounds-of-thing-at-point thing)))
 
-(defun mark-line ()
-  "Put mark at end of this line, point at beginning."
-  (interactive)
-  (destructuring-bind (beg . end) (bounds-of-thing-at-point 'line)
+(defun mark-thing (thing)
+  "Put mark at end of this THING, point at beginning."
+  (interactive (list (primary-thing)))
+  (destructuring-bind (beg . end) (bounds-of-thing-at-point thing)
     (goto-char beg)
     (push-mark end 'nomsg 'activate)))
 
-(defun duplicate-line-or-region ()
-  "Duplicate the current line or, if active, the region."
-  (interactive)
-  (destructuring-bind (beg . end) (bounds-of-thing-at-point-or-region 'line)
+(defun duplicate-thing-or-region (thing)
+  "Duplicate the current THING or, if active, the region."
+  (interactive (list (primary-thing)))
+  (destructuring-bind (beg . end) (bounds-of-thing-at-point-or-region thing)
     (let* ((mark-was-active mark-active)
            deactivate-mark)
       (goto-char beg)
