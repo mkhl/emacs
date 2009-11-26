@@ -84,7 +84,7 @@
 ;;; Code:
 
 (require 'cl)                           ;needed for `sort*' routine.
-(require 'avltree)                      ;from elib, needed for cache management
+(require 'avl-tree)                      ;from elib, needed for cache management
 (require 'xml)                           ;needed for `sort*' routine.
 
 (defvar ell-host "www.damtp.cam.ac.uk")
@@ -129,14 +129,14 @@ If nil, you may want to use another package, such as ffap, instead.
 
 (defun ell-new-cache ()
   "Create a new cache entry."
-(avltree-create (lambda (package1 package2)
+(avl-tree-create (lambda (package1 package2)
                     (and (string< (car package1) (car package2))
                          (string< (cdr package1) (cdr package2))))))
 
 (defun ell-read-cache-from-file (filename)
   "Return a package cache from FILENAME, or a new one if none was found."
   (let ((previous-cache (ell-read-from-file filename)))
-    (if (or (null previous-cache) (not (avltree-p previous-cache)))
+    (if (or (null previous-cache) (not (avl-tree-p previous-cache)))
         (ell-new-cache)
       previous-cache)))
 
@@ -316,12 +316,12 @@ are already installed on your system.\n\n"))
                      (description (car (cdr (cdr x))))
                      (author (car (cdr (cdr (cdr x)))))
                      (package (cons name author)))
-                (avltree-enter new-cache package)
+                (avl-tree-enter new-cache package)
                 (insert (format "%s %s- %s (by %s)\n%s\n\n"
                                 (if (and ell-locate (locate-library name))
                                     (concat "*" name)
                                   name)
-                                (if (avltree-member cache package)
+                                (if (avl-tree-member cache package)
                                      ""
                                   (progn (setq new-count (1+ new-count)) "<New> "))
                                 description author url))))
