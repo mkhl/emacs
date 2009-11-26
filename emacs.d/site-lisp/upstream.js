@@ -1,5 +1,8 @@
 {
     "extras": [ {
+        "file": "diminish.el",
+        "src": "http://www.eskimo.com/~seldon/diminish.el"
+    }, {
         "file": "dirvars.el",
         "src": "http://www.emacswiki.org/emacs/download/dirvars.el"
     }, {
