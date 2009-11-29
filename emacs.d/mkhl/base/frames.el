@@ -12,6 +12,13 @@
   (add-to-list 'default-frame-alist '(height . 50))
   (add-to-list 'default-frame-alist `(font . ,(face-font 'default))))
 
+;; special frames
+(setq special-display-regexps `(,(rx bos "*Help" eow)
+                                ,(rx bos "*Apropos" eow)
+                                ,(rx bos "*info" eow)
+                                ,(rx bos "*Man" eow)
+                                ,(rx bos "*WoMan" eow)))
+(add-to-list 'special-display-frame-alist '(height . 24))
 
 ;; switch frames
 (global-set-key (kbd "C-M-`") 'ns-next-frame)
