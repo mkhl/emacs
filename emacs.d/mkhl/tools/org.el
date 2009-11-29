@@ -1,16 +1,9 @@
 
-(defun mk/org-keys ()
-  (let* ((prefix-key "C-x C-o"))
-    (labels ((org-kbd (key) (read-kbd-macro (format "%s %s" prefix-key key))))
-      (global-unset-key (read-kbd-macro prefix-key))
-      (global-set-key (org-kbd "l") 'org-store-link)
-      (global-set-key (org-kbd "a") 'org-agenda)
-      (global-set-key (org-kbd "b") 'org-iswitchb))))
+;;; `org-remember'
 
 (defun mk/org-remember ()
   (org-remember-insinuate)
   (setq org-default-notes-file (concat org-directory "notes.org"))
-  (global-set-key (kbd "C-x C-r") 'org-remember))
   (setq org-remember-templates
         '(("todo" ?t
            "* TODO %?\n\n  Date: %u\n\n  %i" nil "Todo List")
@@ -18,6 +11,31 @@
            "* %?\n\n  Source: %u, %c\n  Context: %a\n\n  %i" nil "Remember")
           ("org-mac note" ?z
            "* %?\n\n  Date: %u\n" nil "Notes")))
+  (global-set-key (kbd "C-x C-r") 'org-remember-default)
+  (global-set-key (kbd "C-x C-t") 'org-remember-todo))
+
+(defun org-remember-with-template (template-char)
+  (if (eq '- current-prefix-arg)
+      (org-remember current-prefix-arg)
+    (org-remember current-prefix-arg template-char)))
+
+(defun org-remember-default ()
+  (interactive)
+  (org-remember-with-template ?w))
+
+(defun org-remember-todo ()
+  (interactive)
+  (org-remember-with-template ?t))
+
+;;; `org'
+
+(defun mk/org-keys ()
+  (let* ((prefix-key "C-x C-o"))
+    (labels ((org-kbd (key) (read-kbd-macro (format "%s %s" prefix-key key))))
+      (global-unset-key (read-kbd-macro prefix-key))
+      (global-set-key (org-kbd "l") 'org-store-link)
+      (global-set-key (org-kbd "a") 'org-agenda)
+      (global-set-key (org-kbd "b") 'org-iswitchb))))
 
 (defun mk/setup-org ()
   (eval-after-load 'org
