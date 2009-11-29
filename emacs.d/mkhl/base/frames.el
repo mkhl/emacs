@@ -12,13 +12,7 @@
   (add-to-list 'default-frame-alist '(height . 50))
   (add-to-list 'default-frame-alist `(font . ,(face-font 'default))))
 
-;; switch frames
-(global-set-key (kbd "C-M-`") 'switch-to-next-frame)
-(global-set-key (kbd "C-M-~") 'switch-to-previous-frame)
 
-(defun switch-to-next-frame (arg)
-  (interactive "p")
-  (other-frame arg))
-(defun switch-to-previous-frame (arg)
-  (interactive "p")
-  (other-frame (- arg)))
+;; switch frames
+(global-set-key (kbd "C-M-`") 'ns-next-frame)
+(global-set-key (kbd "C-M-~") 'ns-prev-frame)
