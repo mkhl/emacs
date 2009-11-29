@@ -11,6 +11,13 @@
   (org-remember-insinuate)
   (setq org-default-notes-file (concat org-directory "notes.org"))
   (global-set-key (kbd "C-x C-r") 'org-remember))
+  (setq org-remember-templates
+        '(("todo" ?t
+           "* TODO %?\n\n  Date: %u\n\n  %i" nil "Todo List")
+          ("org-mac remember" ?w
+           "* %?\n\n  Source: %u, %c\n  Context: %a\n\n  %i" nil "Remember")
+          ("org-mac note" ?z
+           "* %?\n\n  Date: %u\n" nil "Notes")))
 
 (defun mk/setup-org ()
   (eval-after-load 'org
