@@ -7,8 +7,7 @@
 
 (defadvice save-buffers-kill-terminal (around kill-server-or-terminal activate)
   "If the current buffer has clients, kill those instead of Emacs first."
-  (if server-buffer-clients
-      (server-done)
+  (unless (server-done)
     ad-do-it))
 
 (defun kill-emacs-with-timeout (prompt)
