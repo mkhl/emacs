@@ -46,6 +46,7 @@
                                 (name . ,(rx bos "*fuel listener*"))))
            ("Search" (or (mode . occur-mode)
                          (mode . grep-mode)
+                         (mode . igrep-mode)
                          (mode . ack-mode)))
            ("Shell" (or (mode . eshell-mode)
                         (mode . shell-mode)))
