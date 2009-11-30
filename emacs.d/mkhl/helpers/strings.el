@@ -5,3 +5,6 @@
     (if (string-match newlines string)
         (replace-match "" 'fixed 'literal string)
       string)))
+
+(defun in-indentation ()
+  (looking-at-p (rx bol (+ blank))))
