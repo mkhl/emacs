@@ -17,26 +17,25 @@ MODE buffers use (like `line's, say), and should be recognized by
   "Determine the primary kind of `thing' used by `major-mode'."
   (aget primary-thing-mode-alist major-mode 'line))
 
-(defun bounds-of-thing-at-point-or-region (thing)
+(defun bounds-of-thing-or-line-at-point (thing)
   "Determine the start and end buffer locations for the THING at
-point, or, if active, the region. THING is a symbol which
-specifies the kind of syntactic entity you want.  Possibilities
-include `symbol', `list', `sexp', `defun', `filename', `url',
-`word', `sentence', `whitespace', `line', `page' and others.
-
-See the file `thingatpt.el' for documentation on how to define
-a symbol as a valid THING.
-
-The value is a cons cell (START . END) giving the start and end positions
-of the textual entity that was found."
+point, or, if unavailable, the current line."
   (if (region-active-p)
       (cons (region-beginning) (region-end))
-    (bounds-of-thing-at-point thing)))
+    (or (bounds-of-thing-at-point thing)
+        (bounds-of-thing-at-point 'line))))
+
+(defun bounds-of-thing-at-point-or-region (thing)
+  "Determine the start and end buffer locations for the THING at
+point, or, if active, the region."
+  (if (region-active-p)
+      (cons (region-beginning) (region-end))
+    (bounds-of-thing-or-line-at-point-or-region thing)))
 
 (defun mark-thing (thing)
   "Put mark at end of this THING, point at beginning."
   (interactive (list (primary-thing)))
-  (destructuring-bind (beg . end) (bounds-of-thing-at-point thing)
+  (destructuring-bind (beg . end) (bounds-of-thing-or-line-at-point thing)
     (goto-char beg)
     (push-mark end 'nomsg 'activate)))
 
