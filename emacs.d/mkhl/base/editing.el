@@ -10,3 +10,6 @@
 
 (defun do-truncate-lines ()
   (setq truncate-lines t))
+
+(defun dont-truncate-lines ()
+  (setq truncate-lines nil))
