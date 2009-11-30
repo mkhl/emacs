@@ -21,7 +21,7 @@
                          (acl ,inferior-lisp-acl-program)
                          (ccl ,inferior-lisp-ccl-program)))
     (add-to-list 'slime-lisp-implementations
-                 `(,sym ,(split-string spec)))))
+                 (list sym (split-string spec)))))
 
 (defun mk/setup-slime ()
   (mk/slime-implementations)
