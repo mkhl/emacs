@@ -3,7 +3,6 @@
 
 (defun mk/org-remember ()
   (org-remember-insinuate)
-  (setq org-default-notes-file (concat org-directory "notes.org"))
   (setq org-remember-templates
         '(("todo" ?t
            "* TODO %?\n\n  Date: %u\n\n  %i" nil "Todo List")
@@ -55,6 +54,7 @@
 
 (defun mk/setup-org ()
   (setq org-directory (file-name-as-directory org-directory))
+  (setq org-default-notes-file (concat org-directory "notes.org"))
   (mk/org-modules))
 
 (when (require 'org-install nil 'noerror)
