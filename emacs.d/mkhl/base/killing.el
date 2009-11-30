@@ -5,7 +5,14 @@
       (delete-indentation t)
     ad-do-it))
 
+(defadvice save-buffers-kill-terminal (around kill-server-or-terminal activate)
+  "If the current buffer has clients, kill those instead of Emacs first."
+  (if server-buffer-clients
+      (server-done)
+    ad-do-it))
+
 (defun kill-emacs-with-timeout (prompt)
+  "Automatically kill Emacs after 5 a second delay."
   (let* ((message "will exit automatically in 5 seconds")
          (prompt (format "%s(%s) " prompt message)))
     (y-or-n-p-with-timeout prompt 5 t)))
