@@ -18,7 +18,7 @@
                                 ,(rx bos "*info" eow)
                                 ,(rx bos "*Man" eow)
                                 ,(rx bos "*WoMan" eow)))
-(add-to-list 'special-display-frame-alist '(height . 24))
+(add-to-list 'special-display-frame-alist '(height . 30))
 
 ;; switch frames
 (global-set-key (kbd "C-M-`") 'ns-next-frame)
