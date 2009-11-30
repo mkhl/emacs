@@ -1,5 +1,6 @@
 
 (defvar indent-region-modes '(emacs-lisp-mode
+                              lisp-interaction-mode
                               lisp-mode
                               scheme-mode
                               clojure-mode
@@ -9,8 +10,7 @@
   "List of modes that support smart indentation of the region.")
 
 (defun indent-yanked-region ()
-  (when (or (member major-mode indent-region-modes)
-            (derived-mode-p indent-region-modes))
+  (when (member major-mode indent-region-modes)
     (let* ((mark-even-if-inactive t))
       (indent-region (region-beginning) (region-end)))))
 
