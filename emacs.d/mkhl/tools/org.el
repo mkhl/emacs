@@ -37,9 +37,15 @@
       (global-set-key (org-kbd "a") 'org-agenda)
       (global-set-key (org-kbd "b") 'org-iswitchb))))
 
-(defun mk/setup-org ()
-  (eval-after-load 'org
-    '(setq org-directory (file-name-as-directory org-directory)))
+(defun mk/org-modules ()
+  (dolist (module '(org-mac-messages
+                    org-mac-protocol
+                    org-mac-iCal
+                    org-man))
+    (add-to-list 'org-modules module 'append)))
+
+(defun mk/install-org ()
+  (require 'calendar)
   (setq org-replace-disputed-keys t
         org-completion-use-ido t
         org-startup-folded 'content)
@@ -47,9 +53,15 @@
   (mk/org-remember)
   (add-hook 'org-mode-hook 'yas/fix-trigger-key))
 
+(defun mk/setup-org ()
+  (setq org-directory (file-name-as-directory org-directory))
+  (mk/org-modules))
+
 (when (require 'org-install nil 'noerror)
-  (require 'calendar)
-  (mk/setup-org))
+  (mk/install-org))
+
+(eval-after-load 'org
+  '(mk/setup-org))
 
 (defadvice org-publish-projects
   (around org-publish-disable-flymake activate)
