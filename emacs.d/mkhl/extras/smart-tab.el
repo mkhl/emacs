@@ -10,22 +10,21 @@
       (otherwise ad-do-it))))
 
 (defun mk/setup-smart-tab-eshell ()
-  (pushnew '(eshell-mode . pcomplete)
-           smart-tab-completion-functions-alist))
+  (aput 'smart-tab-completion-functions-alist
+        'eshell-mode #'pcomplete))
 
 (defun mk/setup-smart-tab-shell ()
-  (pushnew '(shell-mode . comint-dynamic-complete)
-           smart-tab-completion-functions-alist))
+  (aput 'smart-tab-completion-functions-alist
+        'shell-mode #'comint-dynamic-complete))
 
 (defun mk/setup-smart-tab-emacs-lisp ()
-  (dolist (spec '((emacs-lisp-mode . lisp-complete-symbol)
-                  (lisp-interaction-mode . lisp-complete-symbol)))
-    (pushnew spec smart-tab-completion-functions-alist)))
+  (dolist (mode '(emacs-lisp-mode lisp-interaction-mode))
+    (aput 'smart-tab-completion-functions-alist mode #'lisp-complete-symbol)))
 
 (defun mk/setup-smart-tab-scheme-complete ()
   (when (fboundp 'scheme-smart-complete)
-    (pushnew '(scheme-mode . scheme-smart-complete)
-             smart-tab-completion-functions-alist)))
+    (aput 'smart-tab-completion-functions-alist
+          'scheme-mode #'scheme-smart-complete)))
 
 (defun mk/eval-after-smart-tab ()
   (setq smart-tab-using-hippie-expand t)

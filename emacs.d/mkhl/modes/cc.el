@@ -9,7 +9,7 @@
 (defun mk/google-c-style ()
   (when (require 'google-c-style nil 'noerror)
     (c-add-style "Google" google-c-style)
-    (add-to-list 'c-default-style '(objc-mode . "Google"))))
+    (aput 'c-default-style 'objc-mode "Google")))
 
 (defun mk/setup-cc-mode ()
   (setq-default c-basic-offset 4)

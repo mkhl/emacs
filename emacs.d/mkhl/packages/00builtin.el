@@ -2,6 +2,9 @@
 ;; Just to be /completely/ safe...
 (require 'cl)
 (require 'autoload)
+;; And have the useful stuff available
+(require 'assoc)
+(require 'avl-tree)
 ;; Make sure built-in packages like `generic-x' can be overridden.
 (require 'generic-x)
 (require 'jka-compr)

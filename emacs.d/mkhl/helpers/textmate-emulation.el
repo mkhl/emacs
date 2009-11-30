@@ -15,7 +15,7 @@ MODE buffers use (like `line's, say), and should be recognized by
 
 (defun primary-thing ()
   "Determine the primary kind of `thing' used by `major-mode'."
-  (or (cdr (assq major-mode primary-thing-mode-alist)) 'line))
+  (aget primary-thing-mode-alist major-mode 'line))
 
 (defun bounds-of-thing-at-point-or-region (thing)
   "Determine the start and end buffer locations for the THING at
