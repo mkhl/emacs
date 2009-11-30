@@ -14,5 +14,5 @@
 (global-set-key (kbd "M-v") 'yank)
 (global-set-key (kbd "M-V") 'yank-pop)
 
-(setq cua-highlight-region-shift-only t)
+(setq cua-highlight-region-shift-only nil)
 (cua-selection-mode t)
