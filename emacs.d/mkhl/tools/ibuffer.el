@@ -57,7 +57,7 @@
            ("Org" (or (mode . org-mode)
                       (mode . calendar-mode)))
            ("Unknown" (mode . fundamental-mode)))))
-  (define-key ibuffer-mode-map (kbd "TAB") 'ibuffer-toggle-filter-group)
+  (define-key ibuffer-mode-map (kbd "TAB") #'ibuffer-toggle-filter-group)
   (add-hook 'ibuffer-mode-hook 'mk/ibuffer-mode-hook))
 
 (eval-after-load 'ibuffer

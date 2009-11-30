@@ -11,8 +11,8 @@
            "* %?\n\n  Source: %u, %c\n  Context: %a\n\n  %i" nil "Remember")
           ("org-mac note" ?z
            "* %?\n\n  Date: %u\n" nil "Notes")))
-  (global-set-key (kbd "C-x C-r") 'org-remember-default)
-  (global-set-key (kbd "C-x C-t") 'org-remember-todo))
+  (global-set-key (kbd "C-x C-r") #'org-remember-default)
+  (global-set-key (kbd "C-x C-t") #'org-remember-todo))
 
 (defun org-remember-with-template (template-char)
   (if (eq '- current-prefix-arg)
@@ -33,9 +33,9 @@
   (let* ((prefix-key "C-x C-o"))
     (labels ((org-kbd (key) (read-kbd-macro (format "%s %s" prefix-key key))))
       (global-unset-key (read-kbd-macro prefix-key))
-      (global-set-key (org-kbd "l") 'org-store-link)
-      (global-set-key (org-kbd "a") 'org-agenda)
-      (global-set-key (org-kbd "b") 'org-iswitchb))))
+      (global-set-key (org-kbd "l") #'org-store-link)
+      (global-set-key (org-kbd "a") #'org-agenda)
+      (global-set-key (org-kbd "b") #'org-iswitchb))))
 
 (defun mk/org-modules ()
   (dolist (module '(org-mac-messages

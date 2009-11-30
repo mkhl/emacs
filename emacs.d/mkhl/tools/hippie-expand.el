@@ -1,6 +1,6 @@
 
-(global-set-key (kbd "<C-tab>") 'hippie-expand)
-(global-set-key (kbd "M-/") 'hippie-expand)
+(global-set-key (kbd "<C-tab>") #'hippie-expand)
+(global-set-key (kbd "M-/") #'hippie-expand)
 
 (setq hippie-expand-try-functions-list
       '(try-expand-all-abbrevs

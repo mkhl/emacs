@@ -14,8 +14,8 @@ Otherwise call `insert-pair', which see."
 (dolist* ((car . cdr) '(("M-(" . "M-)")
                         ("M-[" . "M-]")
                         ("M-{" . "M-}")))
-  (global-set-key (read-kbd-macro car) 'insert-pair)
-  (global-set-key (read-kbd-macro cdr) 'up-list))
+  (global-set-key (read-kbd-macro car) #'insert-pair)
+  (global-set-key (read-kbd-macro cdr) #'up-list))
 
-(global-set-key (kbd "M-\'") 'insert-pair-or-skip)
-(global-set-key (kbd "M-\"") 'insert-pair-or-skip)
+(global-set-key (kbd "M-\'") #'insert-pair-or-skip)
+(global-set-key (kbd "M-\"") #'insert-pair-or-skip)

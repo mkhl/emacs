@@ -17,8 +17,8 @@
           haskell-indentation-ifte-offset 4)))
 
 (defun mk/haskell-keys ()
-  (define-key haskell-mode-map (kbd "C-c C-h") 'haskell-hoogle)
-  (define-key haskell-mode-map (kbd "C-c C-v") 'hs-lint))
+  (define-key haskell-mode-map (kbd "C-c C-h") #'haskell-hoogle)
+  (define-key haskell-mode-map (kbd "C-c C-v") #'hs-lint))
 
 (defun mk/setup-haskell-mode ()
   (mk/haskell-keys)

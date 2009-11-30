@@ -9,4 +9,4 @@ tell application \"System Events\"
     end tell
 end tell" invocation-name))))
 
-(global-set-key [(control meta shift h)] 'ns-do-hide-emacs)
+(global-set-key [(control meta shift h)] #'ns-do-hide-emacs)

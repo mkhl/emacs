@@ -19,4 +19,4 @@
 ;;; `shell-current-directory'
 
 (when (fboundp 'shell-current-directory)
-  (global-set-key (kbd "C-x C-l") 'shell-current-directory))
+  (global-set-key (kbd "C-x C-l") #'shell-current-directory))

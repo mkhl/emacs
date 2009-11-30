@@ -2,8 +2,8 @@
 (defun mk/eshell-mode-hook ()
   (setenv "TERM" "xterm")
   (pushnew 'eshell-handle-ansi-color eshell-output-filter-functions)
-  (define-key eshell-mode-map (kbd "M-m") 'eshell-bol)
-  (define-key eshell-mode-map (kbd "C-a") 'eshell-bol))
+  (define-key eshell-mode-map (kbd "M-m") #'eshell-bol)
+  (define-key eshell-mode-map (kbd "C-a") #'eshell-bol))
 
 (defun mk/setup-eshell ()
   (setq eshell-save-history-on-exit t
@@ -18,4 +18,4 @@
   '(mk/setup-eshell))
 
 (when (require 'eshell-auto nil 'noerror)
-  (global-set-key (kbd "C-x C-z") 'eshell-toggle))
+  (global-set-key (kbd "C-x C-z") #'eshell-toggle))

@@ -17,9 +17,9 @@
   (dolist (mode-map (list emacs-lisp-mode-map
                           lisp-interaction-mode-map
                           lisp-mode-map))
-    (define-key mode-map (kbd "M-(") 'insert-parentheses)
-    (define-key mode-map (kbd "M-)") 'move-past-close-and-reindent)
-    (define-key mode-map (kbd "<C-tab>") 'lisp-complete-symbol)))
+    (define-key mode-map (kbd "M-(") #'insert-parentheses)
+    (define-key mode-map (kbd "M-)") #'move-past-close-and-reindent)
+    (define-key mode-map (kbd "<C-tab>") #'lisp-complete-symbol)))
 
 (defun mk/setup-lisp-mode ()
   (mk/lisp-keys)

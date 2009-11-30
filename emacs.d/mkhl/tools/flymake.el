@@ -62,5 +62,5 @@
   (interactive)
   (mk/navigate-errors 'previous-error 'flymake-goto-prev-error))
 
-(global-set-key [remap next-error] 'mk/next-error)
-(global-set-key [remap previous-error] 'mk/previous-error)
+(global-set-key [remap next-error] #'mk/next-error)
+(global-set-key [remap previous-error] #'mk/previous-error)
