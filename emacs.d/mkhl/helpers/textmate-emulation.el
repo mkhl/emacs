@@ -30,7 +30,7 @@ point, or, if unavailable, the current line."
 point, or, if active, the region."
   (if (region-active-p)
       (cons (region-beginning) (region-end))
-    (bounds-of-thing-or-line-at-point-or-region thing)))
+    (bounds-of-thing-or-line-at-point thing)))
 
 (defun mark-thing (thing)
   "Put mark at end of this THING, point at beginning."
