@@ -1,6 +1,9 @@
 
 ;; emulate textmate bindings
+(global-set-key (kbd "s-RET") #'next-line-and-indent)
+(global-set-key (kbd "s-/") #'comment-or-uncomment-region)
 (global-set-key (kbd "M-RET") #'next-line-and-indent)
+(global-set-key (kbd "M-;") #'comment-or-uncomment-region)
 (global-set-key (kbd "M-D") #'duplicate-thing-or-region)
 (global-set-key (kbd "M-K") #'kill-whole-line)
 (global-set-key (kbd "M-l") #'goto-line)
