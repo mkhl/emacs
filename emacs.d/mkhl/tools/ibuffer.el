@@ -1,6 +1,6 @@
 
 (setq ibuffer-default-sorting-mode 'alphabetic
-      ibuffer-never-show-predicates `(,(rx bos "*Completions*" eos))
+      ibuffer-never-show-predicates (list (rx bos "*Completions*" eos))
       ibuffer-show-empty-filter-groups nil)
 
 (defun mk/ibuffer-mode-hook ()
