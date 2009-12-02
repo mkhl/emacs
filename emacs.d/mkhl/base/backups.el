@@ -6,4 +6,4 @@
       kept-old-versions 2
       delete-old-versions t
       vc-follow-symlinks t
-      backup-directory-alist `(("." . ,(concat dot-emacs-dir "backup"))))
+      backup-directory-alist (list (cons "." (concat dot-emacs-dir "backup"))))
