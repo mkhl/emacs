@@ -11,31 +11,33 @@
              (overlay-put overlay 'face 'font-lock-comment-face)
              (overlay-put overlay 'display display)))))
 
-(defun mk/eval-after-hideshow ()
+(defun mk/setup-hideshow ()
+  (mk/setup-objc-hs-mode)
   (mk/setup-ruby-hs-mode)
   (mk/setup-python-hs-mode)
-  (setq hs-set-up-overlay 'hs-display-code-line-counts))
+  (mk/setup-espresso-hs-mode)
+  (setq hs-set-up-overlay 'hs-display-code-line-counts)
+  (add-hook 'find-file-hook 'hs-minor-mode-maybe))
+
+(defun mk/setup-objc-hs-mode ()
+  (aput 'hs-special-modes-alist 'objc-mode
+        (aget hs-special-modes-alist 'c-mode)))
 
 (defun mk/setup-ruby-hs-mode ()
-  (pushnew (list 'ruby-mode
-                 (rx bow (| "class" "def" "do") eow)
-                 (rx bow "end" eow)
-                 "#"
-                 'ruby-end-of-block
-                 nil)
-           hs-special-modes-alist
-           :key 'car))
+  (aput 'hs-special-modes-alist 'ruby-mode
+        (list (rx bow (| "class" "def" "do") eow) (rx bow "end" eow) "#"
+              'ruby-end-of-block
+              nil)))
 
 (defun mk/setup-python-hs-mode ()
-  (pushnew (list 'python-mode
-                 (rx bow (| "class" "def") eow)
-                 nil
-                 "#"
-                 (lambda (&optional arg)
-                   (py-end-of-def-or-class 'either arg))
-                 nil)
-           hs-special-modes-alist
-           :key 'car))
+  (aput 'hs-special-modes-alist 'python-mode
+        (list (rx bow (| "class" "def") eow) nil "#"
+              (lambda (&optional arg) (py-end-of-def-or-class 'either arg))
+              nil)))
 
-(eval-after-load 'hideshow
-  '(mk/eval-after-hideshow))
+(defun mk/setup-espresso-hs-mode ()
+  (aput 'hs-special-modes-alist 'espresso-mode
+        (aget hs-special-modes-alist 'c-mode)))
+
+(when (require 'hideshow nil 'noerror)
+  (mk/setup-hideshow))
