@@ -18,17 +18,16 @@
   (set (make-local-variable 'lisp-indent-function)
        'scheme-smart-indent-function)
   (set (make-local-variable 'eldoc-documentation-function)
-       'scheme-get-current-symbol-info)
-  (turn-on-eldoc-mode))
+       'scheme-get-current-symbol-info))
 
 (defun mk/scheme-keys ()
+  (mk/any-lisp-setup-keys scheme-mode-map)
   (when (fboundp 'scheme-complete-or-indent)
-    (define-key scheme-mode-map (kbd "TAB") #'scheme-complete-or-indent))
-  (define-key scheme-mode-map (kbd "M-(") #'insert-parentheses)
-  (define-key scheme-mode-map (kbd "M-)") #'move-past-close-and-reindent))
+    (define-key scheme-mode-map (kbd "TAB") #'scheme-complete-or-indent)))
 
 (defun mk/setup-scheme ()
   (mk/scheme-keys)
+  (add-hook 'scheme-mode-hook 'mk/any-lisp-mode-hook)
   (add-hook 'scheme-mode-hook 'mk/scheme-mode-hook))
 
 (eval-after-load 'scheme

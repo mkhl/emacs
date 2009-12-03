@@ -1,20 +1,29 @@
 
-;; HyperSpec
+;;; `lisp'
+
+(defun mk/setup-common-lisp-mode ()
+  (mk/any-lisp-setup-keys lisp-mode-map)
+  (add-hook 'lisp-mode-hook 'mk/any-lisp-mode-hook))
+
+(eval-after-load 'lisp-mode
+  '(mk/setup-common-lisp-mode))
+
+;;; `hyperspec'
 (let* ((local-hyperspec-root "/opt/HyperSpec/"))
   (when (file-exists-p local-hyperspec-root)
     (setq common-lisp-hyperspec-root local-hyperspec-root)))
 
-;; lisp-program
+;;; `inferior-lisp'
 (setq inferior-lisp-acl-program "/Applications/Developer/AllegroCL/alisp"
       inferior-lisp-ccl-program "/opt/ccl/scripts/ccl64 -K utf-8"
       inferior-lisp-sbcl-program "/opt/local/bin/sbcl"
       inferior-lisp-clisp-program "/opt/local/bin/clisp")
 (setq inferior-lisp-program inferior-lisp-ccl-program)
 
-;; slime autoloads
+;;; `slime-autoloads'
 (require 'slime-autoloads nil 'noerror)
 
-;; slime
+;;; `slime'
 (setq slime-net-coding-system 'utf-8-unix)
 
 (defun mk/slime-implementations ()
