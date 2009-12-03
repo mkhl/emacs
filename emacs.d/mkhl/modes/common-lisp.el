@@ -7,7 +7,8 @@
 ;; lisp-program
 (setq inferior-lisp-acl-program "/Applications/Developer/AllegroCL/alisp"
       inferior-lisp-ccl-program "/opt/ccl/scripts/ccl64 -K utf-8"
-      inferior-lisp-sbcl-program "/opt/local/bin/sbcl")
+      inferior-lisp-sbcl-program "/opt/local/bin/sbcl"
+      inferior-lisp-clisp-program "/opt/local/bin/clisp")
 (setq inferior-lisp-program inferior-lisp-ccl-program)
 
 ;; slime autoloads
@@ -17,7 +18,9 @@
 (setq slime-net-coding-system 'utf-8-unix)
 
 (defun mk/slime-implementations ()
-  (dolist* ((sym spec) `((sbcl ,inferior-lisp-sbcl-program)
+  (setq slime-default-lisp 'ccl)
+  (dolist* ((sym spec) `((clisp ,inferior-lisp-clisp-program)
+                         (sbcl ,inferior-lisp-sbcl-program)
                          (acl ,inferior-lisp-acl-program)
                          (ccl ,inferior-lisp-ccl-program)))
     (add-to-list 'slime-lisp-implementations
