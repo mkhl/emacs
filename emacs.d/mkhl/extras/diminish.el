@@ -1,6 +1,7 @@
 
 (when (fboundp 'diminish)
   (let* ((mode-specs '((eldoc-mode (eldoc))
+                       (abbrev-mode (abbrev))
                        (paredit-mode (paredit paredit-21))
                        (ruby-electric-mode (ruby-electric))
                        (smart-tab-mode (smart-tab))
