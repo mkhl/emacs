@@ -1,6 +1,6 @@
 
 ;; Fix Emacs 23 `local-function-key-map'
-(case (window-system)
+(case window-system
   (ns (setq local-function-key-map '(keymap (M-escape . [134217755])
                                             (M-return . [134217741])
                                             (M-clear . [134217740])
