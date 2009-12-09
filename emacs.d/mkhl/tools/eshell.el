@@ -17,5 +17,6 @@
 (eval-after-load 'eshell
   '(mk/setup-eshell))
 
+(global-set-key (kbd "C-x C-z") #'eshell)
 (when (require 'eshell-auto nil 'noerror)
   (global-set-key (kbd "C-x C-z") #'eshell-toggle))
