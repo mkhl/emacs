@@ -25,6 +25,8 @@
   (mk/setup-yasnippet))
 
 (defun yas/fix-trigger-key ()
-  (setq yas/fallback-behavior `(apply ,(local-key-binding (kbd "TAB"))))
-  (local-unset-key (kbd "TAB"))
-  (local-unset-key (kbd "<tab>")))
+  (when (featurep 'yasnippet)
+    (setq yas/fallback-behavior `(apply ,(local-key-binding (kbd "TAB"))))
+    (local-unset-key (kbd "TAB"))
+    (local-unset-key (kbd "<tab>"))))
+
