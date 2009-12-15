@@ -4,7 +4,7 @@
   (c-toggle-hungry-state 1)
   (c-toggle-electric-state 1)
   (c-toggle-auto-newline 1)
-  (c-subword-mode t))
+  (subword-mode t))
 
 (defun mk/google-c-style ()
   (when (require 'google-c-style nil 'noerror)

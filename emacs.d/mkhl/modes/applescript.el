@@ -3,7 +3,7 @@
   (setq indent-tabs-mode t)
   (set-indent-to-tab-stops)
   (define-tab-width 4)
-  (c-subword-mode t))
+  (subword-mode t))
 
 (defun mk/setup-applescript-mode ()
   (add-hook 'applescript-mode-hook 'mk/applescript-mode-hook))

@@ -8,7 +8,7 @@
   (setq haskell-hoogle-command nil)
   (define-tab-width 4)
   (turn-on-eldoc-mode)
-  (c-subword-mode t)
+  (subword-mode t)
   (if (not (fboundp 'haskell-indentation-mode))
       (set-indent-to-tab-stops)
     (haskell-indentation-mode t)
