@@ -39,6 +39,11 @@ point, or, if active, the region."
     (goto-char beg)
     (push-mark end 'nomsg 'activate)))
 
+(defun mark-line ()
+  "Put mark at end of this line, point at beginning."
+  (interactive)
+  (mark-thing 'line))
+
 (defun duplicate-thing-or-region (thing)
   "Duplicate the current THING or, if active, the region."
   (interactive (list (primary-thing)))
@@ -49,6 +54,11 @@ point, or, if active, the region."
       (insert (buffer-substring-no-properties beg end))
       (when mark-was-active
         (push-mark (+ end (- end beg)) 'nomsg 'activate)))))
+
+(defun duplicate-line-or-region ()
+  "Duplicate the current line or, if active, the region."
+  (interactive)
+  (duplicate-thing-or-region 'line))
 
 ;;; Reformat ...
 
