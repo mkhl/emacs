@@ -4,7 +4,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(create-frame-min-width 78)
- '(default-major-mode (quote text-mode))
+ '(default-major-mode (quote text-mode) t)
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(fringe-mode nil nil (fringe))
  '(fuel-listener-factor-binary "/Applications/Developer/Factor/Factor.app/Contents/MacOS/factor")
@@ -13,8 +13,6 @@
  '(isa-isatool-command "~/Projects/Hets/Isabelle/bin/isabelle")
  '(isar-unicode-tokens-enable t)
  '(isar-x-symbol-enable nil)
- '(mac-pass-command-to-system nil)
- '(mac-pass-control-to-system nil)
  '(ns-alternate-modifier (quote none))
  '(ns-command-modifier (quote meta))
  '(proof-electric-terminator-enable t)
