@@ -112,6 +112,15 @@ if active, the region, to upper case."
   (destructuring-bind (beg . end) (bounds-of-thing-at-point-or-region 'line)
     (upcase-initials-region beg end)))
 
+;;; Source -> Comments -> ...
+
+(defun comment-or-uncomment-region-or-line ()
+  "Like `comment-or-uncomment-region', but acts on the current
+line if mark is not active."
+  (interactive)
+  (destructuring-bind (beg . end) (bounds-of-thing-at-point-or-region 'line)
+    (comment-or-uncomment-region beg end current-prefix-arg)))
+
 ;;; Source -> Move to EOL -> ...
 
 (defun next-line-and-indent ()
