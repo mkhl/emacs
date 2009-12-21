@@ -1,8 +1,16 @@
 
-(dolist* ((char . func) '((?h . ns-do-hide-emacs)
+(dolist* ((char . func) '((?a . mark-whole-buffer)
+                          (?h . ns-do-hide-emacs)
                           (?j . exchange-point-and-mark)
                           (?k . kill-this-buffer)
+                          (?l . goto-line)
+                          (?m . iconify-frame)
                           (?n . make-frame)
+                          (?o . ns-open-file-using-panel)
+                          (?p . ns-print-buffer)
                           (?q . save-buffers-kill-emacs)
+                          (?s . save-buffer)
+                          (?u . revert-buffer)
                           (?w . delete-frame)))
   (global-set-key (vector (list 'control 'meta 'shift char)) func))
+
