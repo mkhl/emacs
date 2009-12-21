@@ -92,7 +92,7 @@ point, or, if active, the region."
                         'upcase-word)))
 
 (defun downcase-word-or-region ()
-  "convert the following word or, if active, the region, to lower case."
+  "Convert the following word or, if active, the region, to lower case."
   (interactive)
   (call-interactively (if (region-active-p)
                           'downcase-region
