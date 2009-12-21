@@ -58,8 +58,7 @@
   (defun flymake-xml-init ()
     (list "xmllint" (list "--valid" (flymake-init-create-temp-buffer-copy 'flymake-create-temp-inplace))))
   (mk/flymake-allow-modes)
-  (mk/setup-flymake-error-bindings)
-  (add-hook 'find-file-hook 'flymake-find-file-hook))
+  (mk/setup-flymake-error-bindings))
 
 (when (require 'flymake nil 'noerror)
   (mk/setup-flymake))
