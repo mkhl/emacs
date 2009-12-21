@@ -10,4 +10,5 @@
 (global-set-key (kbd "M-S-l") #'mark-line)
 (global-set-key (kbd "C-S-d") #'duplicate-line-or-region)
 (global-set-key (kbd "C-S-k") #'kill-whole-line)
+(global-set-key (kbd "C-S-j") #'join-line-with-next)
 (global-set-key (kbd "C-S-w") #'mark-word)

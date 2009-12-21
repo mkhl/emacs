@@ -123,3 +123,10 @@ if active, the region, to upper case."
     (let* ((column (save-excursion (back-to-indentation) (current-column))))
       (newline)
       (indent-to-column column))))
+
+;;; Text -> Join Line With Next
+
+(defun join-line-with-next ()
+  "Join this line to following line."
+  (interactive)
+  (delete-indentation t))
