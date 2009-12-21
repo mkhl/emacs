@@ -12,7 +12,7 @@
 (global-set-key (kbd "M-x") #'kill-region-or-meta-x)
 (global-set-key (kbd "M-c") #'copy-region-as-kill)
 (global-set-key (kbd "M-v") #'yank)
-(global-set-key (kbd "M-V") #'yank-pop)
+(global-set-key (kbd "M-S-v") #'yank-pop)
 
 (setq cua-highlight-region-shift-only nil
       cua-delete-selection nil)
