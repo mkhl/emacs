@@ -39,10 +39,23 @@ point, or, if active, the region."
     (goto-char beg)
     (push-mark end 'nomsg 'activate)))
 
-(defun mark-line ()
-  "Put mark at end of this line, point at beginning."
-  (interactive)
-  (mark-thing 'line))
+(unless (fboundp 'mark-word)
+  (defun mark-word ()
+    "Put mark at end of this word, point at beginning."
+    (interactive)
+    (mark-thing 'word)))
+
+(unless (fboundp 'mark-line)
+  (defun mark-line ()
+    "Put mark at end of this line, point at beginning."
+    (interactive)
+    (mark-thing 'line)))
+
+(unless (fboundp 'mark-sexp)
+  (defun mark-sexp ()
+    "Put mark at end of this sexp, point at beginning."
+    (interactive)
+    (mark-thing 'sexp)))
 
 (defun duplicate-thing-or-region (thing)
   "Duplicate the current THING or, if active, the region."
