@@ -18,9 +18,9 @@
 ;;; components
 (load-component "mkhl/helpers")
 (load-component "mkhl/base")
+(load-component "mkhl/modes")
 (load-component "mkhl/tools")
 (load-component "mkhl/extras")
-(load-component "mkhl/modes")
 (load-component "mkhl/system")
 
 ;;; custom
