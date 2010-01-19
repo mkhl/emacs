@@ -3,7 +3,6 @@
               comment-column 40)
 
 (setq require-final-newline t
-      kill-whole-line t
       comment-auto-fill-only-comments t)
 
 (add-hook 'dired-mode-hook 'do-truncate-lines)
