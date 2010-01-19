@@ -15,5 +15,6 @@
 (global-set-key (kbd "M-S-v") #'yank-pop)
 
 (setq cua-highlight-region-shift-only nil
-      cua-delete-selection nil)
+      cua-delete-selection nil
+      cua-enable-cua-keys nil)
 (cua-selection-mode t)
