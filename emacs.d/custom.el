@@ -7,8 +7,6 @@
  '(default-major-mode (quote text-mode) t)
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(fringe-mode nil nil (fringe))
- '(fuel-listener-factor-binary "/Applications/Developer/Factor/Factor.app/Contents/MacOS/factor")
- '(fuel-listener-factor-image "/Applications/Developer/Factor/factor.image")
  '(initial-major-mode (quote lisp-interaction-mode))
  '(isa-isatool-command "~/Projects/Hets/Isabelle/bin/isabelle")
  '(isar-unicode-tokens-enable t)
