@@ -3,7 +3,7 @@ SPECIAL := autoloads.el
 SOURCE	:= $(filter-out $(SPECIAL),$(wildcard $(addsuffix /*.el,$(DIRS))))
 TARGET	:= $(patsubst %.el,%.elc,$(SPECIAL) $(SOURCE))
 EMACS   := emacs
-EMACS-BATCH := $(EMACS) --no-init-file --no-splash --batch
+EMACS-BATCH := $(EMACS) --batch
 
 .PHONY: all
 
