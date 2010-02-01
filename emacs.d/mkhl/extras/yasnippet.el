@@ -12,7 +12,9 @@
     '(add-to-list 'hippie-expand-try-functions-list 'yas/hippie-try-expand)))
 
 (defun mk/yasnippet-snippets ()
-  (yas/load-directory (concat dot-emacs-dir "snippets")))
+  (let ((snippets-dir (concat dot-emacs-dir "snippets")))
+   (when (file-exists-p snippets-dir)
+     (yas/load-directory snippets-dir))))
 
 (defun mk/setup-yasnippet ()
   (mk/yasnippet-keys)
