@@ -35,12 +35,13 @@
 
 (defun mk/eval-after-smart-tab ()
   (setq smart-tab-using-hippie-expand t)
-  (mk/setup-smart-tab-org)
-  (mk/setup-smart-tab-eshell)
-  (mk/setup-smart-tab-shell)
-  (mk/setup-smart-tab-emacs-lisp)
-  (mk/setup-smart-tab-scheme-complete)
-  (mk/setup-smart-tab-slime))
+  (when (boundp 'smart-tab-completion-functions-alist)
+   (mk/setup-smart-tab-org)
+   (mk/setup-smart-tab-eshell)
+   (mk/setup-smart-tab-shell)
+   (mk/setup-smart-tab-emacs-lisp)
+   (mk/setup-smart-tab-scheme-complete)
+   (mk/setup-smart-tab-slime)))
 
 (eval-after-load 'smart-tab
   '(mk/eval-after-smart-tab))
