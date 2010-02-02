@@ -86,6 +86,9 @@
         "file": "ipython.el",
         "src": "http://ipython.scipy.org/dist/ipython.el"
     }, {
+        "file": "maude-mode2.el",
+        "src": "maude.cs.uiuc.edu/download/maude-mode2.el"
+    }, {
         "file": "pod-mode.el",
         "src": "http://search.cpan.org/src/SCHWIGON/pod-mode-0.5/pod-mode.el"
     }, {

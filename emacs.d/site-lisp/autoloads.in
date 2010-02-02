@@ -38,6 +38,9 @@
 (autoload 'io-mode "io-mode" nil t)
 (add-to-list 'auto-mode-alist `(,(rx ".io" eos) . io-mode))
 
+(autoload 'maude-mode "maude-mode2" nil t)
+(add-to-list 'auto-mode-alist `(,(rx ".maude" eos) . maude-mode))
+
 (autoload 'pod-mode "pod-mode" nil t)
 (add-to-list 'auto-mode-alist `(,(rx ".pod" eos) . pod-mode))
 
