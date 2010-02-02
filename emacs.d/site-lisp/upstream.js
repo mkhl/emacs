@@ -89,6 +89,9 @@
         "file": "pod-mode.el",
         "src": "http://search.cpan.org/src/SCHWIGON/pod-mode-0.5/pod-mode.el"
     }, {
+        "file": "quack.el",
+        "src": "http://www.neilvandyke.org/quack/quack.el"
+    }, {
         "file": "rdoc-mode.el",
         "src": "http://svn.ruby-lang.org/repos/ruby/trunk/misc/rdoc-mode.el"
     }, {
