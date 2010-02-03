@@ -15,10 +15,10 @@
 ;;; Manually created autoloads for `site-lisp/modes'
 
 (autoload 'applescript-mode "applescript-mode" nil t)
-(add-to-list 'auto-mode-alist `(,(rx ".applescript" eos) . applescript-mode))
+(add-to-list 'auto-mode-alist (cons (rx ".applescript" eos) 'applescript-mode))
 
 (autoload 'fs-mode "f-script-mode" nil t)
-(add-to-list 'auto-mode-alist `(,(rx ".fs" (? "cript") eos) . fs-mode))
+(add-to-list 'auto-mode-alist (cons (rx ".fs" (? "cript") eos) 'fs-mode))
 
 (autoload 'gambit-inferior-mode "gambit" "Hook Gambit mode into cmuscheme.")
 (autoload 'gambit-mode "gambit" "Hook Gambit mode into scheme.")
@@ -29,16 +29,16 @@
 (autoload 'hs-lint "hs-lint" nil t)
 
 (autoload 'io-mode "io-mode" nil t)
-(add-to-list 'auto-mode-alist `(,(rx ".io" eos) . io-mode))
+(add-to-list 'auto-mode-alist (cons (rx ".io" eos) 'io-mode))
 
 (autoload 'maude-mode "maude-mode2" nil t)
-(add-to-list 'auto-mode-alist `(,(rx ".maude" eos) . maude-mode))
+(add-to-list 'auto-mode-alist (cons (rx ".maude" eos) 'maude-mode))
 
 (autoload 'pod-mode "pod-mode" nil t)
-(add-to-list 'auto-mode-alist `(,(rx ".pod" eos) . pod-mode))
+(add-to-list 'auto-mode-alist (cons (rx ".pod" eos) 'pod-mode))
 
 (autoload 'rdoc-mode "rdoc-mode" nil t)
-(add-to-list 'auto-mode-alist `(,(rx ".rd" (? "oc") eos) . rdoc-mode))
+(add-to-list 'auto-mode-alist (cons (rx ".rd" (? "oc") eos) 'rdoc-mode))
 
 (autoload 'scheme-complete-or-indent "scheme-complete-0.8.9" nil t)
 (autoload 'scheme-smart-complete "scheme-complete-0.8.9" nil t)
@@ -48,10 +48,10 @@
 (autoload 'scheme48-mode "scheme48" nil t)
 
 (autoload 'treetop-mode "treetop" nil t)
-(add-to-list 'auto-mode-alist `(,(rx ".treetop" eos) . treetop-mode))
+(add-to-list 'auto-mode-alist (cons (rx ".treetop" eos) 'treetop-mode))
 
 (autoload 'yaml-mode "yaml-mode" nil t)
-(add-to-list 'auto-mode-alist `(,(rx ".y" (? "a") "ml" eos) . yaml-mode))
+(add-to-list 'auto-mode-alist (cons (rx ".y" (? "a") "ml" eos) 'yaml-mode))
 
 ;;; Manually created autoloads for `site-lisp/extras'
 
