@@ -1,6 +1,4 @@
 
-(let ((factor-prefix (file-name-as-directory "/opt/factor")))
- (setq fuel-listener-factor-binary (concat factor-prefix "factor")
-       fuel-listener-factor-image (concat factor-prefix "factor.image")))
-
-(load "fu" 'noerror)
+(when (load "fu" 'noerror)
+  (setq fuel-factor-fuel-dir (file-truename fuel-factor-fuel-dir)
+        fuel-factor-root-dir (expand-file-name "../../" fuel-factor-fuel-dir)))
