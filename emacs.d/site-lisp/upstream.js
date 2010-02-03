@@ -31,9 +31,6 @@
         "file": "ell.el",
         "src": "http://www.damtp.cam.ac.uk/user/eglen/emacs/ell.el"
     }, {
-        "file": "htmlize.el",
-        "src": "http://fly.srk.fer.hr/~hniksic/emacs/htmlize.el"
-    }, {
         "file": "igrep.el",
         "src": "http://www.emacswiki.org/emacs/download/igrep.el"
     }, {
@@ -42,9 +39,6 @@
     }, {
         "file": "osx-plist.el",
         "src": "http://edward.oconnor.cx/elisp/osx-plist.el"
-    }, {
-        "file": "pastie.el",
-        "src": "http://www.emacswiki.org/emacs/download/pastie.el"
     }, {
         "file": "ri.el",
         "src": "http://github.com/technomancy/emacs-starter-kit/raw/master/elpa-to-submit/ri.el"
@@ -56,12 +50,6 @@
         "src": "http://cscope.cvs.sourceforge.net/viewvc/*checkout*/cscope/cscope/contrib/xcscope/xcscope.el"
     } ],
     "modes": [ {
-        "file": "applescript-mode.el",
-        "src": "http://sourceforge.jp/projects/macemacsjp/svn/view/applescript-mode/trunk/applescript-mode.el?view=co&root=macemacsjp"
-    }, {
-        "file": "espresso.el",
-        "src": "http://download.savannah.gnu.org/releases-noredirect/espresso/espresso.el"
-    }, {
         "file": "f-script-mode.el",
         "src": "http://web.mac.com/oyasuhisa/Products/F-Script_files/f-script-mode.el.gz"
     }, {
@@ -98,9 +86,6 @@
         "file": "rdoc-mode.el",
         "src": "http://svn.ruby-lang.org/repos/ruby/trunk/misc/rdoc-mode.el"
     }, {
-        "file": "rst.el",
-        "src": "http://svn.berlios.de/viewcvs/*checkout*/docutils/trunk/docutils/tools/editors/emacs/rst.el"
-    }, {
         "file": "ruby-electric.el",
         "src": "http://svn.ruby-lang.org/repos/ruby/trunk/misc/ruby-electric.el"
     }, {
@@ -115,8 +100,5 @@
     }, {
         "file": "treetop.el",
         "src": "http://github.com/hornbeck/public_emacs/raw/master/treetop.el"
-    }, {
-        "file": "yaml-mode.el",
-        "src": "http://github.com/yoshiki/yaml-mode/raw/master/yaml-mode.el"
     } ]
 }

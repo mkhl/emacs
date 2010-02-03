@@ -11,18 +11,11 @@
   (batch-update-autoloads))
 
 ;;; Manually created autoloads for `site-lisp/tools'
-
-(autoload 'pastie-region "pastie" nil t)
-(autoload 'pastie-buffer "pastie" nil t)
-(autoload 'pastie-get "pastie" nil t)
-(autoload 'pastie-browse "pastie" nil t)
 
 ;;; Manually created autoloads for `site-lisp/modes'
 
 (autoload 'applescript-mode "applescript-mode" nil t)
 (add-to-list 'auto-mode-alist `(,(rx ".applescript" eos) . applescript-mode))
-
-(add-to-list 'auto-mode-alist `(,(rx ".js" eos) . espresso-mode))
 
 (autoload 'fs-mode "f-script-mode" nil t)
 (add-to-list 'auto-mode-alist `(,(rx ".fs" (? "cript") eos) . fs-mode))
@@ -46,8 +39,6 @@
 
 (autoload 'rdoc-mode "rdoc-mode" nil t)
 (add-to-list 'auto-mode-alist `(,(rx ".rd" (? "oc") eos) . rdoc-mode))
-
-(add-to-list 'auto-mode-alist `(,(rx ".r" (? "e") "st" eos) . rst-mode))
 
 (autoload 'scheme-complete-or-indent "scheme-complete-0.8.9" nil t)
 (autoload 'scheme-smart-complete "scheme-complete-0.8.9" nil t)
