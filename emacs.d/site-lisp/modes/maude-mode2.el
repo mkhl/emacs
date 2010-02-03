@@ -31,6 +31,8 @@
 ; ansi-color.el to use format
 ; Doesnt know wheter run-maude work at the moment.
 
+(require 'cl)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defvar maude-mode-hook nil)
 ; Make a keymap (map from keypresses to emacs functions)
