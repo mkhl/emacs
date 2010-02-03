@@ -54,11 +54,11 @@
 
 (defun mk/setup-org ()
   (setq org-directory (file-name-as-directory org-directory))
-  (setq org-default-notes-file (concat org-directory "notes.org"))
-  (mk/org-modules))
+  (setq org-default-notes-file (concat org-directory "notes.org")))
 
 (when (require 'org-install nil 'noerror)
-  (mk/install-org))
+  (mk/install-org)
+  (mk/org-modules))
 
 (eval-after-load 'org
   '(mk/setup-org))
