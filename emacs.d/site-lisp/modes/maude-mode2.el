@@ -711,11 +711,11 @@
 ;; 							 (looking-at (concat start-regexp "\\<\\(end[fo]?m\\))?\\>"))
 							 (looking-at (concat start-regexp "\\<\\(end\\)"))
 							 (looking-at (concat start-regexp "(?\\<\\(search\\|red\\|reduce\\|rew\\|rewrite\\|trace\\|x?match\\)")))
-					(setq cur-indent 0)))))
+					(setq cur-indent 0))))
 ;; 			(if (looking-at "^\\s-*$") (insert-string "...."))
 ;;  			(print cur-indent)
 ;;  			(insert-string "X") ; See delete-char 1 down
-			(indent-line-to (max 0 cur-indent)))
+			(indent-line-to (max 0 cur-indent))))
 ;; 			(delete-char 1) ; Delete the X.  This is so we can indent empty lines
 	(cond ((looking-at "^$") ; Ugly hack to fix indent in empty lines.  Doesnt work well between modules.
 				 (insert-string (make-string (/ standard-indent 2) ?\t ))))
