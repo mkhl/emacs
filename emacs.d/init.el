@@ -1,33 +1,27 @@
+
 (require 'cl)
+(require 'assoc)
+(setq vc-follow-symlinks t)
 
-;;; Uncomment to disable loading the "default" library at startup
-;; (setq inhibit-default-init t)
-
-;; dot-emacs
+;;; `dot-emacs-dir'
 (unless (boundp 'dot-emacs-dir)
-  (setq dot-emacs-dir (file-name-as-directory
-                       (file-name-directory
-                        (or load-file-name (buffer-file-name))))))
+  (let ((this-file (or load-file-name (buffer-file-name))))
+    (setq dot-emacs-dir (file-name-directory this-file))))
 
-;; load-component
-(load (concat dot-emacs-dir "mkhl/load-component"))
+;;; `org' and `org-babel'
+(dolist (path '("org/lisp" "org/contrib/lisp"))
+  (add-to-list 'load-path (expand-file-name path dot-emacs-dir)))
+(require 'org-install)
+(require 'org-babel-init)
 
-;;; packages
-(load-component "mkhl/packages")
+;;; Load `*.org' using `org-babel'
+(dolist (file (directory-files dot-emacs-dir 'full (rx ".org" eos)))
+  (org-babel-load-file file))
 
-;;; components
-(load-component "mkhl/helpers")
-(load-component "mkhl/base")
-(load-component "mkhl/modes")
-(load-component "mkhl/tools")
-(load-component "mkhl/extras")
-(load-component "mkhl/system")
-
-;;; custom
-(setq custom-file (concat dot-emacs-dir "custom.el"))
+;;; `custom-file'
+(setq custom-file (expand-file-name "custom.el" dot-emacs-dir))
 (load custom-file 'noerror 'nomessage)
 
 ;;; `emacs-init-time'
 ;; Useful for benchmarking startup time.
-;; (eval-after-init
-;;   (setq initial-scratch-message (emacs-init-time)))
+;; (emacs-init-time)

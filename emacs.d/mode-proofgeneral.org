@@ -1,0 +1,14 @@
+#+TITLE: Config/Modes/Proof General
+
+* Proof General
+
+#+BEGIN_SRC emacs-lisp
+  (setq isar-unicode-tokens-enable t)
+  (setq isar-x-symbol-enable nil)
+  (setq proof-splash-enable nil)
+  (setq proof-assistants '(isar))
+  
+  (when (require 'proof-site nil 'noerror)
+    (let ((root (file-name-directory (file-truename (locate-library "proof")))))
+      (setq proof-home-directory (expand-file-name "../" root))))
+#+END_SRC

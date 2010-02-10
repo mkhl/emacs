@@ -1,0 +1,89 @@
+#+TITLE: Config Modes Python
+
+* Python
+
+Customization of libraries related to Python.
+
+** Python Mode
+
+Configure Python defaults.
+
+#+BEGIN_SRC emacs-lisp
+  (defun hooks/python-mode-hook ()
+    (set-tab-width 4))
+#+END_SRC
+
+Configure hooks in Python mode.
+
+#+BEGIN_SRC emacs-lisp
+  (defun init/setup-python-mode-hook ()
+    (add-hook 'python-mode-hook 'hooks/python-mode-hook)
+    (add-hook 'python-mode-hook 'turn-on-eldoc-mode)
+    (add-hook 'python-mode-hook 'hs-minor-mode-maybe))
+#+END_SRC
+
+Configure Python mode.
+
+#+BEGIN_SRC emacs-lisp
+  (setq python-check-command "pyflakes")
+  (setq py-pychecker-command "pyflakes")
+  (setq py-pychecker-command-args nil)
+  
+  (dolist (library '(python python-mode))
+    (eval-after-load library
+      '(init/setup-python-mode-hook)))
+#+END_SRC
+
+** TODO Inferior Python
+
+Prefer IPython over vanilla Python.
+
+I'd love to enable this but the =ansi-color= support has problems.
+
+#+BEGIN_SRC emacs-lisp
+  ;; (require 'ipython nil 'noerror)
+#+END_SRC
+
+** Support
+
+Add support for =gud=.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'gud
+    '(setq gud-pdb-command-name "python -mpdb"))
+#+END_SRC
+
+Add support for =flymake=.
+
+#+BEGIN_SRC emacs-lisp
+  (define-flymake-mode-init python-mode
+    (flymake-simple-make-init-impl
+     'flymake-create-temp-inplace t t
+     (file-name-nondirectory buffer-file-name)
+     (lambda (source base-dir)
+       `("pyflakes" (,source)))))
+#+END_SRC
+
+Add support for =hideshow=.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'hideshow
+    '(aput 'hs-special-modes-alist 'python-mode
+           (list (regexp-opt '("class" "def") 'words) nil
+                 "#" 'python-end-of-block nil)))
+#+END_SRC
+
+Make sure =hideshow= works with =python-mode=.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'python-mode
+    '(defun python-end-of-block ()
+       (py-end-of-def-or-class 'either)))
+#+END_SRC
+
+Prefer =python-mode= over =python=.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'python-mode
+    '(defalias 'run-python 'py-shell))
+#+END_SRC

@@ -1,0 +1,222 @@
+#+TITLE: Config Modes Lisp
+
+* Lisp
+
+Customization of libraries related to Lisp.
+
+** Interfaces
+*** Inferior Lisp
+
+Use Clozure CL.
+
+#+BEGIN_SRC emacs-lisp
+  (setq inferior-lisp-program "ccl -K utf-8")
+#+END_SRC
+
+Configure Slime to use Clozure CL.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'slime
+    '(aput 'slime-lisp-implementations 'ccl
+           (list (split-string inferior-lisp-program))))
+#+END_SRC
+
+*** Inferior Scheme
+
+Use Gambit Scheme.
+
+#+BEGIN_SRC emacs-lisp
+  (setq scheme-program-name "gsi -:d-")
+#+END_SRC
+
+Configure Gambit Scheme support library.
+
+#+BEGIN_SRC emacs-lisp
+  (when (functionp 'gambit-mode)
+    (eval-after-load 'scheme
+      '(add-hook 'scheme-mode-hook 'gambit-mode))
+    (eval-after-load 'cmuscheme
+      '(add-hook 'inferior-scheme-mode-hook 'gambit-inferior-mode)))
+#+END_SRC
+
+*** Scheme-Complete
+
+Configure Scheme-Complete defaults.
+
+#+BEGIN_SRC emacs-lisp
+  (defun hooks/enable-scheme-complete ()
+    (set (make-local-variable 'lisp-indent-function)
+         'scheme-smart-indent-function)
+    (set (make-local-variable 'eldoc-documentation-function)
+         'scheme-get-current-symbol-info))
+#+END_SRC
+
+Add Scheme-Complete to Scheme mode hook.
+
+#+BEGIN_SRC emacs-lisp
+  (defun init/setup-scheme-complete-hook ()
+    (add-hook 'scheme-mode-hook 'hooks/enable-scheme-complete))
+#+END_SRC
+
+Add Scheme-Complete to Scheme mode map.
+
+#+BEGIN_SRC emacs-lisp
+  (defun init/setup-scheme-complete-map ()
+    (define-key scheme-mode-map (kbd "TAB") #'scheme-complete-or-indent))
+#+END_SRC
+
+Configure Scheme-Complete.
+
+#+BEGIN_SRC emacs-lisp
+  (when (functionp 'scheme-smart-complete)
+    (eval-after-load 'scheme
+      '(progn (init/setup-scheme-complete-hook)
+              (init/setup-scheme-complete-map))))
+#+END_SRC
+
+*** Slime
+
+Load Slime.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'slime-autoloads nil 'noerror)
+#+END_SRC
+
+Configure Slime.
+
+#+BEGIN_SRC emacs-lisp
+  (setq slime-net-coding-system 'utf-8-unix)
+
+  (eval-after-load 'slime
+    '(slime-setup '(slime-fancy)))
+#+END_SRC
+
+** Languages
+*** Lisp-based Modes
+
+Define a common hook for all Lisp modes.
+
+#+BEGIN_SRC emacs-lisp
+  (defvar lisp-mode-common-hook nil
+    "Hook called by all Lisp Mode modes for common initializations.")
+  
+  (defun hooks/lisp-mode-common-hook ()
+    (run-hooks 'lisp-mode-common-hook))
+#+END_SRC
+
+Enable ElDoc mode.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'lisp-mode-common-hook 'turn-on-eldoc-mode)
+#+END_SRC
+
+*** Emacs-Lisp
+
+Run common Lisp hooks in Emacs-Lisp mode.
+
+#+BEGIN_SRC emacs-lisp
+  (defun init/setup-emacs-lisp-mode-hook ()
+    (dolist (mode-hook '(emacs-lisp-mode-hook lisp-interaction-mode-hook))
+      (add-hook mode-hook 'hooks/lisp-mode-common-hook)))
+#+END_SRC
+
+Configure key bindings in Emacs-Lisp mode.
+
+#+BEGIN_SRC emacs-lisp
+  (defun init/setup-emacs-lisp-mode-map ()
+    (dolist (mode-map (list emacs-lisp-mode-map lisp-interaction-mode-map))
+      (define-key mode-map (kbd "M-.") #'find-function-at-point)
+      (define-key mode-map (kbd "M-,") #'find-variable-at-point))
+    (find-function-setup-keys))
+#+END_SRC
+
+Configure Emacs-Lisp mode.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'lisp-mode
+    '(progn (init/setup-emacs-lisp-mode-hook)
+            (init/setup-emacs-lisp-mode-map)))
+#+END_SRC
+
+*** Scheme
+
+Run common Lisp hooks in Scheme mode.
+
+#+BEGIN_SRC emacs-lisp
+  (defun init/setup-scheme-mode-hook ()
+    (add-hook 'scheme-mode-hook 'hooks/lisp-mode-common-hook))
+#+END_SRC
+
+Configure Scheme mode.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'scheme
+    '(init/setup-scheme-mode-hook))
+#+END_SRC
+
+*** Common Lisp
+
+Run common Lisp hooks in Common Lisp mode.
+
+#+BEGIN_SRC emacs-lisp
+  (defun init/setup-lisp-mode-hook ()
+    (add-hook 'lisp-mode-hook 'hooks/lisp-mode-common-hook))
+#+END_SRC
+
+Configure Common Lisp mode.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'lisp-mode
+    '(init/setup-lisp-mode-hook))
+#+END_SRC
+
+*** Clojure
+
+Run common Lisp hooks in Clojure mode.
+
+#+BEGIN_SRC emacs-lisp
+  (defun init/setup-clojure-mode-hook ()
+    (add-hook 'clojure-mode-hook 'hooks/lisp-mode-common-hook))
+#+END_SRC
+
+Configure Clojure mode.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'clojure-mode
+    '(init/setup-clojure-mode-hook))
+#+END_SRC
+
+** Support
+*** HyperSpec
+
+Try to use a local copy of the hyperspec.
+
+#+BEGIN_SRC emacs-lisp
+  (let ((local-hyperspec-root "/opt/HyperSpec/"))
+    (when (file-exists-p local-hyperspec-root)
+      (setq common-lisp-hyperspec-root local-hyperspec-root)))
+#+END_SRC
+
+*** Paredit
+
+Configure Paredit.
+
+#+BEGIN_SRC emacs-lisp
+  (when (functionp 'paredit-mode)
+    (unless (functionp 'enable-paredit-mode)
+      (defun enable-paredit-mode () (paredit-mode +1)))
+    (add-hook 'lisp-mode-common-hook 'enable-paredit-mode))
+#+END_SRC
+
+Unbind "disputed" key bindings.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'paredit
+    '(dolist (key '("M-<up>" "ESC <up>"
+                    "M-<down>" "ESC <down>"
+                    "C-<left>"
+                    "C-<right>"
+                    "C-M-<left>" "ESC C-<left>"
+                    "C-M-<right>" "ESC C-<right>"))
+       (define-key paredit-mode-map (read-kbd-macro key) nil)))
+#+END_SRC

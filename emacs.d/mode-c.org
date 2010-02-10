@@ -1,0 +1,53 @@
+#+TITLE: Config Modes C
+
+* C
+
+Customization of libraries related to C.
+
+** C-based Modes
+
+Configure common C-based mode defaults.
+
+#+BEGIN_SRC emacs-lisp
+  (defun hooks/c-mode-common-hook ()
+    (c-toggle-syntactic-indentation t)
+    (c-toggle-hungry-state t)
+    (c-toggle-electric-state t)
+    (c-toggle-auto-newline t)
+    (c-subword-mode t))
+  
+  (eval-after-load 'cc-mode
+    '(progn (aput 'c-default-style 'other "bsd")
+            (add-hook 'c-mode-common-hook 'hooks/c-mode-common-hook)))
+#+END_SRC
+
+** Objective C
+
+Add support for =hideshow=.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'hideshow
+    '(aput 'hs-special-modes-alist 'objc-mode
+           (aget hs-special-modes-alist 'c-mode)))
+#+END_SRC
+
+Use the Google style when available.
+
+#+BEGIN_SRC emacs-lisp
+  (when (functionp 'google-set-c-style)
+    (eval-after-load 'cc-mode
+      '(add-hook 'objc-mode-hook 'google-set-c-style)))
+#+END_SRC
+
+** JavaScript
+
+Add support for =flymake=.
+
+#+BEGIN_SRC emacs-lisp
+  (define-flymake-mode-init js-mode
+    (flymake-simple-make-init-impl
+     'flymake-create-temp-inplace t t
+     (file-name-nondirectory buffer-file-name)
+     (lambda (source base-dir)
+       `("js" ("-s" ,source)))))
+#+END_SRC

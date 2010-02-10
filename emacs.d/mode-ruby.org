@@ -1,0 +1,80 @@
+#+TITLE: Config Modes Ruby
+
+* Ruby
+
+Customization of libraries related to Ruby.
+
+** Ruby Mode
+
+Configure Ruby mode defaults.
+
+#+BEGIN_SRC emacs-lisp
+  (defun hooks/ruby-mode-hook ()
+    (set-tab-width 2)
+    (ruby-electric-mode t))
+#+END_SRC
+
+Configure hooks in Ruby mode.
+
+#+BEGIN_SRC emacs-lisp
+  (defun init/setup-ruby-mode-hook ()
+    (add-hook 'ruby-mode-hook 'hooks/ruby-mode-hook)
+    (add-hook 'ruby-mode-hook 'hs-minor-mode-maybe))
+#+END_SRC
+
+Configure key bindings in Ruby mode.
+
+#+BEGIN_SRC emacs-lisp
+  (defun init/setup-ruby-mode-map ()
+    (define-key ruby-mode-map (kbd "TAB") nil))
+#+END_SRC
+
+Configure Ruby mode.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'ruby-mode
+    '(progn (init/setup-ruby-mode-hook)
+            (init/setup-ruby-mode-map)))
+#+END_SRC
+
+Use Ruby mode for Rakefiles.
+
+#+BEGIN_SRC emacs-lisp
+  (aput 'auto-mode-alist "Rakefile" 'ruby-mode)
+  (aput 'auto-mode-alist (rx ".rake" eos) 'ruby-mode)
+#+END_SRC
+
+** Inferior Ruby
+
+Use Yarv as the inferior Ruby.
+
+#+BEGIN_SRC emacs-lisp
+  (setq inf-ruby-default-implementation "yarv")
+  
+  (eval-after-load 'inf-ruby
+    '(aput 'inf-ruby-implementations "yarv"
+           "irb19 --inf-ruby-mode -r irb/completion"))
+#+END_SRC
+
+** Support
+
+Add support for =flymake=.
+
+#+BEGIN_SRC emacs-lisp
+  (define-flymake-mode-init ruby-mode ()
+    (flymake-simple-make-init-impl
+     'flymake-create-temp-inplace t t
+     (file-name-nondirectory buffer-file-name)
+     (lambda (source base-dir)
+       `("ruby" ("-wc" ,source)))))
+#+END_SRC
+
+Add support for =hideshow=.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'hideshow
+    '(aput 'hs-special-modes-alist 'ruby-mode
+           (list (regexp-opt '("class" "def" "do") 'words)
+                 (regexp-opt '("end") 'words)
+                 "#" 'ruby-end-of-block nil)))
+#+END_SRC

@@ -1,0 +1,1141 @@
+#+TITLE: Config Main
+
+* Dependencies
+
+Libraries used during initialization.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'cl)
+  (require 'assoc)
+#+END_SRC
+
+* Basics
+
+Customization of Emacs itself.
+
+** Helpers
+
+Functions and macros asisting the initialization process.
+
+*** Macros
+
+Manual hygiene.
+
+#+BEGIN_SRC emacs-lisp
+  (defmacro* with-unique-names (vars &body body)
+    "Evaluate BODY with each VAR in VARS bound to a unique name.
+  \n(fn VARS BODY...)"
+    (declare (indent 1))
+    `(let ,(loop for var in vars
+                 collect `(,var (gensym ,(symbol-name var))))
+       ,@body))
+#+END_SRC
+
+Support Common Lisp conventions in =dolist=.
+
+#+BEGIN_SRC emacs-lisp
+  (defmacro* dolist* ((args list &optional result) &body body)
+    "Loop over a list.
+  Like normal `dolist', except ARGS allows full Common Lisp conventions.
+  \n(fn (ARGS LIST [RESULT]) BODY...)"
+    (declare (indent 1))
+    (with-unique-names (loop-var)
+      `(dolist (,loop-var ,list ,result)
+         (destructuring-bind ,args ,loop-var
+           ,@body))))
+#+END_SRC
+
+*** Process Control
+
+Sugar for =after-init-hook=.
+
+#+BEGIN_SRC emacs-lisp
+  (defmacro* eval-after-init (&body body)
+    "Arrange that BODY will be run in `after-init-hook'."
+    (declare (indent 0))
+    `(add-hook 'after-init-hook (lambda () ,@body)))
+#+END_SRC
+
+Restart Emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (defun restart-emacs ()
+    "Kill all unmodified buffers except for `shell', `eshell' and `org-agenda'."
+    (interactive)
+    (let* ((kept-buffers '("*shell*" "*eshell*" "*Org Agenda*")))
+      (dolist (buffer (buffer-list))
+        (unless (or (member (buffer-name buffer) kept-buffers)
+                    (and (buffer-file-name buffer)
+                         (buffer-modified-p buffer)))
+          (kill-buffer buffer)))))
+#+END_SRC
+
+Kill Emacs with a 5 second timeout.
+
+#+BEGIN_SRC emacs-lisp
+  (defun kill-emacs-with-timeout (prompt)
+    "Automatically kill Emacs after a 5 second delay."
+    (let* ((message "will exit automatically in 5 seconds")
+           (prompt (format "%s(%s) " prompt message)))
+      (y-or-n-p-with-timeout prompt 5 t)))
+#+END_SRC
+
+*** Key Bindings
+
+#+BEGIN_SRC emacs-lisp
+  (defun ns-command-key (&rest keys)
+    (case window-system
+      (ns (vector (cons ns-command-modifier keys)))
+      (mac (vector (cons mac-command-modifier keys)))))
+#+END_SRC
+
+*** Indentation
+
+Check for indentation at =point=.
+
+#+BEGIN_SRC emacs-lisp
+  (defun in-indentation? ()
+    "Return t if point is currently inside indentation."
+    (looking-at-p (rx bol (0+ blank))))
+#+END_SRC
+
+Configure consistent =tab-width= and =tab-stop-list=.
+
+#+BEGIN_SRC emacs-lisp
+  (defun set-tab-width (width)
+    "Set `tab-width' and `tab-stop-list' to match WIDTH."
+    (setq tab-width width)
+    (set (make-local-variable 'tab-stop-list)
+         (number-sequence width 120 width)))
+#+END_SRC
+
+*** Strings
+
+#+BEGIN_SRC emacs-lisp
+  (defun chomp (string)
+    "Remove any trailing newline characters from STRING."
+    (let ((regexp (rx ?\r ?\n)))
+      (while (and (> (length string) 0)
+                  (string-match regexp (substring string -1)))
+        (setq string (substring string 0 -1)))
+      string))
+#+END_SRC
+
+*** Compatibility
+
+Support for older Emacsen.
+
+#+BEGIN_SRC emacs-lisp
+  (unless (functionp 'region-active-p)
+    (defun region-active-p ()
+      "Return t if Transient Mark mode is enabled and the mark is active."
+      (and transient-mark-mode mark-active)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (unless (functionp 'locate-dominating-file)
+    (defun locate-dominating-file (file name)
+      "Look up the directory hierarchy from FILE for a file named NAME.
+  Stop at the first parent directory containing a file NAME,
+  and return the directory.  Return nil if not found."
+      ;; We used to use the above locate-dominating-files code, but the
+      ;; directory-files call is very costly, so we're much better off doing
+      ;; multiple calls using the code in here.
+      ;;
+      ;; Represent /home/luser/foo as ~/foo so that we don't try to look for
+      ;; `name' in /home or in /.
+      (setq file (abbreviate-file-name file))
+      (let ((root nil)
+            (prev-file file)
+            ;; `user' is not initialized outside the loop because
+            ;; `file' may not exist, so we may have to walk up part of the
+            ;; hierarchy before we find the "initial UID".
+            (user nil)
+            try)
+        (while (not (or root
+                        (null file)
+                        ;; FIXME: Disabled this heuristic because it is sometimes
+                        ;; inappropriate.
+                        ;; As a heuristic, we stop looking up the hierarchy of
+                        ;; directories as soon as we find a directory belonging
+                        ;; to another user.  This should save us from looking in
+                        ;; things like /net and /afs.  This assumes that all the
+                        ;; files inside a project belong to the same user.
+                        ;; (let ((prev-user user))
+                        ;;   (setq user (nth 2 (file-attributes file)))
+                        ;;   (and prev-user (not (equal user prev-user))))
+                        (string-match locate-dominating-stop-dir-regexp file)))
+          (setq try (file-exists-p (expand-file-name name file)))
+          (cond (try (setq root file))
+                ((equal file (setq prev-file file
+                                   file (file-name-directory
+                                         (directory-file-name file))))
+                 (setq file nil))))
+        root))
+  
+    (defvar locate-dominating-stop-dir-regexp
+      "\\`\\(?:[\\/][\\/][^\\/]+\\|/\\(?:net\\|afs\\|\\.\\.\\.\\)/\\)\\'"))
+#+END_SRC
+
+** System Integration
+
+*** TODO Mac OS X
+
+Use Command as the Meta key.
+
+#+BEGIN_SRC emacs-lisp
+  (setq ns-option-modifier nil)
+  (setq ns-command-modifier 'meta)
+  (setq mac-option-modifier nil)
+  (setq mac-command-modifier 'meta)
+  (setq mac-pass-control-to-system nil)
+  (setq mac-pass-command-to-system nil)
+#+END_SRC
+
+Use a helpful frame title.
+
+#+BEGIN_SRC emacs-lisp
+  (case window-system
+    (mac (setq frame-title-format "%b")))
+#+END_SRC
+
+Support hiding Emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (case window-system
+    (ns (global-set-key [remap suspend-frame] #'ns-do-hide-emacs)))
+#+END_SRC
+
+Define more Mac-like CUA keys.
+TODO: Really?
+
+#+BEGIN_SRC emacs-lisp
+  (case window-system
+    ((ns mac)
+     (defvar extended-command-command 'execute-extended-command
+       "Command to run extended commands with.")
+  
+     (defun kill-region-or-meta-x ()
+       "Kill the region, if active, otherwise run `extended-command-command'."
+       (interactive)
+       (if (region-active-p)
+           (call-interactively 'kill-region)
+         (call-interactively extended-command-command)))
+  
+     (global-set-key (ns-command-key 'x) #'kill-region-or-meta-x)
+     (global-set-key (ns-command-key 'c) #'copy-region-as-kill)
+     (global-set-key (ns-command-key 'v) #'yank)
+     (global-set-key (ns-command-key 'V) #'yank-pop)))
+#+END_SRC
+
+Fix Emacs 23 =local-function-key-map=.
+
+#+BEGIN_SRC emacs-lisp
+  (case window-system
+    (ns (setq local-function-key-map
+              '(keymap (M-escape . [134217755])
+                       (M-return . [134217741])
+                       (M-clear . [134217740])
+                       (M-linefeed . [134217738])
+                       (M-tab . [134217737])
+                       (M-delete . [134217855])
+                       (M-backspace . [134217855])
+                       (escape . [27])
+                       (return . [13])
+                       (clear . [12])
+                       (linefeed . [10])
+                       (tab . [9])
+                       (kp-equal . [61])
+                       (kp-divide . [47])
+                       (kp-decimal . [46])
+                       (kp-subtract . [45])
+                       (kp-separator . [44])
+                       (kp-add . [43])
+                       (kp-multiply . [42])
+                       (kp-enter . [13])
+                       (kp-tab . [9])
+                       (kp-space . [32])
+                       (kp-9 . [57])
+                       (kp-8 . [56])
+                       (kp-7 . [55])
+                       (kp-6 . [54])
+                       (kp-5 . [53])
+                       (kp-4 . [52])
+                       (kp-3 . [51])
+                       (kp-2 . [50])
+                       (kp-1 . [49])
+                       (kp-0 . [48])
+                       (24 keymap
+                           (64 keymap
+                               (99 . event-apply-control-modifier)
+                               (83 . event-apply-shift-modifier)
+                               (97 . event-apply-alt-modifier)
+                               (109 . event-apply-meta-modifier)
+                               (115 . event-apply-super-modifier)
+                               (104 . event-apply-hyper-modifier)))
+                       (C-S-kp-9 . [C-S-prior])
+                       (C-S-kp-8 . [C-S-up])
+                       (C-S-kp-7 . [C-S-home])
+                       (C-S-kp-6 . [C-S-right])
+                       (C-S-kp-4 . [C-S-left])
+                       (C-S-kp-3 . [C-S-next])
+                       (C-S-kp-2 . [C-S-down])
+                       (C-S-kp-1 . [C-S-end])
+                       (C-S-kp-prior . [C-S-prior])
+                       (C-S-kp-up . [C-S-up])
+                       (C-S-kp-home . [C-S-home])
+                       (C-S-kp-right . [C-S-right])
+                       (C-S-kp-left . [C-S-left])
+                       (C-S-kp-next . [C-S-next])
+                       (C-S-kp-down . [C-S-down])
+                       (C-S-kp-end . [C-S-end])
+                       (S-kp-prior . [S-prior])
+                       (S-kp-up . [S-up])
+                       (S-kp-home . [S-home])
+                       (S-kp-right . [S-right])
+                       (S-kp-left . [S-left])
+                       (S-kp-next . [S-next])
+                       (S-kp-down . [S-down])
+                       (S-kp-end . [S-end])
+                       (kp-delete . [4])
+                       (delete . [4])
+                       (backspace . [127])
+                       (kp-insert . [insert])
+                       (kp-begin . [begin])
+                       (kp-end . [end])
+                       (M-kp-next . [M-next])
+                       (kp-next . [next])
+                       (kp-prior . [prior])
+                       (kp-down . [down])
+                       (kp-right . [right])
+                       (kp-up . [up])
+                       (kp-left . [left])
+                       (kp-home . [home])))))
+#+END_SRC
+
+*** Printers
+
+We use A4 paper.
+
+#+BEGIN_SRC emacs-lisp
+  (setq ps-paper-type 'a4)
+#+END_SRC
+
+** Customization
+
+*** Builtin Functions
+
+Sane =yes-or-no-p= queries.
+
+#+BEGIN_SRC emacs-lisp
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+Useful =query-replace= shortcuts.
+
+#+BEGIN_SRC emacs-lisp
+  (defalias 'qr 'query-replace)
+  (defalias 'qrr 'query-replace-regexp)
+#+END_SRC
+
+Useful but disabled builtin functions.
+
+#+BEGIN_SRC emacs-lisp
+  (put 'upcase-region 'disabled nil)
+  (put 'downcase-region 'disabled nil)
+  (put 'narrow-to-region 'disabled nil)
+#+END_SRC
+
+Rebind =execute-extended-command=.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x C-m") #'execute-extended-command)
+#+END_SRC
+
+*** Moving around
+
+...with Shift.
+
+#+BEGIN_SRC emacs-lisp
+  (unless (boundp 'shift-select-mode)
+    (cua-selection-mode t))
+  (setq shift-select-mode t)
+#+END_SRC
+
+...with Command.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "<s-left>") #'move-beginning-of-line)
+  (global-set-key (kbd "<s-right>") #'move-end-of-line)
+  (global-set-key (kbd "<s-up>") #'beginning-of-buffer)
+  (global-set-key (kbd "<s-down>") #'end-of-buffer)
+#+END_SRC
+
+...with Control and Meta.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "<C-left>") #'backward-word)
+  (global-set-key (kbd "<C-right>") #'forward-word)
+  (global-set-key (kbd "<M-up>") #'backward-paragraph)
+  (global-set-key (kbd "<M-down>") #'forward-paragraph)
+  (global-set-key (kbd "M-p") #'backward-paragraph)
+  (global-set-key (kbd "M-n") #'forward-paragraph)
+#+END_SRC
+
+...in Lists.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-M-n") #'up-list)
+  (global-set-key (kbd "C-M-p") #'backward-down-list)
+  (global-set-key (kbd "C-M-u") #'backward-up-list)
+  (global-set-key (kbd "C-M-d") #'down-list)
+#+END_SRC
+
+*** Bookkeeping
+
+Make backups.
+
+#+BEGIN_SRC emacs-lisp
+  (setq delete-by-moving-to-trash t)
+  (setq version-control t)
+  (setq kept-new-versions 10)
+  (setq kept-old-versions 2)
+  (setq delete-old-versions t)
+  
+  (case system-type
+    (darwin (setq trash-directory (expand-file-name "~/.Trash"))))
+#+END_SRC
+
+And auto-save files.
+
+#+BEGIN_SRC emacs-lisp
+  (setq auto-save-default t)
+  (setq auto-save-visited-file-name nil)
+#+END_SRC
+
+But don't auto-save messages.
+
+#+BEGIN_SRC emacs-lisp
+  (setq message-auto-save-directory nil)
+#+END_SRC
+
+Store backups under =dot-emacs-dir=.
+
+#+BEGIN_SRC emacs-lisp
+  (setq backup-directory-alist
+        (list (cons "." (expand-file-name "backup" dot-emacs-dir))))
+#+END_SRC
+
+Keep a minibuffer history.
+
+#+BEGIN_SRC emacs-lisp
+  (setq history-length 1024)
+  (setq history-add-new-input t)
+  (setq history-delete-duplicates t)
+  (savehist-mode t)
+#+END_SRC
+
+*** TODO Editing
+
+Unicode!
+
+#+BEGIN_SRC emacs-lisp
+  (prefer-coding-system 'utf-8)
+#+END_SRC
+
+Saner default settings.
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default fill-column 72)
+  (setq-default major-mode 'text-mode)
+  (setq-default indent-tabs-mode nil)
+  (setq require-final-newline t)
+  (setq comment-auto-fill-only-comments t)
+#+END_SRC
+
+Display complete emacs-lisp result expressions.
+
+#+BEGIN_SRC emacs-lisp
+  (setq eval-expression-print-length nil)
+#+END_SRC
+
+Truncate lines in some buffers.
+
+#+BEGIN_SRC emacs-lisp
+  (defun do-truncate-lines ()
+    (setq truncate-lines t))
+
+  (defun dont-truncate-lines ()
+    (setq truncate-lines nil))
+
+  (add-hook 'dired-mode-hook 'do-truncate-lines)
+  (add-hook 'minibuffer-setup-hook 'dont-truncate-lines)
+#+END_SRC
+
+Rebind =backward-kill-word= and =kill-region=.
+TODO: Bind =kill-ring-save= as well.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-w") 'backward-kill-word)
+  (global-set-key (kbd "C-x C-k") 'kill-region)
+#+END_SRC
+
+Rebind =backward-kill-sexp=.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "<C-M-backspace>") #'backward-kill-sexp)
+#+END_SRC
+
+Make =kill-line= call =delete-indentation= when sensible.
+
+#+BEGIN_SRC emacs-lisp
+  (defadvice kill-line (around kill-or-join-line activate)
+    "At EOL, `delete-indentation', otherwise `kill-line'."
+    (if (and (eolp) (not (bolp)))
+        (delete-indentation t)
+      ad-do-it))
+#+END_SRC
+
+Indent yanked text when sensible.
+
+#+BEGIN_SRC emacs-lisp
+  (defvar indent-region-modes '(emacs-lisp-mode
+                                lisp-interaction-mode
+                                lisp-mode
+                                scheme-mode
+                                clojure-mode
+                                c-mode
+                                c++-mode
+                                objc-mode)
+    "List of modes that support smart indentation of the region.")
+
+  (defun indent-yanked-region ()
+    (when (member major-mode indent-region-modes)
+      (let* ((mark-even-if-inactive t))
+        (indent-region (region-beginning) (region-end)))))
+
+  (defadvice yank (after indent-region activate)
+    "Indent `yank'ed text if `major-mode' supports it."
+    (indent-yanked-region))
+
+  (defadvice yank-pop (after indent-region activate)
+    "Indent `yank'ed text if `major-mode' supports it."
+    (indent-yanked-region))
+#+END_SRC
+
+*** Scrolling
+
+...conservatively.
+
+#+BEGIN_SRC emacs-lisp
+  (setq scroll-conservatively most-positive-fixnum)
+  (setq scroll-preserve-screen-position 'always)
+#+END_SRC
+
+...using the Keyboard.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-v") #'scroll-up)
+  (global-set-key (kbd "C-S-v") #'scroll-down)
+#+END_SRC
+
+...using the Mouse.
+
+#+BEGIN_SRC emacs-lisp
+  (when (featurep 'mouse)
+    (setq mouse-yank-at-point t)
+    (setq mouse-wheel-follow-mouse t)
+    (setq mouse-wheel-progressive-speed nil)
+    (setq mouse-avoidance-mode 'exile))
+#+END_SRC
+
+*** Highlighting
+
+Highlight syntax.
+
+#+BEGIN_SRC emacs-lisp
+  (global-font-lock-mode t)
+#+END_SRC
+
+Highlight parens.
+
+#+BEGIN_SRC emacs-lisp
+  (show-paren-mode t)
+  (setq show-paren-style 'mixed)
+#+END_SRC
+
+Highlight the current line.
+
+#+BEGIN_SRC emacs-lisp
+  (global-hl-line-mode t)
+#+END_SRC
+
+*** Frames
+
+Initial frame settings.
+
+#+BEGIN_SRC emacs-lisp
+  (aput 'initial-frame-alist 'top 40)
+  (aput 'initial-frame-alist 'left 100)
+#+END_SRC
+
+Default frame settings.
+
+#+BEGIN_SRC emacs-lisp
+  (aput 'default-frame-alist 'cursor-type 'bar)
+  (aput 'default-frame-alist 'cursor-color "black")
+  (aput 'default-frame-alist 'weight 80)
+  (aput 'default-frame-alist 'height 50)
+#+END_SRC
+
+Frame switching.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (ns-command-key ?`) #'next-multiframe-window)
+  (global-set-key (ns-command-key ?~) #'previous-multiframe-window)
+#+END_SRC
+
+*** UI Elements
+
+Show some but not too much information in the modeline.
+
+#+BEGIN_SRC emacs-lisp
+  (setq column-number-mode t)
+  (setq line-number-mode t)
+  (setq size-indication-mode nil)
+#+END_SRC
+
+Don't show any toolbars.
+
+#+BEGIN_SRC emacs-lisp
+  (when (functionp 'tool-bar-mode) (tool-bar-mode -1))
+  (when (functionp 'tabbar-mode) (tabbar-mode -1))
+#+END_SRC
+
+Don't show a splash screen.
+
+#+BEGIN_SRC emacs-lisp
+  (setq inhibit-startup-screen t)
+#+END_SRC
+
+*** Exiting
+
+Ask before killing Emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (setq confirm-kill-emacs 'kill-emacs-with-timeout)
+#+END_SRC
+
+*** Unix Tools
+
+Generate unified diffs.
+
+#+BEGIN_SRC emacs-lisp
+  (setq diff-switches "-u")
+#+END_SRC
+
+Use =hunspell= for spell-checking.
+
+#+BEGIN_SRC emacs-lisp
+  (setq ispell-program-name "hunspell")
+#+END_SRC
+
+** Load_Path
+
+Set up =load-path= so Emacs can find these libraries.
+
+*** ELPA
+
+#+BEGIN_SRC emacs-lisp
+  (when (load (expand-file-name "elpa/package" dot-emacs-dir) 'noerror)
+    (package-initialize))
+#+END_SRC
+
+*** Vendor
+
+#+BEGIN_SRC emacs-lisp
+  (load (expand-file-name "vendor/autoloads" dot-emacs-dir) 'noerror)
+#+END_SRC
+
+*** Site-Lisp
+
+#+BEGIN_SRC emacs-lisp
+  (load (expand-file-name "site-lisp/autoloads" dot-emacs-dir) 'noerror)
+#+END_SRC
+
+* Builtin Libraries
+
+Customization of libraries that come with Emacs.
+
+** Buffers
+*** =bs-show=
+
+#+BEGIN_SRC emacs-lisp
+  (setq bs-default-sort-name "by filename")
+  
+  (global-set-key (kbd "C-x C-b") #'bs-show)
+#+END_SRC
+
+*** =uniquify=
+
+Uniquify buffer names sensibly.
+
+#+BEGIN_SRC emacs-lisp
+  (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
+
+  (require 'uniquify)
+#+END_SRC
+
+** Shells
+*** =comint=
+
+#+BEGIN_SRC emacs-lisp
+  (setq comint-prompt-read-only t)
+  
+  (eval-after-load 'comint
+    '(add-hook 'comint-mode-hook 'ansi-color-for-comint-mode-on))
+#+END_SRC
+
+*** =shell=
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'shell
+    '(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on))
+#+END_SRC
+
+*** =eshell=
+
+Configure =eshell=.
+
+#+BEGIN_SRC emacs-lisp
+  (setq eshell-save-history-on-exit t)
+  (setq eshell-cmpl-cycle-completions nil)
+  (setq eshell-cmpl-ignore-case read-file-name-completion-ignore-case)
+  
+  ;; (global-set-key (kbd "C-x C-z") #'eshell)
+#+END_SRC
+
+Hook into =eshell-mode= when it starts.
+
+#+BEGIN_SRC emacs-lisp
+  (defun mk/eshell-mode-hook ()
+    (pushnew 'eshell-handle-ansi-color eshell-output-filter-functions)
+    (define-key eshell-mode-map (kbd "M-m") #'eshell-bol)
+    (define-key eshell-mode-map (kbd "C-a") #'eshell-bol)
+    (define-key eshell-mode-map (kbd "<tab>") #'pcomplete-expand-and-complete))
+  
+  (eval-after-load 'eshell '(add-hook 'eshell-mode-hook 'mk/eshell-mode-hook))
+#+END_SRC
+
+** Tools
+*** =dired=
+
+Configure =dired=.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'dired)
+  (setq dired-listing-switches "-alh")
+  
+  (define-key dired-mode-map (kbd "-") #'dired-up-directory)
+  (define-key dired-mode-map (ns-command-key 'up) #'dired-up-directory)
+  (define-key dired-mode-map (ns-command-key 'down) #'dired-find-file)
+  
+  (global-set-key (kbd "C-x C-d") #'dired)
+#+END_SRC
+
+Configure =dired-x=.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'dired-x)
+  (setq-default dired-omit-mode t)
+  (setq dired-omit-files (rx bos (| "#" ".")))
+#+END_SRC
+
+Open files with LaunchServices in =dired=.
+
+#+BEGIN_SRC emacs-lisp
+  (defun dired-open-file (&optional arg)
+    "Open the marked (or next ARG) files with LaunchServices."
+    (interactive "P")
+    (dired-map-over-marks
+     (let ((file-name (dired-get-filename)))
+       (call-process "/usr/bin/open" nil 0 nil file-name))
+     arg))
+  
+  (define-key dired-mode-map (ns-command-key 'shift 'o) #'dired-open-file)
+#+END_SRC
+
+*** =ediff=
+
+Keep Ediff in a single frame.
+
+#+BEGIN_SRC emacs-lisp
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+#+END_SRC
+
+*** =vc=
+
+Make =vc= work with symlinks.
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default vc-follow-symlinks t)
+#+END_SRC
+
+** Completion
+*** =icomplete=
+
+#+BEGIN_SRC emacs-lisp
+  (icomplete-mode t)
+#+END_SRC
+
+*** =ido=
+
+#+BEGIN_SRC emacs-lisp
+  (setq ido-everywhere t)
+  (setq ido-enable-prefix t)
+  (setq ido-enable-flex-matching t)
+  (setq ido-create-new-buffer 'always)
+  (setq ido-use-filename-at-point 'ffap-guesser)
+  (setq ido-use-url-at-point t)
+  (setq ido-save-directory-list-file
+        (expand-file-name ".ido.last" dot-emacs-dir))
+
+  (ido-mode t)
+#+END_SRC
+
+*** =isearch=
+
+#+BEGIN_SRC emacs-lisp
+  (defun isearch-goto-other-end ()
+    "Jump to the beginning of an `isearch' match after searching forward."
+    (when (and isearch-forward isearch-other-end)
+      (goto-char isearch-other-end)))
+  
+  (global-set-key (kbd "C-s") #'isearch-forward)
+  (global-set-key (kbd "C-S-s") #'isearch-backward)
+  (global-set-key (kbd "C-M-s") #'isearch-forward-regexp)
+  (global-set-key (kbd "C-M-S-s") #'isearch-backward-regexp)
+  
+  (define-key isearch-mode-map (kbd "C-s") #'isearch-repeat-forward)
+  (define-key isearch-mode-map (kbd "C-S-s") #'isearch-repeat-backward)
+  (define-key isearch-mode-map (kbd "C-M-s") #'isearch-repeat-forward)
+  (define-key isearch-mode-map (kbd "C-M-S-s") #'isearch-repeat-backward)
+  
+  (add-hook 'isearch-mode-end-hook #'isearch-goto-other-end)
+#+END_SRC
+
+*** =hippie-exp=
+
+#+BEGIN_SRC emacs-lisp
+  (setq hippie-expand-try-functions-list
+        '(try-expand-all-abbrevs
+          try-expand-dabbrev
+          try-expand-dabbrev-all-buffers
+          try-expand-dabbrev-from-kill
+          try-complete-file-name-partially
+          try-complete-file-name
+          try-complete-lisp-symbol-partially
+          try-complete-lisp-symbol
+          try-expand-whole-kill))
+
+  (global-set-key (kbd "M-/") #'hippie-expand)
+#+END_SRC
+
+** Annotation
+*** =flymake=
+
+Make =flymake= support available to additional major modes.
+
+#+BEGIN_SRC emacs-lisp
+  (defmacro* define-flymake-mode-init (mode &body body)
+    (declare (indent 1))
+    (let ((function-name (intern (format "flymake-mode-init/%s" mode)))
+          (regexps (mapcar #'car (remove* mode auto-mode-alist
+                                          :test-not 'eq :key 'cdr))))
+      `(progn (defun ,function-name () ,@body)
+              (eval-after-load 'flymake
+                '(dolist (mask (list ,@regexps))
+                   (pushnew (list mask ',function-name)
+                            flymake-allowed-file-name-masks))))))
+#+END_SRC
+
+*** =hideshow=
+
+Enable =hs-minor-mode= in supported major modes.
+
+#+BEGIN_SRC emacs-lisp
+  (defun hs-minor-mode-maybe ()
+    "Turn on `hs-minor-mode' when `major-mode' supports it."
+    (when (assoc major-mode hs-special-modes-alist)
+      (hs-minor-mode +1)))
+  
+  (add-hook 'find-file-hook 'hs-minor-mode-maybe)
+#+END_SRC
+
+Display line counts when hiding code blocks.
+
+#+BEGIN_SRC emacs-lisp
+  (defun hs-display-code-line-counts (overlay)
+    (case (overlay-get overlay 'hs)
+      ('code (let* ((beg (overlay-start overlay))
+                    (end (overlay-end overlay))
+                    (display (format "... (%d lines)" (count-lines beg end))))
+               (overlay-put overlay 'face 'font-lock-comment-face)
+               (overlay-put overlay 'display display)))))
+  
+  (setq hs-set-up-overlay 'hs-display-code-line-counts)
+#+END_SRC
+
+*** =which-func=
+
+Enable =which-function-mode=.
+
+#+BEGIN_SRC emacs-lisp
+  (setq which-func-modes t)
+
+  (which-function-mode t)
+#+END_SRC
+
+** Process Control
+*** =server=
+
+Unify server buffers with "normal" buffers.
+
+#+BEGIN_SRC emacs-lisp
+  (defadvice save-buffers-kill-terminal
+    (around server-done-or-kill-terminal activate)
+    "If the current buffer has clients, kill those instead."
+    (unless (server-done)
+      ad-do-it))
+
+  (defadvice server-edit
+    (around server-edit-or-bury-buffer activate)
+    "If no server editing buffers exist, call `bury-buffer' instead."
+    (when ad-do-it
+      (bury-buffer)))
+#+END_SRC
+
+Bind =server-edit= to nicer keys.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x C-=") #'server-edit)
+  (global-set-key (kbd "C-x C-#") #'server-edit)
+#+END_SRC
+
+Start the server.
+
+#+BEGIN_SRC emacs-lisp
+  (server-start)
+#+END_SRC
+
+* External Libraries
+
+Customization of libraries separate from Emacs.
+
+** =auto-dictionary=
+
+#+BEGIN_SRC emacs-lisp
+  (when (functionp 'auto-dictionary-mode)
+    (unless (functionp 'auto-dictionary-enable)
+      (defun auto-dictionary-enable ()
+        (auto-dictionary-mode +1)))
+    (add-hook 'flyspell-mode-hook 'auto-dictionary-enable))
+#+END_SRC
+
+** =browse-kill-ring=
+
+#+BEGIN_SRC emacs-lisp
+  (setq browse-kill-ring-highlight-current-entry t)
+  (setq browse-kill-ring-highlight-inserted-item t)
+  (setq browse-kill-ring-display-duplicates nil)
+  (setq browse-kill-ring-no-duplicates t)
+  
+  (when (functionp 'browse-kill-ring-default-keybindings)
+    (browse-kill-ring-default-keybindings))
+#+END_SRC
+
+** =compilation-recenter=
+
+#+BEGIN_SRC emacs-lisp
+  (when (functionp 'compilation-recenter-end-enable)
+    (add-hook 'compilation-mode-hook 'compilation-recenter-end-enable))
+#+END_SRC
+
+** =dirvars=
+
+#+BEGIN_SRC emacs-lisp
+  (require 'dirvars nil 'noerror)
+#+END_SRC
+
+** =fscroll=
+
+#+BEGIN_SRC emacs-lisp
+  (require 'fscroll nil 'noerror)
+#+END_SRC
+
+** =gist=
+
+#+BEGIN_SRC emacs-lisp
+  (setq gist-view-gist t)
+#+END_SRC
+
+** =highlight-symbol=
+
+#+BEGIN_SRC emacs-lisp
+  (when (functionp 'highlight-symbol-mode)
+    (setq highlight-symbol-on-navigation-p t)
+    (global-set-key (kbd "C-*") #'highlight-symbol-next)
+    (global-set-key (kbd "C-&") #'highlight-symbol-prev))
+#+END_SRC
+
+** =igrep=
+
+#+BEGIN_SRC emacs-lisp
+  (when (functionp 'igrep-insinuate)
+    (igrep-insinuate))
+#+END_SRC
+
+** =indent-tabs-maybe=
+
+#+BEGIN_SRC emacs-lisp
+  (when (functionp 'indent-tabs-maybe)
+    (add-hook 'find-file-hook 'indent-tabs-maybe))
+#+END_SRC
+
+** =magit=
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x g") #'magit-status)
+#+END_SRC
+
+** =nav=
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x C-n") #'nav)
+#+END_SRC
+
+** =redo=
+
+#+BEGIN_SRC emacs-lisp
+  (when (require 'redo nil 'noerror)
+    (global-set-key (ns-command-key 'z) #'undo)
+    (global-set-key (ns-command-key 'Z) #'redo)
+    (global-set-key (kbd "C-z") #'zap-to-char))
+#+END_SRC
+
+** =sudoku=
+
+#+BEGIN_SRC emacs-lisp
+  (setq sudoku-download-method "native-url-lib")
+  (setq sudoku-level "medium")
+#+END_SRC
+
+** =yasnippet=
+sb
+Load additional snippets.
+
+#+BEGIN_SRC emacs-lisp
+  (defun init/setup-yasnippet-snippets-dir ()
+    (let ((snippets-dir (expand-file-name "snippets" dot-emacs-dir)))
+      (when (file-directory-p snippets-dir)
+        (yas/load-directory snippets-dir))))
+#+END_SRC
+
+Configure Hippie-Exp to use Yasnippet.
+
+#+BEGIN_SRC emacs-lisp
+  (defun init/setup-yasnippet-hippie-expand ()
+    (eval-after-load 'hippie-exp
+      '(add-to-list 'hippie-expand-try-functions-list 'yas/hippie-try-expand)))
+#+END_SRC
+
+Configure Yasnippet.
+
+#+BEGIN_SRC emacs-lisp
+  (setq yas/use-menu 'abbreviate)
+  
+  (when (functionp 'yas/global-mode)
+    (init/setup-yasnippet-snippets-dir)
+    (init/setup-yasnippet-hippie-expand)
+    (yas/global-mode t))
+#+END_SRC
+
+Fix Yasnippet in modes locally overriding its trigger key.
+
+#+BEGIN_SRC emacs-lisp
+  (defun yas/fix-trigger-key ()
+    "Ensure `yasnippet' works in spite of overriding local bindings."
+    (let ((local-func (local-key-binding (read-kbd-macro yas/trigger-key))))
+      (when (and (featurep 'yasnippet) yas/minor-mode local-func)
+        (setq yas/fallback-behavior (list 'apply local-func))
+        (local-unset-key (read-kbd-macro yas/trigger-key)))))
+#+END_SRC
+
+** =diminish=
+
+#+BEGIN_SRC emacs-lisp
+  (when (functionp 'diminish)
+    (dolist* ((mode sources) '((eldoc-mode (eldoc))
+                               (hs-minor-mode (hideshow))
+                               (paredit-mode (paredit paredit-21))
+                               (ruby-electric-mode (ruby-electric))
+                               (highlight-symbol-mode (highlight-symbol))))
+      (dolist (from sources)
+        (eval-after-load from
+          `(diminish ',mode)))))
+#+END_SRC
+
+
+** TODO =color-theme=
+
+#+BEGIN_SRC emacs-lisp
+  ;; (defun mk/after-init-color-theme ()
+  ;;   (dolist (theme '(color-theme-quiet-light
+  ;;                    color-theme-gtk-ide))
+  ;;     (when (functionp theme)
+  ;;       (funcall theme)
+  ;;       (return))))
+  ;; (when (load "color-theme-autoloads" 'noerror)
+  ;;   (color-theme-initialize)
+  ;;   (eval-after-init
+  ;;     (mk/after-init-color-theme)))
+#+END_SRC
+
+** TODO =autopairs=
+
+#+BEGIN_SRC emacs-lisp
+  ;; (defun insert-pair-or-skip ()
+  ;;   "When looking at the character to be inserted, skip over it.
+  ;; Otherwise call `insert-pair', which see."
+  ;;   (interactive)
+  ;;   (let* ((char (event-basic-type last-command-event)))
+  ;;     (if (and (characterp char)
+  ;;              (looking-at (char-to-string char)))
+  ;;         (call-interactively 'forward-char)
+  ;;       (call-interactively 'insert-pair))))
+  ;; (setq parens-require-spaces nil)
+  ;; (dolist* ((car . cdr) '(("M-(" . "M-)")
+  ;;                         ("M-[" . "M-]")
+  ;;                         ("M-{" . "M-}")))
+  ;;   (global-set-key (read-kbd-macro car) #'insert-pair)
+  ;;   (global-set-key (read-kbd-macro cdr) #'up-list))
+  ;; (global-set-key (kbd "M-\'") #'insert-pair-or-skip)
+  ;; (global-set-key (kbd "M-\"") #'insert-pair-or-skip)
+#+END_SRC
+
+** TODO =textmate=
+
+#+BEGIN_SRC emacs-lisp
+  ;; (global-set-key (kbd "M-RET") #'next-line-and-indent)
+  ;; (global-set-key (kbd "M-;") #'comment-or-uncomment-region-or-line)
+  ;; (global-set-key (kbd "M-l") #'goto-line)
+  ;; (global-set-key (kbd "M-q") #'fill-paragraph-or-region)
+  ;; (global-set-key (kbd "M-u") #'upcase-word-or-region)
+  ;; (global-set-key (kbd "M-U") #'downcase-word-or-region)
+  ;; (global-set-key (kbd "M-B") #'mark-sexp)
+  ;; (global-set-key (kbd "M-L") #'mark-line)
+  ;; (global-set-key (kbd "C-S-d") #'duplicate-line-or-region)
+  ;; (global-set-key (kbd "C-S-k") #'kill-whole-line)
+  ;; (global-set-key (kbd "C-S-j") #'join-line-with-next)
+  ;; (global-set-key (kbd "C-S-w") #'mark-word)
+#+END_SRC

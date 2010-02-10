@@ -1,0 +1,46 @@
+#+TITLE: Config Modes Misc
+
+* Major Modes
+
+Customization of other major modes.
+
+** AppleScript
+
+Configure AppleScript mode defaults.
+
+#+BEGIN_SRC emacs-lisp
+  (defun hooks/applescript-mode-hook ()
+    (setq indent-line-function 'tab-to-tab-stop)
+    (setq indent-tabs-mode t)
+    (set-tab-width 4)
+    (c-subword-mode t))
+#+END_SRC
+
+Configure AppleScript mode.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'applescript-mode
+    '(add-hook 'applescript-mode-hook 'hooks/applescript-mode-hook))
+#+END_SRC
+
+** Erlang
+
+#+BEGIN_SRC emacs-lisp
+  (when (require 'erlang-start nil 'noerror)
+    (let ((root (file-name-directory (file-truename (locate-library "erlang")))))
+      (setq erlang-root-dir (expand-file-name "../../../../../" root))))
+#+END_SRC
+
+** Factor
+
+#+BEGIN_SRC emacs-lisp
+  (when (load "fu" 'noerror)
+    (setq fuel-factor-fuel-dir (file-truename fuel-factor-fuel-dir))
+    (setq fuel-factor-root-dir (expand-file-name "../../" fuel-factor-fuel-dir)))
+#+END_SRC
+
+** Perl
+
+#+BEGIN_SRC emacs-lisp
+  (defalias 'perl-mode 'cperl-mode)
+#+END_SRC

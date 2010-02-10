@@ -1,0 +1,135 @@
+#+TITLE: Config Modes Org
+
+* Org Mode
+
+Customization of Org Mode and related libraries.
+
+** Calendar
+
+Configure =calendar=.
+
+#+BEGIN_SRC emacs-lisp
+  (setq calendar-mark-holidays-flag t)
+
+  (require 'calendar)
+#+END_SRC
+
+** Org Remember
+
+Set up =remember= and =org-remember=.
+
+#+BEGIN_SRC emacs-lisp
+  (org-remember-insinuate)
+#+END_SRC
+
+Define =org-remember= templates.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-remember-templates
+        '(("todo" ?t
+           "* TODO %?\n\n  Date: %u\n\n  %i" nil "Todo List")
+          ("org-mac remember" ?w
+           "* %?\n\n  Source: %u, %c\n  Context: %a\n\n  %i" nil "Remember")
+          ("org-mac note" ?z
+           "* %?\n\n  Date: %u\n" nil "Notes")))
+#+END_SRC
+
+Define commands for these templates.
+
+#+BEGIN_SRC emacs-lisp
+  (defun org-remember-with-template (template-char)
+    (if (eq '- current-prefix-arg)
+        (org-remember current-prefix-arg)
+      (org-remember current-prefix-arg template-char)))
+  
+  (defun org-remember-default ()
+    (interactive)
+    (org-remember-with-template ?w))
+  
+  (defun org-remember-todo ()
+    (interactive)
+    (org-remember-with-template ?t))
+#+END_SRC
+
+Bind these commands to keys.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x C-r") #'org-remember-default)
+  (global-set-key (kbd "C-x C-t") #'org-remember-todo)
+#+END_SRC
+
+** Org Export
+
+Disable =flymake= while exporting.
+
+#+BEGIN_SRC emacs-lisp
+  (defadvice org-publish-projects
+    (around org-publish-disable-flymake activate)
+    "Disable `flymake' while publishing `org-mode' projects."
+    (let ((flymake-allowed-file-name-masks))
+      ad-do-it))
+#+END_SRC
+
+** Org Mode
+
+Load additional modules.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-modules
+        (append org-modules
+                '(org-protocol
+                  org-ctags
+                  org-inlinetask
+                  org-elisp-symbol
+                  org-mac-message
+                  org-mac-iCal
+                  org-mac-protocol)))
+  (when org-modules-loaded
+    (org-load-modules-maybe 'force))
+#+END_SRC
+
+Configure key bindings in =org-mode=.
+
+#+BEGIN_SRC emacs-lisp
+  (defun init/setup-org-mode-map ()
+    (yas/fix-trigger-key)
+    (define-key org-mode-map (kbd "<tab>") nil))
+#+END_SRC
+
+Modify default values computed by =org-mode=.
+
+#+BEGIN_SRC emacs-lisp
+  (defun init/setup-org-mode-vars ()
+    (setq org-directory (file-name-as-directory org-directory))
+    (setq org-default-notes-file (concat org-directory "notes.org")))
+#+END_SRC
+
+Configure =org-mode=.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-completion-use-ido t)
+  (setq org-support-shift-select t)
+  
+  (eval-after-load 'org
+    '(progn (init/setup-org-mode-map)
+            (init/setup-org-mode-vars)))
+#+END_SRC
+
+Use =org-mode= for Org files.
+
+#+BEGIN_SRC emacs-lisp
+  (aput 'auto-mode-alist (rx ".org" eos) 'org-mode)
+#+END_SRC
+
+** Global Org
+
+Bind globally useful =org-mode= functions.
+
+#+BEGIN_SRC emacs-lisp
+  (let ((prefix-key [(control x) (control o)]))
+    (flet ((org-kbd (&rest keys) (vconcat prefix-key (if keys (list keys)))))
+      (global-unset-key (org-kbd))
+      (global-set-key (org-kbd 'l) #'org-store-link)
+      (global-set-key (org-kbd 'a) #'org-agenda)
+      (global-set-key (org-kbd 'b) #'org-iswitchb)))
+#+END_SRC

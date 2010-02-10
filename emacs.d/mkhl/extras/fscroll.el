@@ -1,2 +1,0 @@
-
-(require 'fscroll nil 'noerror)

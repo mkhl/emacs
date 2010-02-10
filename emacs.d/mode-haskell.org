@@ -1,0 +1,55 @@
+#+TITLE: Config Modes Haskell
+
+* Haskell
+
+Customization of libraries related to Haskell.
+
+** Haskell Mode
+
+Load Haskell autoloads.
+
+#+BEGIN_SRC emacs-lisp
+  (load "haskell-site-file" 'noerror)
+#+END_SRC
+
+Configure Haskell mode defaults.
+
+#+BEGIN_SRC emacs-lisp
+  (defun hooks/haskell-mode-hook ()
+    (set-tab-width 4)
+    (c-subword-mode t))
+#+END_SRC
+
+Configure hooks in Haskell mode.
+
+#+BEGIN_SRC emacs-lisp
+  (defun init/setup-haskell-mode-hook ()
+    (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+    (add-hook 'haskell-mode-hook 'turn-on-eldoc-mode)
+    (add-hook 'haskell-mode-hook 'hooks/haskell-mode-hook)
+    (add-hook 'haskell-mode-hook 'hs-minor-mode-maybe))
+#+END_SRC
+
+Configure key bindings in Haskell mode.
+
+#+BEGIN_SRC emacs-lisp
+  (defun init/setup-haskell-mode-map ()
+    (define-key haskell-mode-map (kbd "C-c d h") #'haskell-hoogle)
+    (define-key haskell-mode-map (kbd "C-c d y") #'haskell-hayoo))
+#+END_SRC
+
+Configure Haskell mode.
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'completion-ignored-extensions ".hi")
+  
+  (setq haskell-hoogle-command nil)
+  
+  (setq haskell-indentation-layout-offset 4)
+  (setq haskell-indentation-left-offset 4)
+  (setq haskell-indentation-ifte-offset 4)
+  
+  (eval-after-load 'haskell-mode
+    '(progn (init/setup-haskell-mode-hook)
+            (init/setup-haskell-mode-map)))
+#+END_SRC
