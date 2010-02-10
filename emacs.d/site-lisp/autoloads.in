@@ -1,5 +1,6 @@
-;;; -*-emacs-lisp-*-
+;;;;; -*-emacs-lisp-*-
 
+;;; Function to generate autoloads
 (eval-when-compile
   (require 'cl)
   (require 'autoload))
@@ -62,3 +63,4 @@
 (autoload 'redo "redo" nil t)
 
 ;;; Generated autoloads (made by autoload.el)
+
