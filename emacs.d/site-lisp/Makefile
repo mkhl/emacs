@@ -1,7 +1,8 @@
-DIRS	:= tools modes extras
+FILES   := Makefile autoloads.in autoloads.el autoloads.elc
+DIRS    := $(filter-out $(FILES),$(wildcard *))
 SPECIAL := autoloads.el
-SOURCE	:= $(filter-out $(SPECIAL),$(wildcard $(addsuffix /*.el,$(DIRS))))
-TARGET	:= $(patsubst %.el,%.elc,$(SPECIAL) $(SOURCE))
+SOURCE  := $(wildcard $(addsuffix /*.el,$(DIRS)))
+TARGET  := $(patsubst %.el,%.elc,$(SPECIAL) $(SOURCE))
 EMACS   := emacs
 EMACS-BATCH := $(EMACS) --batch
 
