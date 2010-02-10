@@ -1,0 +1,21 @@
+;;;;; -*-emacs-lisp-*-
+
+;;; Function to generate autoloads
+(eval-when-compile
+  (require 'cl)
+  (require 'autoload))
+
+(defun generate-autoloads ()
+  (setf generated-autoload-file (pop command-line-args-left))
+  (batch-update-autoloads))
+
+;;; Set up `load-path' so these autoloads make sense.
+(let* ((this-file (or load-file-name (buffer-file-name)))
+       (this-dir (file-name-directory this-file))
+       (non-hidden (rx bos (not (in ".")))))
+  (dolist (subdir (directory-files this-dir 'full non-hidden))
+    (when (file-directory-p subdir)
+      (add-to-list 'load-path subdir))))
+
+;;; Generated autoloads (made by autoload.el)
+
