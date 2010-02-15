@@ -14,7 +14,7 @@ Configure common C-based mode defaults.
     (c-toggle-hungry-state t)
     (c-toggle-electric-state t)
     (c-toggle-auto-newline t)
-    (c-subword-mode t))
+    (subword-mode t))
   
   (eval-after-load 'cc-mode
     '(progn (aput 'c-default-style 'other "bsd")
