@@ -484,6 +484,7 @@ Rebind =backward-kill-sexp=.
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "<C-M-backspace>") #'backward-kill-sexp)
+  (global-set-key (kbd "<C-M-delete>") #'backward-kill-sexp)
 #+END_SRC
 
 Make =kill-line= call =delete-indentation= when sensible.
