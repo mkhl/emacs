@@ -1074,6 +1074,13 @@ Fix Yasnippet in modes locally overriding its trigger key.
         (local-unset-key (read-kbd-macro yas/trigger-key)))))
 #+END_SRC
 
+** =autopairs=
+
+#+BEGIN_SRC emacs-lisp
+  (when (functionp 'autopair-global-mode)
+    (autopair-global-mode t))
+#+END_SRC
+
 ** =diminish=
 
 #+BEGIN_SRC emacs-lisp
@@ -1088,42 +1095,11 @@ Fix Yasnippet in modes locally overriding its trigger key.
           `(diminish ',mode)))))
 #+END_SRC
 
-
-** TODO =color-theme=
-
-#+BEGIN_SRC emacs-lisp
-  ;; (defun mk/after-init-color-theme ()
-  ;;   (dolist (theme '(color-theme-quiet-light
-  ;;                    color-theme-gtk-ide))
-  ;;     (when (functionp theme)
-  ;;       (funcall theme)
-  ;;       (return))))
-  ;; (when (load "color-theme-autoloads" 'noerror)
-  ;;   (color-theme-initialize)
-  ;;   (eval-after-init
-  ;;     (mk/after-init-color-theme)))
-#+END_SRC
-
-** TODO =autopairs=
+** =color-theme=
 
 #+BEGIN_SRC emacs-lisp
-  ;; (defun insert-pair-or-skip ()
-  ;;   "When looking at the character to be inserted, skip over it.
-  ;; Otherwise call `insert-pair', which see."
-  ;;   (interactive)
-  ;;   (let* ((char (event-basic-type last-command-event)))
-  ;;     (if (and (characterp char)
-  ;;              (looking-at (char-to-string char)))
-  ;;         (call-interactively 'forward-char)
-  ;;       (call-interactively 'insert-pair))))
-  ;; (setq parens-require-spaces nil)
-  ;; (dolist* ((car . cdr) '(("M-(" . "M-)")
-  ;;                         ("M-[" . "M-]")
-  ;;                         ("M-{" . "M-}")))
-  ;;   (global-set-key (read-kbd-macro car) #'insert-pair)
-  ;;   (global-set-key (read-kbd-macro cdr) #'up-list))
-  ;; (global-set-key (kbd "M-\'") #'insert-pair-or-skip)
-  ;; (global-set-key (kbd "M-\"") #'insert-pair-or-skip)
+  (when (functionp 'color-theme-initialize)
+    (color-theme-initialize))
 #+END_SRC
 
 ** TODO =textmate=
