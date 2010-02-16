@@ -1089,7 +1089,10 @@ Fix Yasnippet in modes locally overriding its trigger key.
                                (hs-minor-mode (hideshow))
                                (paredit-mode (paredit paredit-21))
                                (ruby-electric-mode (ruby-electric))
-                               (highlight-symbol-mode (highlight-symbol))))
+                               (highlight-symbol-mode (highlight-symbol))
+                               (yas/minor-mode (yasnippet yasnippet-bundle))
+                               (autopair-mode (autopair))
+                               ))
       (dolist (from sources)
         (eval-after-load from
           `(diminish ',mode)))))
