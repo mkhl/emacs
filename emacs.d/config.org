@@ -598,6 +598,18 @@ Frame switching.
   (global-set-key (ns-command-key ?~) #'previous-multiframe-window)
 #+END_SRC
 
+*** Windows
+
+Try to =view-echo-area-messages= in =view-mode=.
+
+#+BEGIN_SRC emacs-lisp
+  (defadvice view-echo-area-messages
+    (around view-echo-area-messages-view-mode activate)
+    (let ((undo-window (list (window-buffer) (window-start) (window-point))))
+      ad-do-it
+      (view-mode-enter (cons (selected-window) (cons nil undo-window)))))
+#+END_SRC
+
 *** UI Elements
 
 Show some but not too much information in the modeline.
