@@ -649,10 +649,10 @@ Generate unified diffs.
   (setq diff-switches "-u")
 #+END_SRC
 
-Use =hunspell= for spell-checking.
+Use =aspell= for spell-checking.
 
 #+BEGIN_SRC emacs-lisp
-  (setq ispell-program-name "hunspell")
+  (setq ispell-program-name "aspell")
 #+END_SRC
 
 ** Load_Path
