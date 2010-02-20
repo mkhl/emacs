@@ -101,7 +101,7 @@ Modify default values computed by =org-mode=.
 #+BEGIN_SRC emacs-lisp
   (defun init/setup-org-mode-vars ()
     (setq org-directory (file-name-as-directory org-directory))
-    (setq org-agenda-files (list org-directory dot-emacs-dir))
+    (setq org-agenda-files (list org-directory))
     (setq org-default-notes-file (concat org-directory "notes.org")))
 #+END_SRC
 
