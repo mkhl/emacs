@@ -65,9 +65,6 @@
         "file": "hen.el",
         "src": "http://www.call-with-current-continuation.org/hen.el"
     }, {
-        "file": "hs-lint.el",
-        "src": "http://xtalk.msk.su/~ott/common/emacs/hs-lint.el"
-    }, {
         "file": "io-mode.el",
         "src": "http://github.com/stevedekorte/io/raw/master/extras/SyntaxHighlighters/Emacs/io-mode.el"
     }, {
@@ -75,13 +72,10 @@
         "src": "http://ipython.scipy.org/dist/ipython.el"
     }, {
         "file": "maude-mode2.el",
-        "src": "maude.cs.uiuc.edu/download/maude-mode2.el"
+        "src": "http://maude.cs.uiuc.edu/download/maude-mode2.el"
     }, {
         "file": "pod-mode.el",
         "src": "http://search.cpan.org/src/SCHWIGON/pod-mode-0.5/pod-mode.el"
-    }, {
-        "file": "quack.el",
-        "src": "http://www.neilvandyke.org/quack/quack.el"
     }, {
         "file": "rdoc-mode.el",
         "src": "http://svn.ruby-lang.org/repos/ruby/trunk/misc/rdoc-mode.el"
@@ -89,7 +83,7 @@
         "file": "ruby-electric.el",
         "src": "http://svn.ruby-lang.org/repos/ruby/trunk/misc/ruby-electric.el"
     }, {
-        "file": "scheme-complete.el",
+        "file": "scheme-complete-0.8.9.el.gz",
         "src": "http://synthcode.com/emacs/scheme-complete-0.8.9.el.gz"
     }, {
         "file": "scheme48.el",
