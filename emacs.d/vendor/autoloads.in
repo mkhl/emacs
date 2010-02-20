@@ -17,5 +17,25 @@
     (when (file-directory-p subdir)
       (add-to-list 'load-path subdir))))
 
+;;; Manually created autoloads for `vendor' packages
+
+(autoload 'gitsum "gitsum" nil t)
+
+(autoload 'magit-status "magit" nil t)
+
+(autoload 'markdown "markdown-mode" nil t)
+(autoload 'markdown-preview "markdown-mode" nil t)
+(autoload 'markdown-mode "markdown-mode" nil t)
+(let ((regexp (rx ".m" (| (: (? "ark") "down") (: "d" (? "own")) "kdn") eos)))
+  (add-to-list 'auto-mode-alist (cons regexp 'markdown-mode)))
+
+(autoload 'regex-tool "regex-tool" nil t)
+
+(autoload 'treetop-mode "treetop-mode" nil t)
+(add-to-list 'auto-mode-alist (cons (rx ".treetop" eos) 'treetop-mode))
+
+(autoload 'yaml-mode "yaml-mode" nil t)
+(add-to-list 'auto-mode-alist (cons (rx ".y" (? "a") "ml" eos) 'yaml-mode))
+
 ;;; Generated autoloads (made by autoload.el)
 
