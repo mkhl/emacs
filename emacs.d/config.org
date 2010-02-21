@@ -206,28 +206,6 @@ Support hiding Emacs.
     (ns (global-set-key [remap suspend-frame] #'ns-do-hide-emacs)))
 #+END_SRC
 
-Define more Mac-like CUA keys.
-TODO: Really?
-
-#+BEGIN_SRC emacs-lisp
-  (case window-system
-    ((ns mac)
-     (defvar extended-command-command 'execute-extended-command
-       "Command to run extended commands with.")
-  
-     (defun kill-region-or-meta-x ()
-       "Kill the region, if active, otherwise run `extended-command-command'."
-       (interactive)
-       (if (region-active-p)
-           (call-interactively 'kill-region)
-         (call-interactively extended-command-command)))
-  
-     (global-set-key (ns-command-key 'x) #'kill-region-or-meta-x)
-     (global-set-key (ns-command-key 'c) #'copy-region-as-kill)
-     (global-set-key (ns-command-key 'v) #'yank)
-     (global-set-key (ns-command-key 'V) #'yank-pop)))
-#+END_SRC
-
 Fix Emacs 23 =local-function-key-map=.
 
 #+BEGIN_SRC emacs-lisp
