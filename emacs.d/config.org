@@ -1024,7 +1024,7 @@ Customization of libraries separate from Emacs.
 #+END_SRC
 
 ** =yasnippet=
-sb
+
 Load additional snippets.
 
 #+BEGIN_SRC emacs-lisp
