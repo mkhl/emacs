@@ -1067,10 +1067,11 @@ Fix Yasnippet in modes locally overriding its trigger key.
 #+BEGIN_SRC emacs-lisp
   (defun yas/fix-trigger-key ()
     "Ensure `yasnippet' works in spite of overriding local bindings."
-    (let ((local-func (local-key-binding (read-kbd-macro yas/trigger-key))))
-      (when (and (featurep 'yasnippet) yas/minor-mode local-func)
-        (setq yas/fallback-behavior (list 'apply local-func))
-        (local-unset-key (read-kbd-macro yas/trigger-key)))))
+    (when (featurep 'yasnippet)
+      (let ((local-func (local-key-binding (read-kbd-macro yas/trigger-key))))
+        (when (and yas/minor-mode local-func)
+          (setq yas/fallback-behavior (list 'apply local-func))
+          (local-unset-key (read-kbd-macro yas/trigger-key))))))
 #+END_SRC
 
 ** =autopairs=
