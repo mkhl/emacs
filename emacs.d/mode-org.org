@@ -122,6 +122,13 @@ Use =org-mode= for Org files.
   (aput 'auto-mode-alist (rx ".org" eos) 'org-mode)
 #+END_SRC
 
+** Org Info
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'Info-directory-list
+               (expand-file-name "org/doc" dot-emacs-dir))
+#+END_SRC
+
 ** Global Org
 
 Bind globally useful =org-mode= functions.
