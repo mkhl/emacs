@@ -87,3 +87,13 @@ Prefer =python-mode= over =python=.
   (eval-after-load 'python-mode
     '(defalias 'run-python 'py-shell))
 #+END_SRC
+
+Configure Pysmell.
+
+#+BEGIN_SRC emacs-lisp
+  (when (functionp 'pysmell-mode)
+    (unless (functionp 'enable-pysmell-mode)
+      (defun enable-pysmell-mode () (pysmell-mode +1)))
+    (eval-after-load 'python-mode
+      '(add-hook 'python-mode-hook 'enable-pysmell-mode)))
+#+END_SRC

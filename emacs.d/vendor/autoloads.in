@@ -29,6 +29,8 @@
 (let ((regexp (rx ".m" (| (: (? "ark") "down") (: "d" (? "own")) "kdn") eos)))
   (add-to-list 'auto-mode-alist (cons regexp 'markdown-mode)))
 
+(autoload 'pysmell-mode "pysmell" nil t)
+
 (autoload 'regex-tool "regex-tool" nil t)
 
 (autoload 'treetop-mode "treetop-mode" nil t)
