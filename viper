@@ -16,3 +16,6 @@
 (set-face-background 'viper-minibuffer-emacs nil)
 (set-face-background 'viper-minibuffer-insert nil)
 (set-face-background 'viper-minibuffer-vi nil)
+
+(defadvice viper-maybe-checkout (around viper-never-checkout activate)
+  "Don't try to checkout files, the concept is just broken." nil)
