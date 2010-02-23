@@ -28,9 +28,6 @@
         "file": "browse-kill-ring.el",
         "src": "http://www.emacswiki.org/emacs/download/browse-kill-ring.el"
     }, {
-        "file": "ell.el",
-        "src": "http://www.damtp.cam.ac.uk/user/eglen/emacs/ell.el"
-    }, {
         "file": "igrep.el",
         "src": "http://www.emacswiki.org/emacs/download/igrep.el"
     }, {
