@@ -7,6 +7,7 @@ Libraries used during initialization.
 #+BEGIN_SRC emacs-lisp
   (require 'cl)
   (require 'assoc)
+  (require 'info)
 #+END_SRC
 
 * Basics
@@ -202,8 +203,18 @@ Use a helpful frame title.
 Support hiding Emacs.
 
 #+BEGIN_SRC emacs-lisp
+  (defun mac-do-hide-emacs ()
+    (interactive)
+    (do-applescript
+     (format "tell app \"System Events\"
+                  set visible of application process \"%s\" to false
+              end tell" invocation-name)))
+  
   (case window-system
-    (ns (global-set-key [remap suspend-frame] #'ns-do-hide-emacs)))
+    (ns (defadvice suspend-frame (around ns-do-hide-emacs activate)
+          (ns-do-hide-emacs)))
+    (mac (defadvice iconify-frame (around mac-do-hide-emacs activate)
+           (mac-do-hide-emacs))))
 #+END_SRC
 
 Fix Emacs 23 =local-function-key-map=.
