@@ -130,3 +130,11 @@ Configure Ropemacs.
     (eval-after-load library
       '(load-ropemacs)))
 #+END_SRC
+
+*** Pymacs
+
+Configure Pymacs.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'pymacs nil 'noerror)
+#+END_SRC
