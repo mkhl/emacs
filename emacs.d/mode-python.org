@@ -115,3 +115,18 @@ Configure Pysmell.
       (eval-after-load library
         '(add-hook 'python-mode-hook 'enable-pysmell-mode))))
 #+END_SRC
+
+*** Ropemacs
+
+Configure Ropemacs.
+
+#+BEGIN_SRC emacs-lisp
+  (defun load-ropemacs ()
+    (interactive)
+    (require 'pymacs)
+    (pymacs-load "ropemacs" "rope-"))
+  
+  (dolist (library '(python python-mode))
+    (eval-after-load library
+      '(load-ropemacs)))
+#+END_SRC
