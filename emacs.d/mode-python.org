@@ -94,6 +94,15 @@ Make sure =hideshow= works with =python-mode=.
        (py-end-of-def-or-class 'either)))
 #+END_SRC
 
+*** Pycomplete
+
+Configure Pycomplete.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'python-mode
+    '(require 'pycomplete nil 'noerror))
+#+END_SRC
+
 *** Pysmell
 
 Configure Pysmell.
