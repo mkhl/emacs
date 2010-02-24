@@ -91,8 +91,5 @@
     }, {
         "file": "textile-mode.el",
         "src": "http://github.com/technomancy/emacs-starter-kit/raw/master/elpa-to-submit/textile-mode.el"
-    }, {
-        "file": "treetop.el",
-        "src": "http://github.com/hornbeck/public_emacs/raw/master/treetop.el"
     } ]
 }

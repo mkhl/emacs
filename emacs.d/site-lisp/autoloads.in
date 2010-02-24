@@ -51,9 +51,6 @@
 (autoload 'scheme-get-current-symbol-info "scheme-complete-0.8.9")
 
 (autoload 'scheme48-mode "scheme48" nil t)
-
-(autoload 'treetop-mode "treetop" nil t)
-(add-to-list 'auto-mode-alist (cons (rx ".treetop" eos) 'treetop-mode))
 
 ;;; Manually created autoloads for `site-lisp/extras'
 
