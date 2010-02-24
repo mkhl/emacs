@@ -1058,7 +1058,7 @@ Configure Yasnippet.
   
   (when (functionp 'yas/global-mode)
     (init/setup-yasnippet-snippets-dir)
-    (init/setup-yasnippet-hippie-expand)
+    ;; (init/setup-yasnippet-hippie-expand)
     (yas/global-mode t))
 #+END_SRC
 
