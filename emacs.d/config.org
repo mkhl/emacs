@@ -178,6 +178,11 @@ Support for older Emacsen.
       "\\`\\(?:[\\/][\\/][^\\/]+\\|/\\(?:net\\|afs\\|\\.\\.\\.\\)/\\)\\'"))
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+  (unless (functionp 'subword-mode)
+    (defalias 'subword-mode 'c-subword-mode))
+#+END_SRC
+
 ** System Integration
 
 *** TODO Mac OS X
