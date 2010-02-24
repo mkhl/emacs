@@ -45,14 +45,15 @@ Use Ruby mode for Rakefiles.
 
 ** Inferior Ruby
 
-Use Yarv as the inferior Ruby.
+Try to figure out which inferior Ruby to use.
 
 #+BEGIN_SRC emacs-lisp
-  (setq inf-ruby-default-implementation "yarv")
-  
   (eval-after-load 'inf-ruby
-    '(aput 'inf-ruby-implementations "yarv"
-           "irb19 --inf-ruby-mode -r irb/completion"))
+    '(dolist (impl '("rubinius" "yarv" "ruby"))
+       (let ((command (aget inf-ruby-implementations impl)))
+         (when (executable-find (first (split-string command)))
+           (setq inf-ruby-default-implementation impl)
+           (return)))))
 #+END_SRC
 
 ** Support
