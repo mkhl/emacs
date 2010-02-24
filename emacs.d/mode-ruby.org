@@ -57,6 +57,7 @@ Try to figure out which inferior Ruby to use.
 #+END_SRC
 
 ** Support
+*** Flymake
 
 Add support for =flymake=.
 
@@ -68,6 +69,8 @@ Add support for =flymake=.
      (lambda (source base-dir)
        `("ruby" ("-wc" ,source)))))
 #+END_SRC
+
+*** Hideshow
 
 Add support for =hideshow=.
 

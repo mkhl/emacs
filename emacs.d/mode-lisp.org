@@ -77,7 +77,7 @@ Configure Scheme-Complete.
 
 *** Slime
 
-Load Slime.
+Load Slime autoloads.
 
 #+BEGIN_SRC emacs-lisp
   (require 'slime-autoloads nil 'noerror)

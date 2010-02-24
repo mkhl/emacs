@@ -45,6 +45,7 @@ The colors don't work well in (Cocoa) Emacs 23...
 #+END_SRC
 
 ** Support
+*** PDB
 
 Add support for =gud=.
 
@@ -52,6 +53,8 @@ Add support for =gud=.
   (eval-after-load 'gud
     '(setq gud-pdb-command-name "python -mpdb"))
 #+END_SRC
+
+*** Flymake
 
 Add support for =flymake=.
 
@@ -64,6 +67,8 @@ Add support for =flymake=.
        `("pyflakes" (,source)))))
 #+END_SRC
 
+*** Hideshow
+
 Add support for =hideshow=.
 
 #+BEGIN_SRC emacs-lisp
@@ -71,6 +76,15 @@ Add support for =hideshow=.
     '(aput 'hs-special-modes-alist 'python-mode
            (list (regexp-opt '("class" "def") 'words) nil
                  "#" 'python-end-of-block nil)))
+#+END_SRC
+
+*** Python Mode
+
+Prefer =python-mode= over =python=.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'python-mode
+    '(defalias 'run-python 'py-shell))
 #+END_SRC
 
 Make sure =hideshow= works with =python-mode=.
@@ -81,12 +95,7 @@ Make sure =hideshow= works with =python-mode=.
        (py-end-of-def-or-class 'either)))
 #+END_SRC
 
-Prefer =python-mode= over =python=.
-
-#+BEGIN_SRC emacs-lisp
-  (eval-after-load 'python-mode
-    '(defalias 'run-python 'py-shell))
-#+END_SRC
+*** Pysmell
 
 Configure Pysmell.
 
@@ -94,6 +103,7 @@ Configure Pysmell.
   (when (functionp 'pysmell-mode)
     (unless (functionp 'enable-pysmell-mode)
       (defun enable-pysmell-mode () (pysmell-mode +1)))
-    (eval-after-load 'python-mode
-      '(add-hook 'python-mode-hook 'enable-pysmell-mode)))
+    (dolist (library '(python python-mode))
+      (eval-after-load library
+        '(add-hook 'python-mode-hook 'enable-pysmell-mode))))
 #+END_SRC
