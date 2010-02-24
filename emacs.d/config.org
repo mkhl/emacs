@@ -817,6 +817,13 @@ Make =vc= work with symlinks.
   (setq-default vc-follow-symlinks t)
 #+END_SRC
 
+*** =viper=
+
+#+BEGIN_SRC emacs-lisp
+  (setq viper-mode t)
+  (require 'viper)
+#+END_SRC
+
 ** Completion
 *** =icomplete=
 
