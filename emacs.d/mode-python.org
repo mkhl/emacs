@@ -34,14 +34,14 @@ Configure Python mode.
       '(init/setup-python-mode-hook)))
 #+END_SRC
 
-** TODO Inferior Python
+** Inferior Python
 
 Prefer IPython over vanilla Python.
 
-I'd love to enable this but the =ansi-color= support has problems.
+The colors don't work well in (Cocoa) Emacs 23...
 
 #+BEGIN_SRC emacs-lisp
-  ;; (require 'ipython nil 'noerror)
+  (require 'ipython nil 'noerror)
 #+END_SRC
 
 ** Support
