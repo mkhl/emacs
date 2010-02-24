@@ -872,6 +872,7 @@ Enable =hs-minor-mode= in supported major modes.
 #+BEGIN_SRC emacs-lisp
   (defun hs-minor-mode-maybe ()
     "Turn on `hs-minor-mode' when `major-mode' supports it."
+    (require 'hideshow)
     (when (assoc major-mode hs-special-modes-alist)
       (hs-minor-mode +1)))
   

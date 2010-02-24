@@ -18,8 +18,7 @@ Configure hooks in Python mode.
 #+BEGIN_SRC emacs-lisp
   (defun init/setup-python-mode-hook ()
     (add-hook 'python-mode-hook 'hooks/python-mode-hook)
-    (add-hook 'python-mode-hook 'turn-on-eldoc-mode)
-    (add-hook 'python-mode-hook 'hs-minor-mode-maybe))
+    (add-hook 'python-mode-hook 'turn-on-eldoc-mode))
 #+END_SRC
 
 Configure Python mode.

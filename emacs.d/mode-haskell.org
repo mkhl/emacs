@@ -26,8 +26,7 @@ Configure hooks in Haskell mode.
   (defun init/setup-haskell-mode-hook ()
     (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
     (add-hook 'haskell-mode-hook 'turn-on-eldoc-mode)
-    (add-hook 'haskell-mode-hook 'hooks/haskell-mode-hook)
-    (add-hook 'haskell-mode-hook 'hs-minor-mode-maybe))
+    (add-hook 'haskell-mode-hook 'hooks/haskell-mode-hook))
 #+END_SRC
 
 Configure key bindings in Haskell mode.

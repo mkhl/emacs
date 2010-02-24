@@ -17,8 +17,7 @@ Configure hooks in Ruby mode.
 
 #+BEGIN_SRC emacs-lisp
   (defun init/setup-ruby-mode-hook ()
-    (add-hook 'ruby-mode-hook 'hooks/ruby-mode-hook)
-    (add-hook 'ruby-mode-hook 'hs-minor-mode-maybe))
+    (add-hook 'ruby-mode-hook 'hooks/ruby-mode-hook))
 #+END_SRC
 
 Configure key bindings in Ruby mode.
