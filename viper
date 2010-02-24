@@ -4,3 +4,8 @@
 (setq viper-ex-style-editing nil)
 (setq viper-vi-style-in-minibuffer nil)
 (setq viper-want-ctl-h-help t)
+
+(setq viper-replace-state-cursor-color nil)
+(setq viper-insert-state-cursor-color nil)
+(setq viper-emacs-state-cursor-color nil)
+(setq viper-vi-state-cursor-color nil)
