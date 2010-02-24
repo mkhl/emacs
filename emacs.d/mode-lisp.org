@@ -13,12 +13,13 @@ Use Clozure CL.
   (setq inferior-lisp-program "ccl -K utf-8")
 #+END_SRC
 
-Configure Slime to use Clozure CL.
+Configure Slime to use Clozure CL or SBCL.
 
 #+BEGIN_SRC emacs-lisp
   (eval-after-load 'slime
-    '(aput 'slime-lisp-implementations 'ccl
-           (list (split-string inferior-lisp-program))))
+    '(progn (aput 'slime-lisp-implementations 'sbcl '(("sbcl")))
+            (aput 'slime-lisp-implementations 'ccl
+                  (list (split-string inferior-lisp-program)))))
 #+END_SRC
 
 *** Inferior Scheme
