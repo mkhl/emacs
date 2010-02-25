@@ -534,6 +534,12 @@ Indent yanked text when sensible.
     (indent-yanked-region))
 #+END_SRC
 
+Configure text modes.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'text-mode-hook #'turn-on-visual-line-mode)
+#+END_SRC
+
 *** Scrolling
 
 ...conservatively.
