@@ -46,10 +46,8 @@ Configure Scheme-Complete defaults.
 
 #+BEGIN_SRC emacs-lisp
   (defun hooks/enable-scheme-complete ()
-    (set (make-local-variable 'lisp-indent-function)
-         'scheme-smart-indent-function)
-    (set (make-local-variable 'eldoc-documentation-function)
-         'scheme-get-current-symbol-info))
+    (setl lisp-indent-function 'scheme-smart-indent-function)
+    (setl eldoc-documentation-function 'scheme-get-current-symbol-info))
 #+END_SRC
 
 Add Scheme-Complete to Scheme mode hook.

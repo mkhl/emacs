@@ -10,7 +10,7 @@ Configure AppleScript mode defaults.
 
 #+BEGIN_SRC emacs-lisp
   (defun hooks/applescript-mode-hook ()
-    (set (make-local-variable 'yas/indent-line) 'fixed)
+    (setl yas/indent-line 'fixed)
     (setq indent-line-function 'tab-to-tab-stop)
     (setq indent-tabs-mode t)
     (set-tab-width 4)

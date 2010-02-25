@@ -46,6 +46,14 @@ Support Common Lisp conventions in =dolist=.
            ,@body))))
 #+END_SRC
 
+Easier local variables.
+
+#+BEGIN_SRC emacs-lisp
+  (defmacro setl (sym val)
+    "Like setq, but makes sym a local variable first."
+    `(set (make-local-variable ',sym) ,val))
+#+END_SRC
+
 *** Process Control
 
 Sugar for =after-init-hook=.
@@ -106,8 +114,7 @@ Configure consistent =tab-width= and =tab-stop-list=.
   (defun set-tab-width (width)
     "Set `tab-width' and `tab-stop-list' to match WIDTH."
     (setq tab-width width)
-    (set (make-local-variable 'tab-stop-list)
-         (number-sequence width 120 width)))
+    (setl tab-stop-list (number-sequence width 120 width)))
 #+END_SRC
 
 *** Strings
