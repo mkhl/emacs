@@ -1001,6 +1001,13 @@ Customization of libraries separate from Emacs.
   (require 'dirvars nil 'noerror)
 #+END_SRC
 
+** =folding=
+
+#+BEGIN_SRC emacs-lisp
+  (when (functionp 'folding-install-hooks)
+    (folding-install-hooks))
+#+END_SRC
+
 ** =fscroll=
 
 #+BEGIN_SRC emacs-lisp
