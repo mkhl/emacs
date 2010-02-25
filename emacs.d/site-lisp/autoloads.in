@@ -54,6 +54,8 @@
 
 ;;; Manually created autoloads for `site-lisp/extras'
 
+(autoload 'iedit-mode "iedit" nil t)
+
 (autoload 'indent-tabs-maybe "indent-tabs-maybe")
 
 (autoload 'paredit-mode "paredit-21" nil t)

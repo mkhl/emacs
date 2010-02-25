@@ -9,6 +9,10 @@
         "file": "fscroll.el",
         "src": "http://www.davep.org/emacs/fscroll.el"
     }, {
+        // iedit-mode.el
+        "file": null,
+        "src": "http://article.gmane.org/gmane.emacs.sources/3381"
+    }, {
         "file": "indent-tabs-maybe.el",
         "src": "http://www.loveshack.ukfsn.org/emacs/indent-tabs-maybe.el"
     }, {
