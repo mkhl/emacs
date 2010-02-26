@@ -596,6 +596,12 @@ Frame switching.
   (global-set-key (ns-command-key ?~) #'previous-multiframe-window)
 #+END_SRC
 
+Don't pop up every new frame.
+
+#+BEGIN_SRC emacs-lisp
+  (setq ns-pop-up-frames nil)
+#+END_SRC
+
 *** Windows
 
 Try to =view-echo-area-messages= in =view-mode=.
