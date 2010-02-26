@@ -63,6 +63,9 @@
         "file": "google-c-style.el",
         "src": "http://google-styleguide.googlecode.com/svn/trunk/google-c-style.el"
     }, {
+        "file": "graphviz-dot-mode.el",
+        "src": "http://users.skynet.be/ppareit/projects/graphviz-dot-mode/graphviz-dot-mode.el"
+    }, {
         "file": "hen.el",
         "src": "http://www.call-with-current-continuation.org/hen.el"
     }, {
