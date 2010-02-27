@@ -30,6 +30,8 @@ Configure key bindings in Ruby mode.
 Configure Ruby mode.
 
 #+BEGIN_SRC emacs-lisp
+  (setq ruby-insert-encoding-magic-comment nil)
+  
   (eval-after-load 'ruby-mode
     '(progn (init/setup-ruby-mode-hook)
             (init/setup-ruby-mode-map)))
