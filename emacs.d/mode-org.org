@@ -10,7 +10,8 @@ Configure =calendar=.
 
 #+BEGIN_SRC emacs-lisp
   (setq calendar-mark-holidays-flag t)
-
+  (setq calendar-week-start-day 1)
+  
   (require 'calendar)
 #+END_SRC
 
