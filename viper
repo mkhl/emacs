@@ -19,3 +19,11 @@
 
 (defadvice viper-maybe-checkout (around viper-never-checkout activate)
   "Don't try to checkout files, the concept is just broken." nil)
+
+(eval-after-load 'hideshow
+  '(progn (define-key viper-vi-basic-map "za" 'hs-toggle-hiding)
+          (define-key viper-vi-basic-map "zm" 'hs-hide-all)
+          (define-key viper-vi-basic-map "zr" 'hs-show-all)
+          (define-key viper-vi-basic-map "zo" 'hs-show-block)
+          (define-key viper-vi-basic-map "zc" 'hs-hide-block)
+          (define-key viper-vi-basic-map "zi" 'hs-minor-mode)))
