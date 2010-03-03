@@ -578,8 +578,8 @@ Highlight the current line.
 Initial frame settings.
 
 #+BEGIN_SRC emacs-lisp
-  (aput 'initial-frame-alist 'top 40)
-  (aput 'initial-frame-alist 'left 100)
+  (aput 'initial-frame-alist 'top 88)
+  (aput 'initial-frame-alist 'left 128)
 #+END_SRC
 
 Default frame settings.
