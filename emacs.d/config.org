@@ -876,6 +876,21 @@ Make =vc= work with symlinks.
   (global-set-key (kbd "M-/") #'hippie-expand)
 #+END_SRC
 
+*** =skeleton=
+
+#+BEGIN_SRC emacs-lisp
+  (setq skeleton-pair t)
+
+  (dolist (char '(?\( ?\[ ?\{))
+    (global-set-key (string char) #'skeleton-pair-insert-maybe))
+  (dolist (char '(?\` ?\"))
+    (define-key text-mode-map (string char) #'skeleton-pair-insert-maybe))
+
+  (dolist (pair '((?\[ . ?\]) (?\{ . ?\})))
+    (global-set-key (vector (list 'meta (car pair))) #'insert-pair)
+    (global-set-key (vector (list 'meta (cdr pair))) #'up-list))
+#+END_SRC
+
 ** Annotation
 *** =flymake=
 
@@ -1129,13 +1144,6 @@ Fix Yasnippet in modes locally overriding its trigger key.
         (when (and yas/minor-mode local-func)
           (setq yas/fallback-behavior (list 'apply local-func))
           (local-unset-key (read-kbd-macro yas/trigger-key))))))
-#+END_SRC
-
-** =autopair=
-
-#+BEGIN_SRC emacs-lisp
-  (when (functionp 'autopair-global-mode)
-    (autopair-global-mode t))
 #+END_SRC
 
 ** =diminish=
