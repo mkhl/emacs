@@ -217,10 +217,12 @@ Support hiding Emacs.
 #+BEGIN_SRC emacs-lisp
   (defun mac-do-hide-emacs ()
     (interactive)
-    (do-applescript
-     (format "tell app \"System Events\"
-                  set visible of application process \"%s\" to false
-              end tell" invocation-name)))
+    (if (executable-find "appswitch")
+        (shell-command (format "appswitch -h -a %s" invocation-name))
+      (do-applescript
+       (format "tell app \"System Events\"
+                    set visible of application process \"%s\" to false
+                end tell" invocation-name))))
   
   (case window-system
     (ns (defadvice suspend-frame (around ns-do-hide-emacs activate)
