@@ -28,8 +28,9 @@ Configure AppleScript mode.
 
 #+BEGIN_SRC emacs-lisp
   (when (require 'erlang-start nil 'noerror)
-    (let ((root (file-name-directory (file-truename (locate-library "erlang")))))
-      (setq erlang-root-dir (expand-file-name "../../../../../" root))))
+    (let* ((erlang-path (file-truename (locate-library "erlang")))
+           (erlang-dir (file-name-directory erlang-path)))
+      (setq erlang-root-dir (expand-file-name "../../../../../" erlang-dir))))
 #+END_SRC
 
 ** Factor
