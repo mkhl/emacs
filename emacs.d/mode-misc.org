@@ -37,8 +37,10 @@ Configure AppleScript mode.
 
 #+BEGIN_SRC emacs-lisp
   (when (load "fu" 'noerror)
-    (setq fuel-factor-fuel-dir (file-truename fuel-factor-fuel-dir))
-    (setq fuel-factor-root-dir (expand-file-name "../../" fuel-factor-fuel-dir)))
+    (setq fuel-factor-fuel-dir
+          (file-truename fuel-factor-fuel-dir))
+    (setq fuel-factor-root-dir
+          (expand-file-name "../../" fuel-factor-fuel-dir)))
 #+END_SRC
 
 ** Perl
