@@ -56,7 +56,6 @@ Bind these commands to keys.
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x C-r") #'org-remember-default)
-  (global-set-key (kbd "C-x C-t") #'org-remember-todo)
 #+END_SRC
 
 ** Org Export
@@ -136,9 +135,12 @@ Bind globally useful =org-mode= functions.
 
 #+BEGIN_SRC emacs-lisp
   (let ((prefix-key [(control x) (control o)]))
-    (flet ((org-kbd (&rest keys) (vconcat prefix-key (if keys (list keys)))))
-      (global-unset-key (org-kbd))
-      (global-set-key (org-kbd 'l) #'org-store-link)
-      (global-set-key (org-kbd 'a) #'org-agenda)
-      (global-set-key (org-kbd 'b) #'org-iswitchb)))
+    (global-unset-key prefix-key)
+    (flet ((org-kbd (&rest keys) (vconcat prefix-key (list keys))))
+      (dolist* ((key . func) '((l . org-store-link)
+                               (a . org-agenda)
+                               (b . org-iswitchb)
+                               (t . org-remember-todo)))
+        (global-set-key (org-kbd key) func)
+        (global-set-key (org-kbd 'control key) func))))
 #+END_SRC
