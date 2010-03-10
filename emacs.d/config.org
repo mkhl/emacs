@@ -601,6 +601,7 @@ Initial frame settings.
 Default frame settings.
 
 #+BEGIN_SRC emacs-lisp
+  (aput 'default-frame-alist 'cursor-type 'bar)
   (aput 'default-frame-alist 'weight 80)
   (aput 'default-frame-alist 'height 50)
 #+END_SRC
