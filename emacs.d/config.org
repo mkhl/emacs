@@ -1013,6 +1013,12 @@ Customization of libraries separate from Emacs.
   (setq gist-view-gist t)
 #+END_SRC
 
+** =gitsum=
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key [(control x) (g)] #'gitsum)
+#+END_SRC
+
 ** =highlight-symbol=
 
 #+BEGIN_SRC emacs-lisp
@@ -1039,7 +1045,7 @@ Customization of libraries separate from Emacs.
 ** =magit=
 
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-x g") #'magit-status)
+  (global-set-key [(control x) (shift g)] #'magit-status)
 #+END_SRC
 
 ** =nav=
