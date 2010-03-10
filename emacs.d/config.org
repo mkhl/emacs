@@ -876,6 +876,10 @@ Enable =hs-minor-mode= in supported major modes.
     (when (assoc major-mode hs-special-modes-alist)
       (hs-minor-mode +1)))
   
+  (defun enable-hs-minor-mode ()
+    "Turn on `hs-minor-mode'."
+    (hs-minor-mode +1))
+  
   (add-hook 'find-file-hook 'hs-minor-mode-maybe)
 #+END_SRC
 

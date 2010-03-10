@@ -188,14 +188,13 @@ Configure Clojure mode.
 #+END_SRC
 
 ** Support
-*** HyperSpec
+*** Hideshow
 
-Try to use a local copy of the hyperspec.
+Add support for =hideshow=.
 
 #+BEGIN_SRC emacs-lisp
-  (let ((local-hyperspec-root "/opt/HyperSpec/"))
-    (when (file-exists-p local-hyperspec-root)
-      (setq common-lisp-hyperspec-root local-hyperspec-root)))
+  (when (functionp 'enable-hs-minor-mode)
+    (add-hook 'lisp-mode-common-hook 'enable-hs-minor-mode))
 #+END_SRC
 
 *** Paredit
@@ -220,4 +219,14 @@ Unbind "disputed" key bindings.
                     "C-M-<left>" "ESC C-<left>"
                     "C-M-<right>" "ESC C-<right>"))
        (define-key paredit-mode-map (read-kbd-macro key) nil)))
+#+END_SRC
+
+*** HyperSpec
+
+Try to use a local copy of the hyperspec.
+
+#+BEGIN_SRC emacs-lisp
+  (let ((local-hyperspec-root "/opt/HyperSpec/"))
+    (when (file-exists-p local-hyperspec-root)
+      (setq common-lisp-hyperspec-root local-hyperspec-root)))
 #+END_SRC
