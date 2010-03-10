@@ -78,7 +78,7 @@ Add support for =hideshow=.
 #+BEGIN_SRC emacs-lisp
   (eval-after-load 'hideshow
     '(aput 'hs-special-modes-alist 'ruby-mode
-           (list (regexp-opt '("class" "def" "do") 'words)
+           (list (regexp-opt '("module" "class" "def" "do" "begin") 'words)
                  (regexp-opt '("end") 'words)
                  "#" 'ruby-end-of-block nil)))
 #+END_SRC
