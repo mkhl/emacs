@@ -1025,7 +1025,7 @@ Customization of libraries separate from Emacs.
   (when (functionp 'highlight-symbol-mode)
     (setq highlight-symbol-on-navigation-p t)
     (global-set-key (kbd "C-*") #'highlight-symbol-next)
-    (global-set-key (kbd "C-&") #'highlight-symbol-prev))
+    (global-set-key (kbd "C-#") #'highlight-symbol-prev))
 #+END_SRC
 
 ** =igrep=
