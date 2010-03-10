@@ -24,6 +24,24 @@ Configure AppleScript mode.
     '(add-hook 'applescript-mode-hook 'hooks/applescript-mode-hook))
 #+END_SRC
 
+** CoffeeScript
+
+Configure CoffeeScript mode defaults.
+
+#+BEGIN_SRC emacs-lisp
+  (defun hooks/coffee-mode-hook ()
+    (set-tab-width 2))
+#+END_SRC
+
+Configure CoffeeScript mode.
+
+#+BEGIN_SRC emacs-lisp
+  (setq coffee-js-mode 'js-mode)
+  
+  (eval-after-load 'coffee-mode
+    '(add-hook 'coffee-mode-hook 'hooks/coffee-mode-hook))
+#+END_SRC
+
 ** Erlang
 
 #+BEGIN_SRC emacs-lisp
