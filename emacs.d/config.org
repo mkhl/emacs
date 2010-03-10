@@ -229,6 +229,16 @@ Support hiding Emacs.
            (mac-do-hide-emacs))))
 #+END_SRC
 
+Define Mac-like CUA keys.
+
+#+BEGIN_SRC emacs-lisp
+  (case window-system
+    ((ns mac)
+     (global-set-key (ns-command-key 'c) #'copy-region-as-kill)
+     (global-set-key (ns-command-key 'v) #'yank)
+     (global-set-key (ns-command-key 'V) #'yank-pop)))
+#+END_SRC
+
 Fix Emacs 23 =local-function-key-map=.
 
 #+BEGIN_SRC emacs-lisp
