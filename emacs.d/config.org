@@ -820,7 +820,7 @@ Make =vc= work with symlinks.
 *** =viper=
 
 #+BEGIN_SRC emacs-lisp
-  (setq viper-mode t)
+  (setq viper-mode nil)
   (require 'viper)
 #+END_SRC
 
@@ -1184,6 +1184,14 @@ Configure =vimpulse=.
   
   (eval-after-load 'vimpulse
     '(init/setup-vimpulse-mode-maps))
+#+END_SRC
+
+** =vim-mode=
+
+#+BEGIN_SRC emacs-lisp
+  (when (require 'vim nil 'noerror)
+    (unless viper-mode
+      (vim-mode t)))
 #+END_SRC
 
 ** =diminish=
