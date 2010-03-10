@@ -43,6 +43,15 @@ Configure AppleScript mode.
           (expand-file-name "../../" fuel-factor-fuel-dir)))
 #+END_SRC
 
+** Slate
+
+#+BEGIN_SRC emacs-lisp
+  (when (functionp 'slate-mode)
+    (let* ((slate-mode-path (file-truename (locate-library "slate-mode")))
+           (slate-mode-dir (file-name-directory slate-mode-path)))
+      (setq slate-dir (expand-file-name "../" slate-mode-dir))))
+#+END_SRC
+
 ** Perl
 
 #+BEGIN_SRC emacs-lisp
