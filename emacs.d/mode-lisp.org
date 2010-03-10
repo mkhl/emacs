@@ -221,6 +221,16 @@ Unbind "disputed" key bindings.
        (define-key paredit-mode-map (read-kbd-macro key) nil)))
 #+END_SRC
 
+*** Highlight Parentheses
+
+#+BEGIN_SRC emacs-lisp
+  (when (functionp 'highlight-parentheses-mode)
+    (unless (functionp 'enable-highlight-parentheses-mode)
+      (defun enable-highlight-parentheses-mode ()
+        (highlight-parentheses-mode +1)))
+    (add-hook 'lisp-mode-common-hook 'enable-highlight-parentheses-mode))
+#+END_SRC
+
 *** HyperSpec
 
 Try to use a local copy of the hyperspec.
