@@ -10,7 +10,9 @@ Configure Ruby mode defaults.
 
 #+BEGIN_SRC emacs-lisp
   (defun hooks/ruby-mode-hook ()
-    (set-tab-width 2))
+    (set-tab-width 2)
+    (setl beginning-of-defun-function 'ruby-beginning-of-defun)
+    (setl end-of-defun-function 'ruby-end-of-defun))
 #+END_SRC
 
 Configure hooks in Ruby mode.
