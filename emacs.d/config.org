@@ -1154,6 +1154,38 @@ Fix Yasnippet in modes locally overriding its trigger key.
           (local-unset-key (read-kbd-macro yas/trigger-key))))))
 #+END_SRC
 
+** =vimpulse=
+
+Configure key bindings for =vimpulse=.
+
+#+BEGIN_SRC emacs-lisp
+  (setq vimpulse-want-vi-keys-in-buffmenu nil)
+  (setq vimpulse-want-vi-keys-in-dired nil)
+  (setq vimpulse-want-vi-keys-in-Info nil)
+  (setq vimpulse-want-vi-keys-in-help nil)
+  (setq vimpulse-want-C-u-like-Vim t)
+  
+  (defun init/setup-vimpulse-mode-maps ()
+    (define-key viper-insert-basic-map "\C-d" nil)
+    (define-key viper-insert-basic-map "\C-t" nil)
+    (define-key viper-insert-basic-map "\C-p" nil)
+    (define-key viper-insert-basic-map "\C-n" nil)
+    (define-key viper-vi-basic-map "K" 'man)
+    (define-key viper-vi-basic-map "\C-o" nil)
+    (define-key viper-vi-basic-map "\C-i" nil))
+#+END_SRC
+
+Configure =vimpulse=.
+
+#+BEGIN_SRC emacs-lisp
+  (when viper-mode
+    (require 'rect)                       ; Missing `vimpulse' dependency
+    (require 'vimpulse nil 'noerror))
+  
+  (eval-after-load 'vimpulse
+    '(init/setup-vimpulse-mode-maps))
+#+END_SRC
+
 ** =diminish=
 
 #+BEGIN_SRC emacs-lisp
