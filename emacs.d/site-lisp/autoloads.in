@@ -18,6 +18,8 @@
       (add-to-list 'load-path subdir))))
 
 ;;; Manually created autoloads for `site-lisp/tools'
+
+(autoload 'growl "growl")
 
 ;;; Manually created autoloads for `site-lisp/modes'
 

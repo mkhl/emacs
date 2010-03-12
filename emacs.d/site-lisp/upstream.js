@@ -32,6 +32,9 @@
         "file": "browse-kill-ring.el",
         "src": "http://www.emacswiki.org/emacs/download/browse-kill-ring.el"
     }, {
+        "file": "growl.el",
+        "src": "http://edward.oconnor.cx/elisp/growl.el"
+    }, {
         "file": "igrep.el",
         "src": "http://www.emacswiki.org/emacs/download/igrep.el"
     }, {
