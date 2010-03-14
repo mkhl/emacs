@@ -457,6 +457,7 @@ Unicode!
 Saner default settings.
 
 #+BEGIN_SRC emacs-lisp
+  (setq-default comment-column 40)
   (setq-default fill-column 72)
   (setq-default major-mode 'text-mode)
   (setq-default indent-tabs-mode nil)
