@@ -6,6 +6,9 @@
         "file": "dirvars.el",
         "src": "http://www.emacswiki.org/emacs/download/dirvars.el"
     }, {
+        "file": "esh-toggle.el",
+        "src": "http://gist.github.com/raw/327433/bac59603cefd835823d2953a72cf6aa4fa7da7a2/esh-toggle.el"
+    }, {
         "file": "fscroll.el",
         "src": "http://www.davep.org/emacs/fscroll.el"
     }, {
