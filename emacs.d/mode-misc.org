@@ -75,3 +75,19 @@ Configure CoffeeScript mode.
 #+BEGIN_SRC emacs-lisp
   (defalias 'perl-mode 'cperl-mode)
 #+END_SRC
+
+** Shell Script
+
+Configure Shell Script mode defaults.
+
+#+BEGIN_SRC emacs-lisp
+  (defun hooks/sh-mode-hook ()
+    (set-tab-width sh-basic-offset))
+#+END_SRC
+
+Configure Shell Script mode.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'sh-script
+    '(add-hook 'sh-mode-hook 'hooks/sh-mode-hook))
+#+END_SRC
