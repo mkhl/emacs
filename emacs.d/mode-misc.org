@@ -64,7 +64,7 @@ Configure CoffeeScript mode.
 ** Slate
 
 #+BEGIN_SRC emacs-lisp
-  (when (functionp 'slate-mode)
+  (when (locate-library "slate-mode")
     (let* ((slate-mode-path (file-truename (locate-library "slate-mode")))
            (slate-mode-dir (file-name-directory slate-mode-path)))
       (setq slate-dir (expand-file-name "../" slate-mode-dir))))
