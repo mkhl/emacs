@@ -8,6 +8,7 @@ Libraries used during initialization.
   (require 'cl)
   (require 'assoc)
   (require 'info)
+  (info-initialize)
 #+END_SRC
 
 * Basics
