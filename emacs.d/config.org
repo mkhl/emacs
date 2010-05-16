@@ -882,15 +882,21 @@ Make =vc= work with symlinks.
 
 #+BEGIN_SRC emacs-lisp
   (setq skeleton-pair t)
-
+  
   (dolist (char '(?\( ?\[ ?\{))
     (global-set-key (string char) #'skeleton-pair-insert-maybe))
   (dolist (char '(?\` ?\"))
     (define-key text-mode-map (string char) #'skeleton-pair-insert-maybe))
-
+  
   (dolist (pair '((?\[ . ?\]) (?\{ . ?\})))
     (global-set-key (vector (list 'meta (car pair))) #'insert-pair)
     (global-set-key (vector (list 'meta (cdr pair))) #'up-list))
+  
+  (defadvice delete-backward-char (before delete-empty-pair activate)
+    (when (and (char-before)
+               (char-after)
+               (eq (cadr (assq (char-before) insert-pair-alist)) (char-after)))
+      (delete-char 1)))
 #+END_SRC
 
 ** Annotation
