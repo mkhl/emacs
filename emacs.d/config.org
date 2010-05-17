@@ -833,7 +833,7 @@ Make =vc= work with symlinks.
   (setq ido-enable-prefix t)
   (setq ido-enable-flex-matching t)
   (setq ido-create-new-buffer 'always)
-  (setq ido-use-filename-at-point t)
+  (setq ido-use-filename-at-point nil)
   (setq ido-use-url-at-point t)
   (setq ido-save-directory-list-file
         (expand-file-name ".ido.last" dot-emacs-dir))
