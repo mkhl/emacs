@@ -1204,7 +1204,8 @@ Fix Yasnippet in modes locally overriding its trigger key.
 #+BEGIN_SRC emacs-lisp
   (when (functionp 'color-theme-initialize)
     (color-theme-initialize)
-    (when (functionp 'color-theme-quiet-light)
-      (color-theme-quiet-light)))
+    (let ((theme 'color-theme-quiet-light))
+      (when (functionp theme)
+        (funcall theme))))
 #+END_SRC
 
