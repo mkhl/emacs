@@ -99,8 +99,13 @@ Make sure =hideshow= works with =python-mode=.
 Configure Pycomplete.
 
 #+BEGIN_SRC emacs-lisp
+  (defun load-pycomplete ()
+    (interactive)
+    (when (featurep 'pymacs)
+      (require 'pycomplete nil 'noerror)))
+
   (eval-after-load 'python-mode
-    '(require 'pycomplete nil 'noerror))
+    '(load-pycomplete))
 #+END_SRC
 
 *** Pysmell
@@ -123,8 +128,8 @@ Configure Ropemacs.
 #+BEGIN_SRC emacs-lisp
   (defun load-ropemacs ()
     (interactive)
-    (require 'pymacs)
-    (pymacs-load "ropemacs" "rope-"))
+    (when (featurep 'pymacs)
+      (pymacs-load "ropemacs" "rope-")))
   
   (dolist (library '(python python-mode))
     (eval-after-load library
