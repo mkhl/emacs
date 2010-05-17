@@ -1032,6 +1032,15 @@ Customization of libraries separate from Emacs.
   (require 'dirvars nil 'noerror)
 #+END_SRC
 
+** =drag-stuff=
+
+#+BEGIN_SRC emacs-lisp
+  (setq drag-stuff-modifier '(control meta))
+  
+  (when (require 'drag-stuff nil 'noerror)
+    (drag-stuff-global-mode t))
+#+END_SRC
+
 ** =esh-toggle=
 
 #+BEGIN_SRC emacs-lisp
@@ -1171,6 +1180,7 @@ Fix Yasnippet in modes locally overriding its trigger key.
                 (hs-minor-mode (hideshow))
                 (visual-line-mode (simple))
                 (paredit-mode (paredit paredit-21))
+                (drag-stuff-mode (drag-stuff))
                 (highlight-parentheses-mode (highlight-parentheses))
                 (highlight-symbol-mode (highlight-symbol))
                 (highlight-80+-mode (highlight-80+))
