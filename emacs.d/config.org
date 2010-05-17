@@ -1122,6 +1122,12 @@ Customization of libraries separate from Emacs.
     (global-set-key (kbd "C-z") #'zap-to-char))
 #+END_SRC
 
+** =smart-tab=
+
+#+BEGIN_SRC emacs-lisp
+  (setq smart-tab-using-hippie-expand t)
+#+END_SRC
+
 ** =sudoku=
 
 #+BEGIN_SRC emacs-lisp
@@ -1184,6 +1190,7 @@ Fix Yasnippet in modes locally overriding its trigger key.
                 (highlight-parentheses-mode (highlight-parentheses))
                 (highlight-symbol-mode (highlight-symbol))
                 (highlight-80+-mode (highlight-80+))
+                (smart-tab-mode (smart-tab))
                 (yas/minor-mode (yasnippet yasnippet-bundle))
                 (autopair-mode (autopair))
                 ))
