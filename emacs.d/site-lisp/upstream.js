@@ -44,6 +44,9 @@
         "file": "itunes.el",
         "src": "http://www.emacswiki.org/emacs/download/itunes.el"
     }, {
+        "file": "js-comint.el",
+        "src": "http://downloads.sourceforge.net/js-comint-el/js-comint.el"
+    }, {
         "file": "osx-plist.el",
         "src": "http://edward.oconnor.cx/elisp/osx-plist.el"
     }, {
