@@ -40,7 +40,8 @@ Prefer IPython over vanilla Python.
 The colors don't work well in (Cocoa) Emacs 23...
 
 #+BEGIN_SRC emacs-lisp
-  (require 'ipython nil 'noerror)
+  (when (locate-library "python-mode")
+    (require 'ipython nil 'noerror))
 #+END_SRC
 
 ** Support
