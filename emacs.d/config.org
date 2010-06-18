@@ -812,6 +812,20 @@ Keep Ediff in a single frame.
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 #+END_SRC
 
+*** =smerge=
+
+Activate SMerge in files with conflict markers.
+
+#+BEGIN_SRC emacs-lisp
+  (defun smerge-mode-maybe ()
+    (save-excursion
+      (goto-char (point-min))
+      (when (re-search-forward "^<<<<<<< " nil 'noerror)
+        (smerge-mode t))))
+  
+  (add-hook 'find-file-hook 'smerge-mode-maybe)
+#+END_SRC
+
 *** =vc=
 
 Make =vc= work with symlinks.
