@@ -12,7 +12,6 @@
 (dolist (path '("org/lisp" "org/contrib/lisp"))
   (add-to-list 'load-path (expand-file-name path dot-emacs-dir)))
 (require 'org-install)
-(require 'org-babel-init)
 
 ;;; Load `*.org' using `org-babel'
 (dolist (file (directory-files dot-emacs-dir 'full (rx ".org" eos)))
