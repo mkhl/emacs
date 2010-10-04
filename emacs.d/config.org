@@ -863,8 +863,6 @@ Make =vc= work with symlinks.
   (setq ido-use-url-at-point t)
   (setq ido-save-directory-list-file
         (expand-file-name ".ido.last" user-emacs-directory))
-
-  (ido-mode t)
 #+END_SRC
 
 *** =isearch=
