@@ -18,6 +18,9 @@ Configure Slime to use Clozure CL or SBCL.
 #+BEGIN_SRC emacs-lisp
   (eval-after-load 'slime
     '(progn (aput 'slime-lisp-implementations 'sbcl '(("sbcl")))
+            (aput 'slime-lisp-implementations 'abcl '(("abcl")))
+            (aput 'slime-lisp-implementations 'cmucl '(("cmucl")))
+            (aput 'slime-lisp-implementations 'ecl '(("ecl")))
             (aput 'slime-lisp-implementations 'ccl
                   (list (split-string inferior-lisp-program)))))
 #+END_SRC
