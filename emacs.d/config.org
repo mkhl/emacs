@@ -94,9 +94,11 @@ Kill Emacs with a 5 second timeout.
 
 #+BEGIN_SRC emacs-lisp
   (defun ns-command-key (&rest keys)
-    (case window-system
-      (ns (vector (cons ns-command-modifier keys)))
-      (mac (vector (cons mac-command-modifier keys)))))
+    (let ((modifier (case window-system
+                      (ns ns-command-modifier)
+                      (mac mac-command-modifier)
+                      (otherwise 'meta))))
+      (vector (cons modifier keys))))
 #+END_SRC
 
 *** Indentation
