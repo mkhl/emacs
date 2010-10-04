@@ -372,6 +372,7 @@ Rebind =execute-extended-command=.
   (unless (boundp 'shift-select-mode)
     (cua-selection-mode t))
   (setq shift-select-mode t)
+  (delete-selection-mode t)
 #+END_SRC
 
 ...with Command.
