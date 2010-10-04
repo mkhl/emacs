@@ -1209,6 +1209,15 @@ Fix Yasnippet in modes locally overriding its trigger key.
           (local-unset-key (read-kbd-macro yas/trigger-key))))))
 #+END_SRC
 
+** =edit-server=
+
+Enable =edit-server= for the Edit with Emacs Chrome extension.
+
+#+BEGIN_SRC emacs-lisp
+  (when (require 'edit-server nil 'noerror)
+    (edit-server-start))
+#+END_SRC
+
 ** =diminish=
 
 #+BEGIN_SRC emacs-lisp
