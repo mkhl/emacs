@@ -815,6 +815,14 @@ Keep Ediff in a single frame.
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 #+END_SRC
 
+*** =mail=
+
+#+BEGIN_SRC emacs-lisp
+  (setq send-mail-function 'smtpmail-send-it)
+  (setq smtpmail-default-smtp-server "smtp.gmail.com"
+        smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil)))
+#+END_SRC
+
 *** =smerge=
 
 Activate SMerge in files with conflict markers.
