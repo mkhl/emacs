@@ -1022,6 +1022,13 @@ Start the server.
 
 Customization of libraries separate from Emacs.
 
+** =auto-complete=
+
+#+BEGIN_SRC emacs-lisp
+  (when (require 'auto-complete-config nil 'noerror)
+    (ac-config-default))
+#+END_SRC
+
 ** =auto-dictionary=
 
 #+BEGIN_SRC emacs-lisp
@@ -1211,6 +1218,7 @@ Fix Yasnippet in modes locally overriding its trigger key.
                 (hs-minor-mode (hideshow))
                 (visual-line-mode (simple))
                 (paredit-mode (paredit paredit-21))
+                (auto-complete-mode (auto-complete))
                 (drag-stuff-mode (drag-stuff))
                 (highlight-parentheses-mode (highlight-parentheses))
                 (highlight-symbol-mode (highlight-symbol))
