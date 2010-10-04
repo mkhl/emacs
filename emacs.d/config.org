@@ -431,11 +431,11 @@ But don't auto-save messages.
   (setq message-auto-save-directory nil)
 #+END_SRC
 
-Store backups under =dot-emacs-dir=.
+Store backups under =user-emacs-directory=.
 
 #+BEGIN_SRC emacs-lisp
   (setq backup-directory-alist
-        (list (cons "." (expand-file-name "backup" dot-emacs-dir))))
+        (list (cons "." (expand-file-name "backup" user-emacs-directory))))
 #+END_SRC
 
 Keep a minibuffer history.
@@ -686,20 +686,20 @@ Set up =load-path= so Emacs can find these libraries.
 *** ELPA
 
 #+BEGIN_SRC emacs-lisp
-  (when (load (expand-file-name "elpa/package" dot-emacs-dir) 'noerror)
+  (when (load (expand-file-name "elpa/package" user-emacs-directory) 'noerror)
     (package-initialize))
 #+END_SRC
 
 *** Vendor
 
 #+BEGIN_SRC emacs-lisp
-  (load (expand-file-name "vendor/autoloads" dot-emacs-dir) 'noerror)
+  (load (expand-file-name "vendor/autoloads" user-emacs-directory) 'noerror)
 #+END_SRC
 
 *** Site-Lisp
 
 #+BEGIN_SRC emacs-lisp
-  (load (expand-file-name "site-lisp/autoloads" dot-emacs-dir) 'noerror)
+  (load (expand-file-name "site-lisp/autoloads" user-emacs-directory) 'noerror)
 #+END_SRC
 
 * Builtin Libraries
@@ -851,7 +851,7 @@ Make =vc= work with symlinks.
   (setq ido-use-filename-at-point nil)
   (setq ido-use-url-at-point t)
   (setq ido-save-directory-list-file
-        (expand-file-name ".ido.last" dot-emacs-dir))
+        (expand-file-name ".ido.last" user-emacs-directory))
 
   (ido-mode t)
 #+END_SRC
@@ -1155,7 +1155,7 @@ Load additional snippets.
 
 #+BEGIN_SRC emacs-lisp
   (defun init/setup-yasnippet-snippets-dir ()
-    (let ((snippets-dir (expand-file-name "snippets" dot-emacs-dir)))
+    (let ((snippets-dir (expand-file-name "snippets" user-emacs-directory)))
       (when (file-directory-p snippets-dir)
         (yas/load-directory snippets-dir))))
 #+END_SRC

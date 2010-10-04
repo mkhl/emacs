@@ -130,7 +130,7 @@ Use =org-mode= for Org files.
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'Info-directory-list
-               (expand-file-name "org/doc" dot-emacs-dir))
+               (expand-file-name "org/doc" user-emacs-directory))
 #+END_SRC
 
 ** Global Org
